@@ -15,7 +15,7 @@ import com.skilldistillery.trailnutz.entities.User;
 import com.skilldistillery.trailnutz.services.AuthService;
 
 @RestController
-@CrossOrigin({"*", "http://localhost:4200"})
+@CrossOrigin({"*", "http://localhost:4210"})
 public class AuthController {
 	@Autowired
 	private AuthService authService;
