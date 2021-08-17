@@ -1,5 +1,7 @@
 package com.skilldistillery.trailnutz.services;
 
-public interface UserService {
+import com.skilldistillery.trailnutz.entities.User;
 
+public interface UserService {
+	User userByUsername(String username);
 }
