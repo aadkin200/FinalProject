@@ -77,6 +77,17 @@ public class Amenity {
 		this.imageUrl = imageUrl;
 	}
 
+	
+
+	public List<Trail> getTrails() {
+		return trails;
+	}
+
+
+	public void setTrails(List<Trail> trails) {
+		this.trails = trails;
+	}
+
 
 	@Override
 	public String toString() {
