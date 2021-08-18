@@ -2,6 +2,7 @@ package com.skilldistillery.trailnutz.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +19,6 @@ class DifficultyTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Difficulty difficulty;
-	private Trail trail;
 	
 	
 	@BeforeAll
@@ -50,8 +50,8 @@ class DifficultyTest {
 	}
 	@Test
 	void test_difficulty_name_for_trail_mapping() {
-		assertNotNull(trail);
-		assertEquals("Easy", trail.getDifficulty().getName());
+		assertNotNull(difficulty);
+		assertTrue(difficulty.getTrails().size() > 0);
 	}
 	
 	
