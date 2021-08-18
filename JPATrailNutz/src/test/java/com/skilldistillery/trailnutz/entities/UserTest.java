@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
@@ -40,9 +41,18 @@ class UserTest {
 	}
 
 	@Test
+	@DisplayName("user entity test")
 	void test() {
 		assertNotNull(user);
 		assertEquals("admin", user.getUsername());
 	}
+	
+	@DisplayName("testing LDT user entity")
+	void test1() {
+		assertNotNull(user);
+		assertEquals(2020, user.getCreateAt().getYear());
+		System.out.println(user);
+	}
+	
 
 }

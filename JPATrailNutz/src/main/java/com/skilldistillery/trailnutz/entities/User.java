@@ -1,9 +1,14 @@
 package com.skilldistillery.trailnutz.entities;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class User {
@@ -15,6 +20,17 @@ public class User {
 	private String role;
 	private String password;
 	private boolean enabled;
+	@Column(name="favorite_trail_food")
+	private String favoriteTrailFood;
+	@Column(name="first_name")
+	private String firstName;
+	@Column(name="last_name")
+	private String lastName;
+	@Column(name="image_url")
+	private String imageUrl;
+	@CreationTimestamp
+	@Column(name="created_at")
+	private LocalDateTime createdAt;
 	
 	
 	
@@ -65,6 +81,46 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", role=" + role + ", password=" + password + ", enabled="
 				+ enabled + "]";
+	}
+
+	public String getFavoriteTrailFood() {
+		return favoriteTrailFood;
+	}
+
+	public void setFavoriteTrailFood(String favoriteTrailFood) {
+		this.favoriteTrailFood = favoriteTrailFood;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public LocalDateTime getCreateAt() {
+		return createdAt;
+	}
+
+	public void setCreateAt(LocalDateTime createAt) {
+		this.createdAt = createAt;
 	}
 
 }
