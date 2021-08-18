@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Trail {
@@ -19,6 +20,9 @@ public class Trail {
 	private int id;
 	@ManyToMany(mappedBy="favoritedTrails")
 	private List<User> users;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	@ManyToOne
 	@JoinColumn(name="difficulty_id")
 	private Difficulty difficulty;
@@ -44,7 +48,12 @@ public class Trail {
 	private LocalDateTime updatedAt;
 	private boolean enabled;
 	private boolean approved;
-	private TrailImage trailImages;
+	@OneToMany(mappedBy="trail")
+	private List<TrailImage> trailImages;
+	@OneToMany(mappedBy="trail")
+	private List<TrailResource> trailResource;
+	@OneToMany(mappedBy="trail")
+	private List<Comment> comments;
 	
 	
 	public Trail() {}
@@ -181,6 +190,30 @@ public class Trail {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public List<TrailImage> getTrailImages() {
+		return trailImages;
+	}
+	public void setTrailImages(List<TrailImage> trailImages) {
+		this.trailImages = trailImages;
+	}
+	public List<TrailResource> getTrailResource() {
+		return trailResource;
+	}
+	public void setTrailResource(List<TrailResource> trailResource) {
+		this.trailResource = trailResource;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -201,14 +234,18 @@ public class Trail {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Trail [id=" + id + ", users=" + users + ", name=" + name + ", elevationChangeFeet="
-				+ elevationChangeFeet + ", trailheadLatitude=" + trailheadLatitude + ", trailheadLongitude="
-				+ trailheadLongitude + ", city=" + city + ", state=" + state + ", hazards=" + hazards + ", wildlife="
-				+ wildlife + ", details=" + details + ", distanceMiles=" + distanceMiles + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", enabled=" + enabled + ", approved=" + approved + "]";
+		return "Trail [id=" + id + ", users=" + users + ", user=" + user + ", difficulty=" + difficulty + ", routeType="
+				+ routeType + ", name=" + name + ", elevationChangeFeet=" + elevationChangeFeet + ", trailheadLatitude="
+				+ trailheadLatitude + ", trailheadLongitude=" + trailheadLongitude + ", city=" + city + ", state="
+				+ state + ", hazards=" + hazards + ", wildlife=" + wildlife + ", details=" + details
+				+ ", distanceMiles=" + distanceMiles + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", enabled=" + enabled + ", approved=" + approved + ", trailImages=" + trailImages
+				+ ", trailResource=" + trailResource + ", comments=" + comments + "]";
 	}
+	
 	
 
 }
