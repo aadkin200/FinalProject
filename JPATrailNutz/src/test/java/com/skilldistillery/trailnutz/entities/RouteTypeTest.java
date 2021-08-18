@@ -18,7 +18,7 @@ class RouteTypeTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private RouteType routeType;
-	
+	private Trail trail;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -47,6 +47,13 @@ class RouteTypeTest {
 		assertNotNull(routeType);
 		assertEquals("Loop", routeType.getName());
 	}
+	@Test
+	void test_route_type_for_trail_mapping() {
+		assertNotNull(trail);
+		assertEquals("Loop", trail.getRouteType().getName());
+	}
+	
+	
 
 
 	

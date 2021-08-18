@@ -18,6 +18,7 @@ class DifficultyTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Difficulty difficulty;
+	private Trail trail;
 	
 	
 	@BeforeAll
@@ -47,6 +48,13 @@ class DifficultyTest {
 		assertNotNull(difficulty);
 		assertEquals("Easy", difficulty.getName());
 	}
+	@Test
+	void test_difficulty_name_for_trail_mapping() {
+		assertNotNull(trail);
+		assertEquals("Easy", trail.getDifficulty().getName());
+	}
+	
+	
 
 
 	
