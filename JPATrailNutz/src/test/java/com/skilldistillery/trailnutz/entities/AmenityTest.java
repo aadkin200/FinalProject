@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class AmenityTest {
@@ -47,7 +48,15 @@ class AmenityTest {
 		assertEquals("Bathroom", amenity.getName());
 	}
 
-
+	@Test
+	@DisplayName("amenity to trail test")
+	void test2() {
+		
+		assertNotNull(amenity.getTrails());
+		assertEquals(1, amenity.getTrails().size());
+	
+		
+	}
 	
 
 }
