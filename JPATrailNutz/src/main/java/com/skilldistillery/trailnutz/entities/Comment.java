@@ -1,6 +1,7 @@
 package com.skilldistillery.trailnutz.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Comment {
@@ -29,9 +31,13 @@ public class Comment {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 	
-	@Column(name = "in_reply_to")
-	private Integer inReplyTo;
-
+	@ManyToOne
+	@JoinColumn(name = "in_reply_to")
+	private Comment parentComment;
+	
+	@OneToMany(mappedBy="parentComment")
+	List<Comment> replies;
+	
 	private int enabled;
 	
 	private String subject;
@@ -47,19 +53,21 @@ public class Comment {
 		super();
 	}
 
-	public Comment(int id, User user, Trail trail, String message, LocalDateTime createdAt, LocalDateTime updatedAt,
-			int inReplyTo, int enabled, String subject) {
+	public Comment(int id, User user, String message, LocalDateTime createdAt, LocalDateTime updatedAt,
+			Comment parentComment, List<Comment> replies, int enabled, String subject, Trail trail) {
 		super();
 		this.id = id;
-		this.trail = trail;
 		this.user = user;
 		this.message = message;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.inReplyTo = inReplyTo;
+		this.parentComment = parentComment;
+		this.replies = replies;
 		this.enabled = enabled;
 		this.subject = subject;
+		this.trail = trail;
 	}
+
 
 	public int getId() {
 		return id;
@@ -109,14 +117,6 @@ public class Comment {
 		this.updatedAt = updatedAt;
 	}
 
-	public Integer getInReplyTo() {
-		return inReplyTo;
-	}
-
-	public void setInReplyTo(Integer inReplyTo) {
-		this.inReplyTo = inReplyTo;
-	}
-
 	public int getEnabled() {
 		return enabled;
 	}
@@ -155,11 +155,35 @@ public class Comment {
 		return true;
 	}
 
+
+
+	public List<Comment> getReplies() {
+		return replies;
+	}
+
+
+
+	public void setReplies(List<Comment> replies) {
+		this.replies = replies;
+	}
+
+
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", trail=" + trail + ", user=" + user + ", message=" + message
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", inReplyTo=" + inReplyTo + ", enabled="
-				+ enabled + ", subject=" + subject + "]";
+		return "Comment [id=" + id + ", user=" + user + ", message=" + message + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", parentComment=" + parentComment + ", replies=" + replies
+				+ ", enabled=" + enabled + ", subject=" + subject + ", trail=" + trail + "]";
 	}
 	
 	

@@ -49,6 +49,7 @@ class UserTest {
 		assertEquals("admin", user.getUsername());
 	}
 	
+	@Test
 	@DisplayName("testing LDT user entity")
 	void test1() {
 		assertNotNull(user);
@@ -56,16 +57,38 @@ class UserTest {
 		System.out.println(user);
 	}
 	
+	@Test
 	@DisplayName("User Favorite Trail Join Table")
 	void test2() {
 		assertNotNull(user.getFavoriteTrails());
 		assertTrue(user.getFavoriteTrails().size() > 0);
 	}
 	
+	@Test
 	@DisplayName("User to trail mapping")
 	void test3() {
 		assertNotNull(user.getTrails());
 		assertTrue(user.getTrails().size() > 0);
+	}
+	
+	@Test
+	@DisplayName("user to trail_resource")
+	void test4() {
+		assertNotNull(user.getTrailResources());
+		assertTrue(user.getTrailResources().size() > 0);
+	}
+	
+	@Test
+	@DisplayName("user to comment")
+	void test5() {
+		assertNotNull(user.getComments());
+		assertTrue(user.getComments().size() > 0);
+	}
+	@Test
+	@DisplayName("user to trail images")
+	void test6() {
+		assertNotNull(user.getTrailImages());
+		assertTrue(user.getTrailImages().size() > 0);
 	}
 
 }
