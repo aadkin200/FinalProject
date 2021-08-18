@@ -59,7 +59,7 @@ class TrailTest {
 	@DisplayName("Testing connection between Trail and Comment")
 	void test2() {
 		assertNotNull(trail);
-		assertEquals("Hello", trail.getComments().get(0).getMessage());
+		assertEquals("welcome", trail.getComments().get(0).getMessage());
 	}
 	
 	@Test

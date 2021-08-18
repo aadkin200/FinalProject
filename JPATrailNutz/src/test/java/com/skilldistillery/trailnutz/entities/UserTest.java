@@ -53,7 +53,7 @@ class UserTest {
 	@DisplayName("testing LDT user entity")
 	void test1() {
 		assertNotNull(user);
-		assertEquals(2020, user.getCreateAt().getYear());
+		assertEquals(2020, user.getCreatedAt().getYear());
 		System.out.println(user);
 	}
 	
