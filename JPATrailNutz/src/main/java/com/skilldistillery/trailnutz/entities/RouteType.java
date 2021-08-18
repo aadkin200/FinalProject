@@ -1,9 +1,12 @@
 package com.skilldistillery.trailnutz.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,10 @@ public class RouteType {
 	private String name;
 	
 	private String description;
+	
+	@OneToMany(mappedBy="routeType")
+	private List<Trail> trails;
+	
 
 	public RouteType() {
 		super();
@@ -46,6 +53,16 @@ public class RouteType {
 		this.description = description;
 	}
 
+	public List<Trail> getTrails() {
+		return trails;
+	}
+
+	public void setTrails(List<Trail> trails) {
+		this.trails = trails;
+	}
+
+	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -55,18 +72,8 @@ public class RouteType {
 		builder.append(name);
 		builder.append(", description=");
 		builder.append(description);
-		builder.append(", getId()=");
-		builder.append(getId());
-		builder.append(", getName()=");
-		builder.append(getName());
-		builder.append(", getDescription()=");
-		builder.append(getDescription());
-		builder.append(", getClass()=");
-		builder.append(getClass());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", toString()=");
-		builder.append(super.toString());
+		builder.append(", trails=");
+		builder.append(trails);
 		builder.append("]");
 		return builder.toString();
 	}

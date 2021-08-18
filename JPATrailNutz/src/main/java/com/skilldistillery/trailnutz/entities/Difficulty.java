@@ -1,9 +1,12 @@
 package com.skilldistillery.trailnutz.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Difficulty {
@@ -15,6 +18,9 @@ public class Difficulty {
 	private String name;
 	
 	private String description;
+	
+	@OneToMany(mappedBy="difficulty")
+	private List<Trail> trails;
 
 	public Difficulty() {
 		super();
@@ -44,6 +50,16 @@ public class Difficulty {
 		this.description = description;
 	}
 
+	public List<Trail> getTrails() {
+		return trails;
+	}
+
+	public void setTrails(List<Trail> trails) {
+		this.trails = trails;
+	}
+
+	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -53,6 +69,8 @@ public class Difficulty {
 		builder.append(name);
 		builder.append(", description=");
 		builder.append(description);
+		builder.append(", trails=");
+		builder.append(trails);
 		builder.append("]");
 		return builder.toString();
 	}
