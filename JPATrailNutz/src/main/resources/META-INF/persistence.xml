@@ -6,6 +6,13 @@
     </provider>
     
  		 <class>com.skilldistillery.trailnutz.entities.User</class>
+ 		 <class>com.skilldistillery.trailnutz.entities.Trail</class>
+ 		 <class>com.skilldistillery.trailnutz.entities.TrailImage</class>
+ 		 <class>com.skilldistillery.trailnutz.entities.TrailResource</class>
+ 		 <class>com.skilldistillery.trailnutz.entities.Comment</class>
+ 		 <class>com.skilldistillery.trailnutz.entities.Difficulty</class>
+ 		 <class>com.skilldistillery.trailnutz.entities.RouteType</class>
+ 		 <class>com.skilldistillery.trailnutz.entities.Amenity</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hikedb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
