@@ -84,5 +84,11 @@ class UserTest {
 		assertNotNull(user.getComments());
 		assertTrue(user.getComments().size() > 0);
 	}
+	@Test
+	@DisplayName("user to trail images")
+	void test6() {
+		assertNotNull(user.getTrailImages());
+		assertTrue(user.getTrailImages().size() > 0);
+	}
 
 }
