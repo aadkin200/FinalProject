@@ -39,6 +39,10 @@ public class Comment {
 	private int enabled;
 	
 	private String subject;
+	
+	@ManyToOne
+	@JoinColumn(name="trail_id")
+	private Trail trail;
 
 	
 	
