@@ -21,6 +21,7 @@ class TrailResourceTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private TrailResource trailResrc;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPATrailNutz");
@@ -46,11 +47,21 @@ class TrailResourceTest {
 	@Test
 	@DisplayName("trail resource entity test")
 	void test() {
-		LocalDateTime reviewDate =  LocalDateTime.of(2020, 01, 01, 10, 10, 00);
+		LocalDateTime createDate =  LocalDateTime.of(2020, 01, 01, 10, 10, 00);
 		
 		assertNotNull(trailResrc);
 		assertEquals("Trail photos", trailResrc.getTitle());
+		assertEquals(createDate, trailResrc.getCreatedAt());
 		
+	}
+	
+	@Test
+	@DisplayName("trail resource to user test")
+	void test1() {
+		
+		assertNotNull(trailResrc.getUser());
+		assertEquals(1, trailResrc.getUser().getId());
+		assertEquals("Gerry", trailResrc.getUser().getFirstName());
 		
 	}
 	

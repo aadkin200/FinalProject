@@ -18,36 +18,55 @@ public class Trail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@ManyToMany(mappedBy="favoriteTrails")
 	private List<User> users;
+	
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
 	@ManyToOne
 	@JoinColumn(name="difficulty_id")
 	private Difficulty difficulty;
+	
 	@ManyToOne
 	@JoinColumn(name="route_type_id")
 	private RouteType routeType;
+	
 	private String name;
 	@Column(name="elevation_change_feet")
 	private int elevationChangeFeet;
+	
 	@Column(name="trailhead_latitude")
 	private String trailheadLatitude;
+	
 	@Column(name="trailhead_longitude")
 	private String trailheadLongitude;
+	
 	private String city;
+	
 	private String state;
+	
 	private String hazards;
+	
 	private String wildlife;
+	
 	private String details;
+	
+	@Column(name="distance_miles")
 	private double distanceMiles;
+	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
+	
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
+	
 	private boolean enabled;
+	
 	private boolean approved;
+	
 	@OneToMany(mappedBy="trail")
 	private List<TrailImage> trailImages;
 	@OneToMany(mappedBy="trail")
