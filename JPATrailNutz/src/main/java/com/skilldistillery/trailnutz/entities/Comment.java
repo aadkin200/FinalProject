@@ -30,7 +30,7 @@ public class Comment {
 	private LocalDateTime updatedAt;
 	
 	@Column(name = "in_reply_to")
-	private int inReplyTo;
+	private Integer inReplyTo;
 
 	private int enabled;
 	
@@ -109,11 +109,11 @@ public class Comment {
 		this.updatedAt = updatedAt;
 	}
 
-	public int getInReplyTo() {
+	public Integer getInReplyTo() {
 		return inReplyTo;
 	}
 
-	public void setInReplyTo(int inReplyTo) {
+	public void setInReplyTo(Integer inReplyTo) {
 		this.inReplyTo = inReplyTo;
 	}
 
