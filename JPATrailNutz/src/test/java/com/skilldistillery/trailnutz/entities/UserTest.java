@@ -61,5 +61,11 @@ class UserTest {
 		assertNotNull(user.getFavoriteTrails());
 		assertTrue(user.getFavoriteTrails().size() > 0);
 	}
+	
+	@DisplayName("User to trail mapping")
+	void test3() {
+		assertNotNull(user.getTrails());
+		assertTrue(user.getTrails().size() > 0);
+	}
 
 }

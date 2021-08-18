@@ -49,6 +49,8 @@ public class User {
 	private List<TrailResource> trailResources;
 	@OneToMany(mappedBy="user")
 	private List<Comment> comments;
+	@OneToMany(mappedBy="user")
+	private List<Trail> trails;
 	
 	//TODO: Other user fields
 	public User() {}
@@ -177,6 +179,14 @@ public class User {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public List<Trail> getTrails() {
+		return trails;
+	}
+
+	public void setTrails(List<Trail> trails) {
+		this.trails = trails;
 	}
 
 }
