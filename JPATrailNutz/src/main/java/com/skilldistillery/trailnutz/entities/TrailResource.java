@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,11 +19,12 @@ public class TrailResource {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
-	@Column(name = "trail_id")
+	@ManyToOne
+	@JoinColumn(name = "trail_id")
 	private int trailId;
 	
-	@Column(name = "user_id")
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private int userId;
 	
 	@Column(name = "resource_url")
