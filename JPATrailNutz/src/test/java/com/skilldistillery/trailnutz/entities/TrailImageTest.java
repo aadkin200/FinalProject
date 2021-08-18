@@ -47,5 +47,19 @@ class TrailImageTest {
 		assertEquals("http://www.google.com", trailImage.getImageUrl());
 	}
 	
+	@Test
+	@DisplayName("Testing trailImage to trail mapping")
+	void test1() {
+		assertNotNull(trailImage);
+		assertEquals("Grover", trailImage.getTrail().getCity());
+	}
+	
+	@Test
+	@DisplayName("Testing trailImage to user")
+	void test2() {
+		assertNotNull(trailImage);
+		assertEquals("Lowkey", trailImage.getUser().getLastName());
+	}
+	
 
 }
