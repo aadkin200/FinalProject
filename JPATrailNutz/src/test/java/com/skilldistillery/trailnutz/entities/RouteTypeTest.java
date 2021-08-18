@@ -2,7 +2,6 @@ package com.skilldistillery.trailnutz.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,7 +43,7 @@ class RouteTypeTest {
 	}
 
 	@Test
-	void test() {
+	void test_route_type_mapping() {
 		assertNotNull(routeType);
 		assertEquals("Loop", routeType.getName());
 	}

@@ -42,7 +42,7 @@ class AmenityTest {
 	}
 
 	@Test
-	void test() {
+	void test_amenity_name_mapping() {
 		assertNotNull(amenity);
 		assertEquals("Bathroom", amenity.getName());
 	}

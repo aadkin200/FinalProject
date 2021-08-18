@@ -1,12 +1,16 @@
 package com.skilldistillery.trailnutz.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -31,6 +35,15 @@ public class User {
 	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
+	@ManyToMany
+    @JoinTable(
+            name = "user_has_trail", 
+            joinColumns = { @JoinColumn(name = "user_id") }, 
+            inverseJoinColumns = { @JoinColumn(name = "trail_id")}
+        )
+	List<Trail> favoriteTrails;
+	
+    
 	
 	
 	
