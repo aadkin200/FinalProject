@@ -1,6 +1,8 @@
 package com.skilldistillery.trailnutz.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -54,5 +56,10 @@ class UserTest {
 		System.out.println(user);
 	}
 	
+	@DisplayName("User Favorite Trail Join Table")
+	void test2() {
+		assertNotNull(user.getFavoriteTrails());
+		assertTrue(user.getFavoriteTrails().size() > 0);
+	}
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -38,14 +39,16 @@ public class User {
 	@ManyToMany
     @JoinTable(
             name = "user_has_trail", 
-            joinColumns = { @JoinColumn(name = "user_id") }, 
-            inverseJoinColumns = { @JoinColumn(name = "trail_id")}
+            joinColumns = @JoinColumn(name = "user_id"), 
+            inverseJoinColumns = @JoinColumn(name = "trail_id")
         )
 	List<Trail> favoriteTrails;
-	
-    
-	
-	
+	@OneToMany(mappedBy="user")
+	private List<TrailImage> trailImages;
+	@OneToMany(mappedBy="user")
+	private List<TrailResource> trailResources;
+	@OneToMany(mappedBy="user")
+	private List<Comment> comments;
 	
 	//TODO: Other user fields
 	public User() {}
@@ -134,6 +137,46 @@ public class User {
 
 	public void setCreateAt(LocalDateTime createAt) {
 		this.createdAt = createAt;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public List<Trail> getFavoriteTrails() {
+		return favoriteTrails;
+	}
+
+	public void setFavoriteTrails(List<Trail> favoriteTrails) {
+		this.favoriteTrails = favoriteTrails;
+	}
+
+	public List<TrailImage> getTrailImages() {
+		return trailImages;
+	}
+
+	public void setTrailImages(List<TrailImage> trailImages) {
+		this.trailImages = trailImages;
+	}
+
+	public List<TrailResource> getTrailResources() {
+		return trailResources;
+	}
+
+	public void setTrailResources(List<TrailResource> trailResources) {
+		this.trailResources = trailResources;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }
