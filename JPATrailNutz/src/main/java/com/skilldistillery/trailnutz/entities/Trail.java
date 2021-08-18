@@ -54,6 +54,8 @@ public class Trail {
 	private List<TrailResource> trailResource;
 	@OneToMany(mappedBy="trail")
 	private List<Comment> comments;
+	@ManyToMany(mappedBy="trails")
+	private List<Amenity> amenities;
 	
 	
 	public Trail() {}
