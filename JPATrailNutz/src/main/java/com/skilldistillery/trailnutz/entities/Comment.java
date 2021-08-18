@@ -18,12 +18,8 @@ public class Comment {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "trail_id")
-	private int trailId;
-	
-	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private int userId;
+	private User user;
 	
 	private String message;
 	
@@ -51,12 +47,12 @@ public class Comment {
 		super();
 	}
 
-	public Comment(int id, int trailId, int userId, String message, LocalDateTime createdAt, LocalDateTime updatedAt,
+	public Comment(int id, User user, Trail trail, String message, LocalDateTime createdAt, LocalDateTime updatedAt,
 			int inReplyTo, int enabled, String subject) {
 		super();
 		this.id = id;
-		this.trailId = trailId;
-		this.userId = userId;
+		this.trail = trail;
+		this.user = user;
 		this.message = message;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -73,20 +69,20 @@ public class Comment {
 		this.id = id;
 	}
 
-	public int getTrailId() {
-		return trailId;
+	public Trail getTrail() {
+		return trail;
 	}
 
-	public void setTrailId(int trailId) {
-		this.trailId = trailId;
+	public void setTrail(Trail trail) {
+		this.trail = trail;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getMessage() {
@@ -161,7 +157,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", trailId=" + trailId + ", userId=" + userId + ", message=" + message
+		return "Comment [id=" + id + ", trail=" + trail + ", user=" + user + ", message=" + message
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", inReplyTo=" + inReplyTo + ", enabled="
 				+ enabled + ", subject=" + subject + "]";
 	}

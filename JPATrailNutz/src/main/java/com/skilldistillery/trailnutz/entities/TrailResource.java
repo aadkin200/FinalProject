@@ -19,13 +19,10 @@ public class TrailResource {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "trail_id")
-	private int trailId;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private int userId;
+	private User user;
 	
 	@Column(name = "resource_url")
 	private String resourceUrl;
@@ -49,12 +46,12 @@ public class TrailResource {
 	}
 
 
-	public TrailResource(int id, int trailId, int userId, String resourceUrl, String title, LocalDateTime createdAt,
+	public TrailResource(int id, Trail trail, User user, String resourceUrl, String title, LocalDateTime createdAt,
 			int enabled) {
 		super();
 		this.id = id;
-		this.trailId = trailId;
-		this.userId = userId;
+		this.trail = trail;
+		this.user = user;
 		this.resourceUrl = resourceUrl;
 		this.title = title;
 		this.createdAt = createdAt;
@@ -72,23 +69,13 @@ public class TrailResource {
 	}
 
 
-	public int getTrailId() {
-		return trailId;
+	public User getUser() {
+		return user;
 	}
 
 
-	public void setTrailId(int trailId) {
-		this.trailId = trailId;
-	}
-
-
-	public int getUserId() {
-		return userId;
-	}
-
-
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 
@@ -169,7 +156,7 @@ public class TrailResource {
 
 	@Override
 	public String toString() {
-		return "TrailResource [id=" + id + ", trailId=" + trailId + ", userId=" + userId + ", resourceUrl="
+		return "TrailResource [id=" + id + ", trail=" + trail + ", user=" + user + ", resourceUrl="
 				+ resourceUrl + ", title=" + title + ", createdAt=" + createdAt + ", enabled=" + enabled + "]";
 	}
 	

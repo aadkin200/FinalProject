@@ -1,6 +1,9 @@
 package com.skilldistillery.trailnutz.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +46,11 @@ class TrailResourceTest {
 	@Test
 	@DisplayName("trail resource entity test")
 	void test() {
+		LocalDateTime reviewDate =  LocalDateTime.of(2020, 01, 01, 10, 10, 00);
+		
 		assertNotNull(trailResrc);
+		assertEquals("Trail photos", trailResrc.getTitle());
+		
 		
 	}
 	
