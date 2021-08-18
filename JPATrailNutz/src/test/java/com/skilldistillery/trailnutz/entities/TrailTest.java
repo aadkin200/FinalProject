@@ -54,5 +54,47 @@ class TrailTest {
 		assertNotNull(trail);
 		assertEquals(1, trail.getUsers().size());
 	}
+	
+	@Test
+	@DisplayName("Testing connection between Trail and Comment")
+	void test2() {
+		assertNotNull(trail);
+		assertEquals("Hello", trail.getComments().get(0).getMessage());
+	}
+	
+	@Test
+	@DisplayName("Testing connection between Trail and amenity")
+	void test3() {
+		assertNotNull(trail);
+		assertEquals("Bathrooms?", trail.getAmenities().get(0).getDescription());
+	}
+	
+	@Test
+	@DisplayName("Testing connection between trail and trail_resource")
+	void test4() {
+		assertNotNull(trail);
+		assertEquals("Trail photos", trail.getTrailResource().get(0).getTitle());
+	}
+	
+	@Test
+	@DisplayName("Testing connection between trail and trail_image")
+	void test5() {
+		assertNotNull(trail);
+		assertEquals("http://www.google.com", trail.getTrailImages().get(0).getImageUrl());
+	}
+	
+	@Test
+	@DisplayName("Testing connection between trail and difficulty")
+	void test6() {
+		assertNotNull(trail);
+		assertEquals("A hike that is generally suitable for anyone who enjoys walking. Mostly level or with a slight incline. Generally less than 3 miles.", trail.getDifficulty().getDescription());
+	}
+	
+	@Test
+	@DisplayName("Testing connection between trail and route_type")
+	void test7() {
+		assertNotNull(trail);
+		assertEquals("Loop", trail.getRouteType().getName());
+	}
 
 }
