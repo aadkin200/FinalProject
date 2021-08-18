@@ -65,6 +65,15 @@ class TrailResourceTest {
 		
 	}
 	
+	@Test
+	@DisplayName("trail resource to trail test")
+	void test2() {
+		
+		assertNotNull(trailResrc.getTrail());
+		assertEquals(1, trailResrc.getTrail().getId());
+		assertEquals("Racoons", trailResrc.getTrail().getWildlife());
+		
+	}
 	
 
 }
