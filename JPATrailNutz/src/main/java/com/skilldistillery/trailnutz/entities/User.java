@@ -133,14 +133,6 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 
-	public LocalDateTime getCreateAt() {
-		return createdAt;
-	}
-
-	public void setCreateAt(LocalDateTime createAt) {
-		this.createdAt = createAt;
-	}
-
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
