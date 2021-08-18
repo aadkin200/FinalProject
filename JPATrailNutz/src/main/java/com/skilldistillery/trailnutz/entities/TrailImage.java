@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,6 +25,9 @@ public class TrailImage {
 	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createAt;
+	@ManyToOne
+	@JoinColumn(name="trail_id")
+	private Trail trail;
 	
 	public TrailImage() {}
 
@@ -49,5 +54,14 @@ public class TrailImage {
 	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
+
+	public Trail getTrail() {
+		return trail;
+	}
+
+	public void setTrail(Trail trail) {
+		this.trail = trail;
+	}
+	
 	
 }
