@@ -235,6 +235,12 @@ public class Trail {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
+	public List<Amenity> getAmenities() {
+		return amenities;
+	}
+	public void setAmenities(List<Amenity> amenities) {
+		this.amenities = amenities;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
