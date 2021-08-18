@@ -17,7 +17,7 @@ public class Trail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToMany(mappedBy="trails")
+	@ManyToMany(mappedBy="favoritedTrails")
 	private List<User> users;
 	@ManyToOne
 	@JoinColumn(name="difficulty_id")
@@ -44,6 +44,8 @@ public class Trail {
 	private LocalDateTime updatedAt;
 	private boolean enabled;
 	private boolean approved;
+	private TrailImage trailImages;
+	
 	
 	public Trail() {}
 	
