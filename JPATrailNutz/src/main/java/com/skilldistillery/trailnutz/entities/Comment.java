@@ -117,7 +117,6 @@ public class Comment {
 		this.updatedAt = updatedAt;
 	}
 
-
 	public int getEnabled() {
 		return enabled;
 	}
