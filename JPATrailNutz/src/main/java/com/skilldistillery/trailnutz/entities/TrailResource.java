@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,7 +38,9 @@ public class TrailResource {
 	
 	private int enabled;
 
-
+	@ManyToOne
+	@JoinColumn(name="trail_id")
+	private Trail trail;
 	
 	
 	public TrailResource() {
@@ -125,6 +129,17 @@ public class TrailResource {
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
+	
+
+
+	public Trail getTrail() {
+		return trail;
+	}
+
+
+	public void setTrail(Trail trail) {
+		this.trail = trail;
+	}
 
 
 	@Override
@@ -156,6 +171,8 @@ public class TrailResource {
 		return "TrailResource [id=" + id + ", trailId=" + trailId + ", userId=" + userId + ", resourceUrl="
 				+ resourceUrl + ", title=" + title + ", createdAt=" + createdAt + ", enabled=" + enabled + "]";
 	}
+	
+	
 	
 	
 	
