@@ -18,7 +18,7 @@ public class Trail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToMany(mappedBy="favoritedTrails")
+	@ManyToMany(mappedBy="favoriteTrails")
 	private List<User> users;
 	@ManyToOne
 	@JoinColumn(name="user_id")
