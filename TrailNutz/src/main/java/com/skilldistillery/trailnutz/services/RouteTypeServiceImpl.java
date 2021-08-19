@@ -18,6 +18,8 @@ public class RouteTypeServiceImpl implements RouteTypeService {
 	public List<RouteType> routes() {
 		return repo.findAll();
 	}
+	
+	
 
 	
 	
