@@ -279,7 +279,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `hikedb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `favorite_trail_food`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `created_at`) VALUES (1, 'admin', 'password', 'admin@admin.com', 'Trailnutz', 1, 'ADMIN', 'Gerry', 'Lowkey', 'https://4.bp.blogspot.com/-klQjV5L27_s/T73fozhXluI/AAAAAAAAAkI/_75K0D7Hpqw/s1600/smiley-face2.jpg', '2020-01-01 10:10');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `favorite_trail_food`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `created_at`) VALUES (1, 'admin', '$2a$10$NHCKJEdtUxcAdXBiC6yZnel2uwIowYIz74HV7JlFh7K0yeChwTx7O', 'admin@admin.com', 'Trailnutz', 1, 'ADMIN', 'Gerry', 'Lowkey', 'https://4.bp.blogspot.com/-klQjV5L27_s/T73fozhXluI/AAAAAAAAAkI/_75K0D7Hpqw/s1600/smiley-face2.jpg', '2020-01-01 10:10');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `favorite_trail_food`, `enabled`, `role`, `first_name`, `last_name`, `image_url`, `created_at`) VALUES (2, 'bobby', '$2a$10$T18Sq1Owcw9pPn.HIzY1huZOEoAa2Vx.ewie8BItqwEQ6kb1ilRme', 'bobby@dobby.com', 'Leafy greens', 1, 'standard', 'Bobby', 'Dobby', 'https://4.bp.blogspot.com/-klQjV5L27_s/T73fozhXluI/AAAAAAAAAkI/_75K0D7Hpqw/s1600/smiley-face2.jpg', '2020-01-01 10:10');
 
 COMMIT;
 
