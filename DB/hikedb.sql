@@ -317,6 +317,7 @@ COMMIT;
 START TRANSACTION;
 USE `hikedb`;
 INSERT INTO `trail` (`id`, `user_id`, `difficulty_id`, `route_type_id`, `name`, `elevation_change_feet`, `trailhead_latitude`, `trailhead_longitude`, `city`, `state`, `hazards`, `wildlife`, `details`, `distance_miles`, `created_at`, `updated_at`, `enabled`, `approved`) VALUES (1, 1, 1, 1, 'Great Smokey', 700, '35.176720', '-81.452720', 'Grover', 'NC', 'sheer cliffs', 'Racoons', 'not even worth going', 560, '2020-01-01 10:10', '2020-01-01 10:10', 1, 1);
+INSERT INTO `trail` (`id`, `user_id`, `difficulty_id`, `route_type_id`, `name`, `elevation_change_feet`, `trailhead_latitude`, `trailhead_longitude`, `city`, `state`, `hazards`, `wildlife`, `details`, `distance_miles`, `created_at`, `updated_at`, `enabled`, `approved`) VALUES (2, 2, 2, 1, 'Polly Wag Trail', 125, NULL, NULL, 'Somecity', 'SC', 'none', 'none', 'mythical location', 2, '2021-01-01 10:10', '2021-01-01 10:10', 1, 0);
 
 COMMIT;
 
