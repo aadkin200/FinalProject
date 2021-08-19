@@ -33,15 +33,17 @@ public class TrailResourceServiceImpl implements TrailResourceService {
 		trRepo.saveAndFlush(trailResource);
 		return trailResource;
 		}
-	
-
 
 	@Override
-	public TrailResource updateTrailResource(TrailResource trailResource, String string, int trailResourceId, int trailId) {
-
-		return null;
-		
-		
+	public TrailResource updateTrailResource(TrailResource trailResource, String username, int trailResourceId, int trailId) {
+		TrailResource managedTR = trRepo.findById(trailResourceId).get();
+		User user = userRepo.findByUsername(username);
+		if(managedTR.getUser().getId() == user.getId()) {
+			managedTR.setResourceUrl(trailResource.getResourceUrl());
+			managedTR.setTitle(trailResource.getTitle());
+			trRepo.saveAndFlush(managedTR);
+		}
+		return managedTR;
 	}
 
 
