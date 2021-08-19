@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,13 +27,12 @@ public class TrailResourceController {
 	private TrailResourceService trServ;
 
 	@PostMapping("trail/{trailId}/trailresources")
-	public TrailResource addTrailResource(@RequestBody TrailResource trailResource, int trailId, HttpServletRequest req,
-			HttpServletResponse res, Principal principal) {
+	public TrailResource addTrailResource(@RequestBody TrailResource trailResource, @PathVariable int trailId,
+			HttpServletRequest req, HttpServletResponse res, Principal principal) {
 
 		try {
-			trailResource = trServ.addTrailResource(trailResource);
-			res.setStatus(200);
-			return trailResource;
+			trailResource = trServ.addTrailResource(trailResource, principal.getName(), trailId);
+			res.setStatus(201);
 		} catch (Exception e) {
 			res.setStatus(400);
 			trailResource = null;
@@ -39,23 +40,18 @@ public class TrailResourceController {
 
 		return trailResource;
 	}
-	
-	@PutMapping("trail/{trailId}/trailresources/{trailResourceId}")
-	public TrailResource removeTraiResource(@RequestBody TrailResource trailResource, int trailResourceId, int trailId, Principal principal, HttpServletResponse res) {
-		
-		try {
-			 trailResource = trServ.updateTrailResource(trailResource, trailResourceId, trailId);
-			res.setStatus(200);
-			return trailResource;
-}
-	catch(Exception e) {
-		res.setStatus(400);
-		trailResource = null;
-	}
-	
-	return trailResource;
-		
-	}
-	
 
+	@DeleteMapping("trail/{trailId}/trailresources/{trailResourceId}")
+	public boolean removeTraiResource(@PathVariable int trailId, @PathVariable int trailResourceId,  Principal principal, HttpServletResponse res) {
+
+		boolean isDisabled;
+		try {
+			isDisabled = trServ.disableTrailResource(trailResourceId, trailId, principal.getName());
+			res.setStatus(204);
+			return isDisabled;
+		} catch (Exception e) {
+			res.setStatus(404);
+			return false;
+		}
+	}
 }

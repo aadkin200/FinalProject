@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -31,12 +33,12 @@ public class TrailResource {
 	
 	
 	private String title;
-	
+	@CreationTimestamp
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 	
 	
-	private int enabled;
+	private boolean enabled;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -50,7 +52,7 @@ public class TrailResource {
 
 
 	public TrailResource(int id, Trail trail, User user, String resourceUrl, String title, LocalDateTime createdAt,
-			int enabled) {
+			boolean enabled) {
 		super();
 		this.id = id;
 		this.trail = trail;
@@ -112,12 +114,12 @@ public class TrailResource {
 	}
 
 
-	public int getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 	
