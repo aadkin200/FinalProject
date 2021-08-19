@@ -10,9 +10,9 @@ public interface CommentService {
 	
 	Comment showComment(int commId);
 	
-	Comment createComment(Comment comment);
+	Comment createComment(int trailId, Comment comment, String username);
 	
-	Comment updateComment(int commId, Comment comment);
+	Comment updateComment(int trailId, int commId, Comment comment, String username);
 	
-	boolean disableComment(int userId, int commId);
+	boolean disableComment(int userId, int commId, String username);
 }

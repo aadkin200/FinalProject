@@ -7,14 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.trailnutz.entities.Comment;
+import com.skilldistillery.trailnutz.entities.Trail;
 import com.skilldistillery.trailnutz.entities.User;
 import com.skilldistillery.trailnutz.repositories.CommentRepository;
+import com.skilldistillery.trailnutz.repositories.TrailRepository;
+import com.skilldistillery.trailnutz.repositories.UserRepository;
 
 @Service
 public class CommentServiceImpl implements CommentService{
 	
 	@Autowired
 	private CommentRepository commRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private TrailRepository trailRepo;
 
 	public List<Comment> getCommentByTrailId(Integer trailId) {
 		return commRepo.findByTrail_Id(trailId);
@@ -34,30 +43,40 @@ public class CommentServiceImpl implements CommentService{
 	
 	
 	@Override
-	public Comment createComment(Comment comment) {
+	public Comment createComment(int trailId, Comment comment, String username) {
+		User managedUser = userRepo.findByUsername(username);
+		Trail trail = trailRepo.findById(trailId).get();
+		comment.setTrail(trail);
+		comment.setUser(managedUser);
+		commRepo.saveAndFlush(comment);
 		
-		return commRepo.saveAndFlush(comment);
+		return comment;
 	}
 	
 	
 	@Override
-	public Comment updateComment(int commId, Comment comment) {
-		
+	public Comment updateComment(int trailId, int commId, Comment comment, String username) {
+		User managedUser = userRepo.findByUsername(username);
+		Trail trail = trailRepo.findById(trailId).get();
+		comment.setTrail(trail);
+		comment.setUser(managedUser);
 		comment.setId(commId);
-		return commRepo.saveAndFlush(comment);
+		commRepo.saveAndFlush(comment);
+		
+		return comment;
 	}
 	
 	
 	@Override
-	public boolean disableComment(int userId, int commId) {
+	public boolean disableComment(int userId, int commId, String username) {
 		
 			Optional<Comment> commentOpt = commRepo.findById(commId);
 			if(commentOpt.isPresent()) {
 				
 				Comment comment = commentOpt.get();
-				User user = comment.getUser();
+				User managedUser = userRepo.findByUsername(username);
 				
-				if(user.getRole().equals("admin") || user.getId() == userId) {
+				if(managedUser.getRole().equals("admin") || managedUser.getId() == userId) {
 					
 					comment.setEnabled(false);
 					commRepo.saveAndFlush(comment);
