@@ -52,6 +52,7 @@ public class UserController {
 			res.setStatus(400);
 		}
 	}
+	
 	@PutMapping("user/{userId}")
 	public void enableUser(@PathVariable int userId, Principal principal, HttpServletResponse res) {
 		boolean isEnabled = userSvc.userEnable(userId, principal.getName());
@@ -61,4 +62,6 @@ public class UserController {
 			res.setStatus(400);
 		}
 	}
+	
+	
 }

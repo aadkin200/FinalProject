@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService{
 	public boolean disableUser(int userId, String username) {
 		try {
 			User admin = userRepo.findByUsername(username);
-			if(admin.getRole().equals("admin")) {
+			if(admin.getRole().equalsIgnoreCase("admin")) {
 				Optional<User> user = userRepo.findById(userId);
 				if(user.isPresent()) {
 					user.get().setEnabled(false);
@@ -68,23 +68,11 @@ public class UserServiceImpl implements UserService{
 	public boolean userEnable(int userId, String username) {
 		try {
 			User admin = userRepo.findByUsername(username);
-			System.out.println(admin);
-			System.out.println("*******************");
-			System.out.println("*******************");
-			System.out.println("*******************");
-			System.out.println("*******************");
-			System.out.println("*******************");
-			System.out.println("*******************");
-			if(admin.getRole().equals("admin")) {
+			if(admin.getRole().equalsIgnoreCase("admin")) {
 				Optional<User> user = userRepo.findById(userId);
-				System.out.println(user.get());
-				System.out.println("*******************");
-				System.out.println("*******************");
-				System.out.println("*******************");
 				if(user.isPresent()) {
 					user.get().setEnabled(true);
 					userRepo.saveAndFlush(user.get());
-					System.out.println(user.get());
 					return true;
 				}
 			}
