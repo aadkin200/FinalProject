@@ -47,11 +47,10 @@ public class TrailController {
 	
 	@PutMapping("trail")
 	public Trail update(@RequestBody Trail trail,
-						@PathVariable int trailId,
 						HttpServletRequest req, 
 						HttpServletResponse res, 
 						Principal principal) {
-		return trailSvc.update(principal.getName(), trail, trailId);
+		return trailSvc.update(principal.getName(), trail, trail.getId());
 	}
 	
 	@PutMapping("trail/{trailId}")
