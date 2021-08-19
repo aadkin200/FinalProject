@@ -6,4 +6,8 @@ import com.skilldistillery.trailnutz.entities.TrailImage;
 
 public interface TrailImageRepository extends JpaRepository<TrailImage, Integer> {
 
+
+
+	TrailImage getById(int trailImgId);
+
 }

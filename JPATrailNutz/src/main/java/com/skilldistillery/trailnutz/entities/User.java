@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -46,6 +47,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "trail_id")
         )
 	List<Trail> favoriteTrails;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<TrailImage> trailImages;
 	@JsonIgnore

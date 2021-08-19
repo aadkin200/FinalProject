@@ -1,10 +1,9 @@
 package com.skilldistillery.trailnutz.services;
 
-import java.util.Optional;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.skilldistillery.trailnutz.entities.Trail;
 import com.skilldistillery.trailnutz.entities.TrailResource;
 import com.skilldistillery.trailnutz.entities.User;
@@ -31,14 +30,20 @@ public class TrailResourceServiceImpl implements TrailResourceService {
 		}
 		trailResource.setUser(user);
 		trailResource.setEnabled(true);
-		
-		return trRepo.save(trailResource);
-	}
+		trRepo.saveAndFlush(trailResource);
+		return trailResource;
+		}
+	
+
 
 	@Override
-	public TrailResource updateTrailResource(TrailResource trailResource, int trailResourceId, int trailId) {
-		return trRepo.saveAndFlush(trailResource);
+	public TrailResource updateTrailResource(TrailResource trailResource, String string, int trailResourceId, int trailId) {
+
+		return null;
+		
+		
 	}
+
 
 	@Override
 	public boolean disableTrailResource(int trailResourceId, int trailId, String username) {
@@ -58,8 +63,5 @@ public class TrailResourceServiceImpl implements TrailResourceService {
 		}
 		return false;
 	}
-	
-	
 
-	
 }

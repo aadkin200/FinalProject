@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="trail_image")
@@ -27,10 +28,12 @@ public class TrailImage {
 	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createAt;
-	@JsonIgnore
+	
+	@JsonIgnoreProperties("trailImages")
 	@ManyToOne
 	@JoinColumn(name="trail_id")
 	private Trail trail;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")

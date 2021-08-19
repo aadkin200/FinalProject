@@ -1,11 +1,12 @@
 package com.skilldistillery.trailnutz.services;
 
+
 import com.skilldistillery.trailnutz.entities.TrailImage;
 
 public interface TrailImageService {
 
-	TrailImage addTrailImage(TrailImage trailImage);
+	TrailImage addTrailImage(String username, TrailImage trailImage, int trailId);
 
-	TrailImage updateTrailImage(TrailImage trailImage, int trailImgId, int trailId);
+	boolean updateTrailImage( int trailImgId, int trailId);
 
 }

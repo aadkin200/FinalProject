@@ -103,7 +103,6 @@ public class TrailResource {
 		this.title = title;
 	}
 
-
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}

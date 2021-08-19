@@ -54,4 +54,11 @@ public class TrailResourceController {
 			return false;
 		}
 	}
+	
+	@PutMapping("trail/{trailId}/trailresources/{trailResourceId}")
+	public TrailResource removeTraiResource(@RequestBody TrailResource trailResource, int trailResourceId, int trailId, Principal principal, HttpServletResponse res) {
+		
+		return trServ.updateTrailResource(trailResource, principal.getName(), trailResource.getId(), trailId);
+		
+	}
 }

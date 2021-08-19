@@ -6,4 +6,6 @@ import com.skilldistillery.trailnutz.entities.TrailResource;
 
 public interface TrailResourceRepository extends JpaRepository<TrailResource, Integer>{
 
+//	TrailResource findByUsernameAndTrailId(String string, int trailId);
+
 }
