@@ -38,7 +38,7 @@ public class Comment {
 	@OneToMany(mappedBy="parentComment")
 	List<Comment> replies;
 	
-	private int enabled;
+	private boolean enabled;
 	
 	private String subject;
 	
@@ -54,7 +54,7 @@ public class Comment {
 	}
 
 	public Comment(int id, User user, String message, LocalDateTime createdAt, LocalDateTime updatedAt,
-			Comment parentComment, List<Comment> replies, int enabled, String subject, Trail trail) {
+			Comment parentComment, List<Comment> replies, boolean enabled, String subject, Trail trail) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -117,11 +117,11 @@ public class Comment {
 		this.updatedAt = updatedAt;
 	}
 
-	public int getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
