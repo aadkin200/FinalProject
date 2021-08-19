@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Difficulty {
 	
@@ -19,6 +21,7 @@ public class Difficulty {
 	
 	private String description;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="difficulty")
 	private List<Trail> trails;
 
