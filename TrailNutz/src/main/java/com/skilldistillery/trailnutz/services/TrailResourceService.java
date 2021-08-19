@@ -4,9 +4,9 @@ import com.skilldistillery.trailnutz.entities.TrailResource;
 
 public interface TrailResourceService  {
 
-	TrailResource addTrailResource(TrailResource trailResource);
+	TrailResource addTrailResource(String string, TrailResource trailResource);
 
-	TrailResource updateTrailResource(TrailResource trailResource, int trailResourceId, int trailId);
+	TrailResource updateTrailResource(TrailResource trailResource, String string, int trailResourceId, int trailId);
 	
 	
 

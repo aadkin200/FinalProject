@@ -1,5 +1,6 @@
 package com.skilldistillery.trailnutz.services;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +14,24 @@ public class TrailResourceServiceImpl implements TrailResourceService {
 	private TrailResourceRepository trRepo;
 
 	@Override
-	public TrailResource addTrailResource(TrailResource trailResource) {
+	public TrailResource addTrailResource(String string, TrailResource trailResource) {
 		
 		
 		return trRepo.save(trailResource);
 	}
 
 	@Override
-	public TrailResource updateTrailResource(TrailResource trailResource, int trailResourceId, int trailId) {
-		return trRepo.saveAndFlush(trailResource);
+	public TrailResource updateTrailResource(TrailResource trailResource, String string, int trailResourceId, int trailId) {
+//		TrailResource managed = trRepo.findByUsernameAndTrailId(string, trailId);
+//		if(managed != null) {
+//			managed.setResourceUrl(trailResource.getResourceUrl());
+//		}
+		
+		return null;
+		
+		
 	}
-
+	
+	
 	
 }

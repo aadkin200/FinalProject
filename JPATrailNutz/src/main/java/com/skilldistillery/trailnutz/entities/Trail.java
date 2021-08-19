@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Trail {
@@ -23,6 +24,7 @@ public class Trail {
 	@ManyToMany(mappedBy="favoriteTrails")
 	private List<User> users;
 	
+	@JsonIgnoreProperties("trails")
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
@@ -68,6 +70,7 @@ public class Trail {
 	
 	private boolean approved;
 	
+	@JsonIgnoreProperties("trail")
 	@OneToMany(mappedBy="trail")
 	private List<TrailImage> trailImages;
 	@OneToMany(mappedBy="trail")

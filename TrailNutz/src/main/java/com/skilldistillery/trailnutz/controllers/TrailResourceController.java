@@ -28,34 +28,18 @@ public class TrailResourceController {
 	public TrailResource addTrailResource(@RequestBody TrailResource trailResource, int trailId, HttpServletRequest req,
 			HttpServletResponse res, Principal principal) {
 
-		try {
-			trailResource = trServ.addTrailResource(trailResource);
-			res.setStatus(200);
-			return trailResource;
-		} catch (Exception e) {
-			res.setStatus(400);
-			trailResource = null;
-		}
-
-		return trailResource;
+		return trServ.addTrailResource(principal.getName(), trailResource);
 	}
 	
 	@PutMapping("trail/{trailId}/trailresources/{trailResourceId}")
 	public TrailResource removeTraiResource(@RequestBody TrailResource trailResource, int trailResourceId, int trailId, Principal principal, HttpServletResponse res) {
 		
-		try {
-			 trailResource = trServ.updateTrailResource(trailResource, trailResourceId, trailId);
-			res.setStatus(200);
-			return trailResource;
-}
-	catch(Exception e) {
-		res.setStatus(400);
-		trailResource = null;
-	}
-	
-	return trailResource;
+		return trServ.updateTrailResource(trailResource, principal.getName(), trailResource.getId(), trailId);
 		
 	}
+	
+	
+	
 	
 
 }
