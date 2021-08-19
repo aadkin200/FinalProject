@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
@@ -36,6 +38,7 @@ public class User {
 	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
+	@JsonIgnore
 	@ManyToMany
     @JoinTable(
             name = "user_has_trail", 
@@ -45,10 +48,13 @@ public class User {
 	List<Trail> favoriteTrails;
 	@OneToMany(mappedBy="user")
 	private List<TrailImage> trailImages;
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<TrailResource> trailResources;
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Comment> comments;
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Trail> trails;
 	

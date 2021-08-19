@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Comment {
 	
@@ -31,9 +33,11 @@ public class Comment {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "in_reply_to")
 	private Comment parentComment;
+	
 	
 	@OneToMany(mappedBy="parentComment")
 	List<Comment> replies;
@@ -42,6 +46,7 @@ public class Comment {
 	
 	private String subject;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="trail_id")
 	private Trail trail;

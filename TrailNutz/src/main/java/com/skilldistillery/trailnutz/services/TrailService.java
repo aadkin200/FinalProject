@@ -6,6 +6,7 @@ import com.skilldistillery.trailnutz.entities.Trail;
 
 public interface TrailService {
 	public List<Trail> index(String username);
+	public List<Trail> index();
 	public Trail show(String username, int trailId);
 	public Trail create(String username, Trail trail);
 	public Trail update(String username, Trail trail, int trailId);

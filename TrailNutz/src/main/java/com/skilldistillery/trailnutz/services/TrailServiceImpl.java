@@ -22,6 +22,11 @@ public class TrailServiceImpl implements TrailService{
 	public List<Trail> index(String username) {
 		return trailRepo.findByUser_Username(username);
 	}
+	
+	@Override
+	public List<Trail> index() {
+		return trailRepo.findAll();
+	}
 
 	@Override
 	public Trail show(String username, int trailId) {
@@ -66,5 +71,6 @@ public class TrailServiceImpl implements TrailService{
 		}
 		return false;
 	}
+
 
 }
