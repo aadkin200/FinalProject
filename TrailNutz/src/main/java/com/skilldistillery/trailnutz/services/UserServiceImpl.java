@@ -63,4 +63,34 @@ public class UserServiceImpl implements UserService{
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean userEnable(int userId, String username) {
+		try {
+			User admin = userRepo.findByUsername(username);
+			System.out.println(admin);
+			System.out.println("*******************");
+			System.out.println("*******************");
+			System.out.println("*******************");
+			System.out.println("*******************");
+			System.out.println("*******************");
+			System.out.println("*******************");
+			if(admin.getRole().equals("admin")) {
+				Optional<User> user = userRepo.findById(userId);
+				System.out.println(user.get());
+				System.out.println("*******************");
+				System.out.println("*******************");
+				System.out.println("*******************");
+				if(user.isPresent()) {
+					user.get().setEnabled(true);
+					userRepo.saveAndFlush(user.get());
+					System.out.println(user.get());
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
+	}
 }
