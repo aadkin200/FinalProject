@@ -1,5 +1,6 @@
 import { Trail } from "./trail";
 import { TrailImage } from "./trail-image";
+import { TrailResource } from "./trail-resource";
 
 export class User {
   id:number;
@@ -14,7 +15,7 @@ export class User {
   createdAt:string;
   favoriteTrails: Trail[];
   trailImages: TrailImage[];
-  trailResouces: TrailResouce[];
+  trailResouces: TrailResource[];
   comments: Comment[];
   trails: Trail[];
 
@@ -31,7 +32,7 @@ export class User {
     createdAt:string = "",
     favoriteTrails: Trail[] = [],
     trailImages: TrailImage[] = [],
-    trailResouces: TrailResouce[] = [],
+    trailResouces: TrailResource[] = [],
     comments: Comment[] = [],
     trails: Trail[] = []
   ){
