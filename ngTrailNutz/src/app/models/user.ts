@@ -1,4 +1,5 @@
 import { Trail } from "./trail";
+import { TrailImage } from "./trail-image";
 
 export class User {
   id:number;
