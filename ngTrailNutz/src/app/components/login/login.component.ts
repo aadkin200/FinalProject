@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(user.username, user.password).subscribe(
       loggedIn => {
         console.log('LoginComponent.login(): user logged in');
-        this.router.navigateByUrl('/trail');
+        this.router.navigateByUrl('/feed');
       },
       fial => {
         console.error("error in login.component.ts login()");
