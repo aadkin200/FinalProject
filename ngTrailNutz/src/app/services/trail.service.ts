@@ -29,7 +29,8 @@ export class TrailService {
   }
 
   public show(trailId: any) {
-    return this.http.get<Trail>(`${this.baseUrl}/${trailId}`).pipe(
+    return this.http.get<Trail>(`${this.baseUrl}/${trailId}`)
+    .pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error in trail.service.ts show()');
@@ -38,10 +39,29 @@ export class TrailService {
   }
 
   public create(trail: Trail) {
-    return this.http.post<Trail>(this.baseUrl, trail, this.getHttpOptions()).pipe(
+    return this.http.post<Trail>(this.baseUrl, trail, this.getHttpOptions())
+    .pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error in trail.service.ts create()');
+      })
+    )
+  }
+
+  public update(trail: Trail) {
+    return this.http.put<Trail>(`${this.baseUrl}/${trail.id}`, trail, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error in trail.service.ts update()');
+      })
+    )
+  }
+
+  public destroy(id: number) {
+    return this.http.delete<Trail>(`${this.baseUrl}/${id}`, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error deleting');
       })
     )
   }
