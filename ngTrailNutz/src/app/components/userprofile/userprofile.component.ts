@@ -17,11 +17,13 @@ export class UserprofileComponent implements OnInit {
     this.userSvc.getUser().subscribe(
       user=>{
         this.user = user;
-      },
+      }
+      ,
       err=>{
         console.error("userprofile: ngOnInit(): error getting user", err);
       }
     )
+
   }
 
 
