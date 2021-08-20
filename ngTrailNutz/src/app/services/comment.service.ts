@@ -13,14 +13,14 @@ import { AuthService } from './auth.service';
 })
 export class CommentService {
 
-  private url = environment.baseUrl + 'api/trail/{trialId}/comment';
+  private url = environment.baseUrl;
 
 
   constructor(
     private auth: AuthService, private http: HttpClient
   ) { }
 
-  create(comment: Comment): Observable<Comment> {
+  create(comment: Comment, trailId:number): Observable<Comment> {
   comment.user = new User();
   comment.message = '';
   comment.createdAt = '';
@@ -30,7 +30,7 @@ export class CommentService {
   comment.enabled = true;
   comment.subject = '';
   comment.trail = new Trail();
-    return this.http.post<Comment>(this.url, comment, this.getHttpOptions()).pipe(
+    return this.http.post<Comment>(this.url + `api/trail/${trailId}/comment`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.create(): error creating comment');
         return throwError(err);
@@ -38,8 +38,8 @@ export class CommentService {
     );
   }
 
-  update(comment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${this.url}/${comment.id}`, comment, this.getHttpOptions()).pipe(
+  update(comment: Comment, trailId:number): Observable<Comment> {
+    return this.http.put<Comment>(this.url + `api/trail/${trailId}/comment/${comment.id}`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.update(): error updating comment');
         return throwError(err);
@@ -47,8 +47,8 @@ export class CommentService {
     );
   }
 
-  disable(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+  disable(id: number, trailId:number): Observable<void> {
+    return this.http.delete<void>(this.url + `api/trail/${trailId}/comment/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.disable(): error disabling comment');
         return throwError(err);

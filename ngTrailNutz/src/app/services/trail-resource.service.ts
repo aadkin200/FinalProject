@@ -36,8 +36,8 @@ export class TrailResourceService {
     );
   }
 
-  update(trailResrc: TrailResource): Observable<TrailResource> {
-    return this.http.put<TrailResource>(`${this.url}/${trailResrc.id}`, trailResrc, this.getHttpOptions()).pipe(
+  update(trailResrc: TrailResource, trailId:number): Observable<TrailResource> {
+    return this.http.put<TrailResource>(this.url + `api/trail/${trailId}/trailresources/${trailResrc.id}`, trailResrc, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('TrailResourceService.update(): error updating TrailResource');
         return throwError(err);
@@ -45,8 +45,8 @@ export class TrailResourceService {
     );
   }
 
-  disable(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+  disable(id: number, trailId:number): Observable<void> {
+    return this.http.delete<void>(this.url + `api/trail/${trailId}/trailresources/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.disable(): error disabling comment');
         return throwError(err);
