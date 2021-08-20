@@ -1,40 +1,32 @@
 import { Trail } from "./trail";
 import { User } from "./user";
 
-export class Comment {
+export class TrailResource {
 
   id: number;
   user: User;
-  message: string;
+  resourceUrl: string;
+  title: string;
   createdAt: string;
-  updatedAt: string;
-  parentComment: number;
-  replies: Comment[];
   enabled: boolean;
-  subject: string;
   trail: Trail;
 
 constructor(
   id: number = 0,
   user: User = new User,
-  message: string = '',
   createdAt: string = '',
-  updatedAt: string = '',
-  parentComment: number = 0,
-  replies: Comment[] = [],
+  resourceUrl: string = '',
+  title: string = '',
   enabled: boolean = true,
-  subject: string = '',
   trail: Trail = new Trail
 ){
   this.id = id;
   this.user = user;
-  this.message = message;
   this.createdAt = createdAt;
-  this.updatedAt = updatedAt;
-  this.parentComment = parentComment;
-  this.replies = replies;
+  this.resourceUrl = resourceUrl;
+  this.title = title;
   this.enabled = enabled;
-  this.subject = subject;
   this.trail = trail;
 }
+
 }
