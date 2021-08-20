@@ -13,7 +13,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
-import { DatePipe } from '@angular/common';
+import { DifficultyService } from './services/difficulty.service';
+import { AmenityService } from './services/amenity.service';
+import { RouteTypeService } from './services/route-type.service';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { DatePipe } from '@angular/common';
   ],
   providers: [
     AuthService,
-
+    DifficultyService,
+    AmenityService,
+    RouteTypeService
   ],
   bootstrap: [AppComponent]
 })

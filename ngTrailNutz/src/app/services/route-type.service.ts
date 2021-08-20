@@ -1,19 +1,18 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
-import { catchError } from "rxjs/operators";
-import { throwError } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Routetype } from '../models/routetype';
 import { AuthService } from './auth.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
+export class RouteTypeService {
 
-export class Routetype {
-
-  url = environment.baseUrl + 'api/trails';
+  url = environment.baseUrl;
 
 
   constructor(
@@ -23,8 +22,8 @@ export class Routetype {
   ) { }
 
 
-  show(): Observable<Routetype> {
-    return this.http.get<Routetype>(`${this.url}`, this.getHttpOptions()).pipe(
+  show(): Observable<Routetype[]> {
+    return this.http.get<Routetype[]>(`${this.url}api/traildetails/routetype`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('RouteTypeService.show(): error retrieving this route:');
         return throwError(err);
@@ -43,5 +42,4 @@ export class Routetype {
     };
     return httpOptions
   }
-  }
-
+}
