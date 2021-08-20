@@ -6,8 +6,8 @@ export class Comment {
   id: number;
   user: User;
   message: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: number;
+  updatedAt: number;
   parentComment: number;
   replies: Comment[];
   enabled: boolean;
@@ -18,13 +18,13 @@ constructor(
   id: number = 0,
   user: User = new User,
   message: string = '',
-  createdAt: string = '',
-  updatedAt: string = '',
+  createdAt: number = 0,
+  updatedAt: number = 0,
   parentComment: number = 0,
   replies: Comment[] = [],
   enabled: boolean = true,
   subject: string = '',
-  trail: Trail = new Trail()
+  trail: Trail = new Trail
 ){
   this.id = id;
   this.user = user;

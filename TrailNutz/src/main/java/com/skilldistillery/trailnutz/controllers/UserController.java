@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	private UserService userSvc;
 	
-	@GetMapping("users")
+	@GetMapping("user")
 	public User getUserByUsername(Principal principal) {
 		
 		User user = userSvc.userByUsername(principal.getName());
