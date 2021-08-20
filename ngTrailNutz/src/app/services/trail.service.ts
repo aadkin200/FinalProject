@@ -13,14 +13,14 @@ import { AuthService } from './auth.service';
 export class TrailService {
 
   baseUrl = environment.baseUrl;
+  url = this.baseUrl + "api/trail";
 
   constructor(private http: HttpClient,
-              private datePipe: DatePipe,
               private auth: AuthService
-    ) { }
+              ) { }
 
   index(): Observable<Trail[]> {
-    return this.http.get<Trail[]>(this.baseUrl, this.getHttpOptions()).pipe(
+    return this.http.get<Trail[]>(`${this.baseUrl}/${this.url}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('rideService.index() error');
         return throwError(err);
@@ -29,7 +29,7 @@ export class TrailService {
   }
 
   public show(trailId: any) {
-    return this.http.get<Trail>(`${this.baseUrl}/${trailId}`)
+    return this.http.get<Trail>(`${this.baseUrl}/${this.url}/${trailId}`)
     .pipe(
       catchError((err: any) => {
         console.log(err);
@@ -39,7 +39,7 @@ export class TrailService {
   }
 
   public create(trail: Trail) {
-    return this.http.post<Trail>(this.baseUrl, trail, this.getHttpOptions())
+    return this.http.post<Trail>(`${this.baseUrl}/${this.url}`, trail, this.getHttpOptions())
     .pipe(
       catchError((err: any) => {
         console.log(err);
@@ -49,7 +49,7 @@ export class TrailService {
   }
 
   public update(trail: Trail) {
-    return this.http.put<Trail>(`${this.baseUrl}/${trail.id}`, trail, this.getHttpOptions()).pipe(
+    return this.http.put<Trail>(`${this.baseUrl}/${this.url}/${trail.id}`, trail, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error in trail.service.ts update()');
@@ -58,7 +58,7 @@ export class TrailService {
   }
 
   public destroy(id: number) {
-    return this.http.put<Trail>(`${this.baseUrl}/${id}`, this.getHttpOptions()).pipe(
+    return this.http.put<Trail>(`${this.baseUrl}/${this.url}/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error deleting');
