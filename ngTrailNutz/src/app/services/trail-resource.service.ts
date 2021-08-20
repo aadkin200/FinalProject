@@ -14,21 +14,21 @@ import { AuthService } from './auth.service';
 
 export class TrailResourceService {
 
-  private url = environment.baseUrl + 'api/trail/{trialId}/trailresources';
+  private url = environment.baseUrl;
 
 
   constructor(
     private auth: AuthService, private http: HttpClient
   ) { }
 
-  create(trailResrc: TrailResource): Observable<TrailResource> {
+  create(trailResrc: TrailResource, trailId:number): Observable<TrailResource> {
     trailResrc.user = new User();
     trailResrc.resourceUrl = '';
     trailResrc.createdAt = '';
     trailResrc.title = '';
     trailResrc.enabled = true;
     trailResrc.trail = new Trail();
-    return this.http.post<Comment>(this.url, trailResrc, this.getHttpOptions()).pipe(
+    return this.http.post<TrailResource>(this.url + `api/trail/${trailId}/trailresources`, trailResrc, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('TrailResourceService.create(): error creating TrailResource');
         return throwError(err);
