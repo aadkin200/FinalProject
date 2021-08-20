@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
 import { TrailService } from 'src/app/services/trail.service';
 
@@ -12,7 +13,8 @@ export class TrailFeedComponent implements OnInit {
   trails: Trail[] = [];
 
   constructor(
-    private trailSrv: TrailService
+    private trailSrv: TrailService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,5 +32,11 @@ export class TrailFeedComponent implements OnInit {
 
       }
     );
+  }
+
+  displayTrail(trail: Trail){
+
+    this.router.navigateByUrl(`trail/${trail.id}`);
+
   }
 }
