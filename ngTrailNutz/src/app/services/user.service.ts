@@ -27,6 +27,15 @@ export class UserService {
     return httpOptions;
   }
 
+  getUser():Observable<User>{
+    return this.http.get<User>(`${this.baseUrl}api/user/`, this.getHttpOptions()).pipe(
+       catchError((err:any) => {
+         console.error(`User.getUser: error GET user`);
+         return throwError(err);
+       })
+    )
+  }
+
   update(user:User):Observable<User>{
     return this.http.put<User>(`${this.baseUrl}api/user/${user.id}`, user, this.getHttpOptions()).pipe(
        catchError((err:any) => {
