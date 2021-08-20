@@ -23,7 +23,7 @@ constructor(
   replies: Comment[] = [],
   enabled: boolean = true,
   subject: string = '',
-  trail: Trail = new Trail
+  trail: Trail = new Trail()
 ){
   this.id = id;
   this.user = user;
