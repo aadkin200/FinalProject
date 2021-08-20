@@ -1,3 +1,8 @@
+import { Amenity } from "./amenity";
+import { Difficulty } from "./difficulty";
+import { Routetype } from "./routetype";
+import { TrailImage } from "./trail-image";
+import { TrailResource } from "./trail-resource";
 import { User } from "./user";
 
 export class Trail {
@@ -20,8 +25,8 @@ export class Trail {
   users: User[];
   user: User;
   difficulty: Difficulty;
-  routeType: RouteType;
-  trailImages: TrailImages[];
+  routeType: Routetype;
+  trailImages: TrailImage[];
   trailResource: TrailResource[];
   comments: Comment[];
   amenities: Amenity[];
@@ -48,7 +53,7 @@ export class Trail {
     users: User[] = [],
     user: User = new User(),
     difficulty: Difficulty = new Difficulty(),
-    routeType: RouteType = new RouteType(),
+    routeType: Routetype = new Routetype(),
     trailImages: TrailImage[] = [],
     trailResource: TrailResource[] = [],
     comments: Comment[] = [],
