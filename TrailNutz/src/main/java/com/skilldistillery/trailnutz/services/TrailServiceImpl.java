@@ -2,6 +2,7 @@ package com.skilldistillery.trailnutz.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,13 @@ public class TrailServiceImpl implements TrailService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Trail show(int trailId) {
+		Optional<Trail> trailOp = trailRepo.findById(trailId);
+		Trail trail = trailOp.get();
+		return trail;
 	}
 
 

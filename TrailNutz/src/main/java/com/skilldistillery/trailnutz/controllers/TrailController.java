@@ -37,6 +37,14 @@ public class TrailController {
 		return trailSvc.index();
 	}
 	
+	@GetMapping("trail/{trailId}")
+	public Trail show(@PathVariable int trailId,
+					  HttpServletRequest req,
+					  HttpServletResponse res,
+					  Principal principal) {
+		return trailSvc.show(trailId);
+	}
+	
 	@PostMapping("trail")
 	public Trail create(@RequestBody Trail trail, 
 						HttpServletRequest req, 
