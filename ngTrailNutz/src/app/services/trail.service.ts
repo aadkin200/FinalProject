@@ -58,7 +58,7 @@ export class TrailService {
   }
 
   public destroy(id: number) {
-    return this.http.delete<Trail>(`${this.baseUrl}/${id}`, this.getHttpOptions()).pipe(
+    return this.http.put<Trail>(`${this.baseUrl}/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error deleting');
