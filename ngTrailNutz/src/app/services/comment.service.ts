@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { Comment } from '../models/comment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Trail } from '../models/trail';
 
 @Injectable({
   providedIn: 'root'
