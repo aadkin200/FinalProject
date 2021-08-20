@@ -31,4 +31,8 @@ export class LoginComponent implements OnInit {
     )
   }
 
+  loggedIn(): boolean {
+    return this.auth.checkLogin();
+  }
+
 }
