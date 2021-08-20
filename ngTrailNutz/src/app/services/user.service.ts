@@ -28,7 +28,7 @@ export class UserService {
   }
 
   update(user:User):Observable<User>{
-    return this.http.put<User>(`${this.baseUrl}/user/${user.id}`, user, this.getHttpOptions()).pipe(
+    return this.http.put<User>(`${this.baseUrl}api/user/${user.id}`, user, this.getHttpOptions()).pipe(
        catchError((err:any) => {
          console.error(`User.update: error updating user`);
          return throwError(err);
@@ -36,7 +36,7 @@ export class UserService {
     )
   }
   disable(userId:number):Observable<User>{
-    return this.http.delete<User>(`${this.baseUrl}/user/${userId}`, this.getHttpOptions()).pipe(
+    return this.http.delete<User>(`${this.baseUrl}api/user/${userId}`, this.getHttpOptions()).pipe(
        catchError((err:any) => {
          console.error(`User.disable: error disabling user`);
          return throwError(err);
@@ -44,7 +44,7 @@ export class UserService {
     )
   }
   enable(userId:number):Observable<User>{
-    return this.http.put<User>(`${this.baseUrl}/user/${userId}`, this.getHttpOptions()).pipe(
+    return this.http.put<User>(`${this.baseUrl}api/user/${userId}`, this.getHttpOptions()).pipe(
        catchError((err:any) => {
          console.error(`User.enable: error enabling user`);
          return throwError(err);
