@@ -10,13 +10,17 @@ import { TrailService } from 'src/app/services/trail.service';
 export class TrailFeedComponent implements OnInit {
 
   trails: Trail[] = [];
-
+  newTrailFormBool: boolean = false;
   constructor(
     private trailSrv: TrailService
   ) { }
 
   ngOnInit(): void {
     this.loadFeed();
+  }
+
+  newTrailFormFillOut() {
+    this.newTrailFormBool = true;
   }
 
   loadFeed(){

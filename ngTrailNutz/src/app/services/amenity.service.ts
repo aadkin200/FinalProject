@@ -1,18 +1,17 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
-import { catchError } from "rxjs/operators";
-import { throwError } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Amenity } from '../models/amenity';
 import { AuthService } from './auth.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class Amenity {
+export class AmenityService {
 
-  url = environment.baseUrl + 'api/trails';
+  url = environment.baseUrl;
 
 
 
@@ -24,8 +23,8 @@ export class Amenity {
 
 
 
-  show(): Observable<Amenity> {
-    return this.http.get<Amenity>(`${this.url}`, this.getHttpOptions()).pipe(
+  show(): Observable<Amenity[]> {
+  return this.http.get<Amenity[]>(`${this.url}traildetails/amenity`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('AmenityService.show(): error retrieving this amenity:');
         return throwError(err);
@@ -44,7 +43,4 @@ export class Amenity {
     };
     return httpOptions
   }
-
-
-
 }

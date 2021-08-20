@@ -1,3 +1,9 @@
+<div *ngIf="newTrailFormBool">
+  <app-new-trail-form></app-new-trail-form>
+</div>
+<div *ngIf="!newTrailFormBool">
+  <button (click)="newTrailFormFillOut()">Create Trail</button>
+</div>
 <!-- <p>trail-feed works!</p> -->
 <div id='trailFeed' *ngFor="let trail of trails">
   <p>{{trail.trailImages}}</p>

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Amenity } from 'src/app/models/amenity';
+import { Difficulty } from 'src/app/models/difficulty';
+import { Routetype } from 'src/app/models/routetype';
 import { Trail } from 'src/app/models/trail';
+import { AmenityService } from 'src/app/services/amenity.service';
+import { DifficultyService } from 'src/app/services/difficulty.service';
+import { RouteTypeService } from 'src/app/services/route-type.service';
 import { TrailService } from 'src/app/services/trail.service';
 
 @Component({
@@ -10,9 +16,26 @@ import { TrailService } from 'src/app/services/trail.service';
 export class NewTrailFormComponent implements OnInit {
 
   newTrail = new Trail();
-  constructor(private trailService: TrailService) { }
+  newDifficulty: Difficulty[] = [];
+  newAmenities: Amenity[] = [];
+  newRouteType: Routetype[] = [];
+
+
+  constructor(private trailService: TrailService,
+              private difficultyService: DifficultyService,
+              private amenityService: AmenityService,
+              private routeType: RouteTypeService) { }
 
   ngOnInit(): void {
+    this.difficultyService.show().subscribe(
+      data => {
+        this.newDifficulty = data;
+      },
+      error => {
+        console.log(error);
+        console.log("error in new-trail-form.component.ts ngOnInit()", error);
+      }
+    );
   }
 
   reload(trailId: any) {
