@@ -42,7 +42,7 @@ public class TrailResourceController {
 	}
 
 	@DeleteMapping("trail/{trailId}/trailresources/{trailResourceId}")
-	public boolean removeTraiResource(@PathVariable int trailId, @PathVariable int trailResourceId, Principal principal,
+	public boolean removeTrailResource(@PathVariable int trailId, @PathVariable int trailResourceId, Principal principal,
 			HttpServletResponse res) {
 		boolean isDisabled;
 		try {
@@ -56,7 +56,7 @@ public class TrailResourceController {
 	}
 
 	@PutMapping("trail/{trailId}/trailresources/{trailResourceId}")
-	public TrailResource removeTraiResource(@RequestBody TrailResource trailResource, @PathVariable int trailResourceId, @PathVariable int trailId,
+	public TrailResource updateTrailResource(@RequestBody TrailResource trailResource, @PathVariable int trailResourceId, @PathVariable int trailId,
 			Principal principal, HttpServletResponse res) {
 
 		return trServ.updateTrailResource(trailResource, principal.getName(), trailResource.getId(), trailId);

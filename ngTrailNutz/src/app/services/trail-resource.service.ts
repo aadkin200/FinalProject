@@ -1,47 +1,45 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Trail } from '../models/trail';
+import { TrailResource } from '../models/trail-resource';
 import { User } from '../models/user';
-import { Comment } from '../models/comment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Trail } from '../models/trail';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommentService {
 
-  private url = environment.baseUrl + 'api/trail/{trialId}/comment';
+export class TrailResourceService {
+
+  private url = environment.baseUrl + 'api/trail/{trialId}/trailresources';
 
 
   constructor(
     private auth: AuthService, private http: HttpClient
   ) { }
 
-  create(comment: Comment): Observable<Comment> {
-  comment.user = new User();
-  comment.message = '';
-  comment.createdAt = '';
-  comment.updatedAt = '';
-  comment.parentComment= 0;
-  comment.replies = [];
-  comment.enabled = true;
-  comment.subject = '';
-  comment.trail = new Trail();
-    return this.http.post<Comment>(this.url, comment, this.getHttpOptions()).pipe(
+  create(trailResrc: TrailResource): Observable<TrailResource> {
+    trailResrc.user = new User();
+    trailResrc.resourceUrl = '';
+    trailResrc.createdAt = '';
+    trailResrc.title = '';
+    trailResrc.enabled = true;
+    trailResrc.trail = new Trail();
+    return this.http.post<Comment>(this.url, trailResrc, this.getHttpOptions()).pipe(
       catchError((err: any) => {
-        console.error('CommentService.create(): error creating comment');
+        console.error('TrailResourceService.create(): error creating TrailResource');
         return throwError(err);
       })
     );
   }
 
-  update(comment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${this.url}/${comment.id}`, comment, this.getHttpOptions()).pipe(
+  update(trailResrc: TrailResource): Observable<TrailResource> {
+    return this.http.put<TrailResource>(`${this.url}/${trailResrc.id}`, trailResrc, this.getHttpOptions()).pipe(
       catchError((err: any) => {
-        console.error('CommentService.update(): error updating comment');
+        console.error('TrailResourceService.update(): error updating TrailResource');
         return throwError(err);
       })
     );

@@ -1,3 +1,4 @@
+import { Trail } from "./trail";
 import { User } from "./user";
 
 export class Comment {
@@ -5,8 +6,8 @@ export class Comment {
   id: number;
   user: User;
   message: string;
-  createdAt: number;
-  updatedAt: number;
+  createdAt: string;
+  updatedAt: string;
   parentComment: number;
   replies: Comment[];
   enabled: boolean;
@@ -17,8 +18,8 @@ constructor(
   id: number = 0,
   user: User = new User,
   message: string = '',
-  createdAt: number = 0,
-  updatedAt: number = 0,
+  createdAt: string = '',
+  updatedAt: string = '',
   parentComment: number = 0,
   replies: Comment[] = [],
   enabled: boolean = true,

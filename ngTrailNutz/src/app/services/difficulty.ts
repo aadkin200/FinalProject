@@ -4,6 +4,9 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { catchError } from "rxjs/operators";
 import { throwError } from "rxjs";
+import { AuthService } from './auth.service';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,9 @@ export class Difficulty {
 
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
+
   ) { }
 
 
@@ -28,13 +33,15 @@ export class Difficulty {
     );
   }
 
-    getHttpOptions() {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-        }),
-      };
-      return httpOptions;
-    }
+  getHttpOptions() {
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'X-Requested-with': 'XMLHttpRequest',
+        'Authorization': `Basic ${credentials}`
+      }),
+    };
+    return httpOptions
+  }
 }
