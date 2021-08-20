@@ -16,7 +16,6 @@ import com.skilldistillery.trailnutz.entities.Trail;
 import com.skilldistillery.trailnutz.services.TrailService;
 
 @RestController
-@RequestMapping("AllTrails")
 @CrossOrigin({"*", "http://localhost:4210"})
 public class UnauthController {
 

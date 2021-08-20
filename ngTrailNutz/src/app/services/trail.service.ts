@@ -20,16 +20,17 @@ export class TrailService {
               ) { }
 
   index(): Observable<Trail[]> {
-    return this.http.get<Trail[]>(`${this.baseUrl}/${this.url}`, this.getHttpOptions()).pipe(
+    return this.http.get<Trail[]>(`${this.baseUrl}trail`).pipe(
       catchError((err: any) => {
-        console.error('rideService.index() error');
+        console.error('trailService.index() error');
         return throwError(err);
       })
+
     );
   }
 
   public show(trailId: any) {
-    return this.http.get<Trail>(`${this.baseUrl}/${this.url}/${trailId}`)
+    return this.http.get<Trail>(`${this.url}/${trailId}`)
     .pipe(
       catchError((err: any) => {
         console.log(err);
@@ -39,7 +40,7 @@ export class TrailService {
   }
 
   public create(trail: Trail) {
-    return this.http.post<Trail>(`${this.baseUrl}/${this.url}`, trail, this.getHttpOptions())
+    return this.http.post<Trail>(`${this.url}`, trail, this.getHttpOptions())
     .pipe(
       catchError((err: any) => {
         console.log(err);
@@ -49,7 +50,7 @@ export class TrailService {
   }
 
   public update(trail: Trail) {
-    return this.http.put<Trail>(`${this.baseUrl}/${this.url}/${trail.id}`, trail, this.getHttpOptions()).pipe(
+    return this.http.put<Trail>(`${this.url}/${trail.id}`, trail, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error in trail.service.ts update()');
@@ -58,7 +59,7 @@ export class TrailService {
   }
 
   public destroy(id: number) {
-    return this.http.put<Trail>(`${this.baseUrl}/${this.url}/${id}`, this.getHttpOptions()).pipe(
+    return this.http.put<Trail>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error deleting');

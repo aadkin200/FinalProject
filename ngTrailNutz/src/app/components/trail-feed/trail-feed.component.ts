@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Trail } from 'src/app/models/trail';
+import { TrailService } from 'src/app/services/trail.service';
 
 @Component({
   selector: 'app-trail-feed',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrailFeedComponent implements OnInit {
 
-  constructor() { }
+  trails: Trail[] = [];
+
+  constructor(
+    private trailSrv: TrailService
+  ) { }
 
   ngOnInit(): void {
+    this.loadFeed();
   }
 
+  loadFeed(){
+    this.trailSrv.index().subscribe(
+      trails => {
+        this.trails = trails;
+      },
+      noTrails => {
+        console.log("Error retreiving trails from service");
+        console.log(noTrails);
+
+      }
+    );
+  }
 }

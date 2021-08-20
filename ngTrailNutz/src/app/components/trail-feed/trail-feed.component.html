@@ -1,1 +1,9 @@
-<p>trail-feed works!</p>
+<!-- <p>trail-feed works!</p> -->
+<div id='trailFeed' *ngFor="let trail of trails">
+  <p>{{trail.trailImages}}</p>
+  <p>{{trail.name}}</p>
+  <p>{{trail.distanceMiles}}</p>
+  <p>{{trail.difficulty}}</p>
+
+  <!-- <button (click)="displayTrail()">More Info</button> -->
+</div>
