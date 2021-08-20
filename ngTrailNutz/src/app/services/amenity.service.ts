@@ -24,7 +24,7 @@ export class AmenityService {
 
 
   show(): Observable<Amenity[]> {
-  return this.http.get<Amenity[]>(`${this.url}traildetails/amenity`, this.getHttpOptions()).pipe(
+  return this.http.get<Amenity[]>(`${this.url}api/traildetails/amenity`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('AmenityService.show(): error retrieving this amenity:');
         return throwError(err);

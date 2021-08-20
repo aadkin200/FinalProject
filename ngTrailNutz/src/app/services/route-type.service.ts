@@ -23,7 +23,7 @@ export class RouteTypeService {
 
 
   show(): Observable<Routetype[]> {
-    return this.http.get<Routetype[]>(`${this.url}traildetails/routetype`, this.getHttpOptions()).pipe(
+    return this.http.get<Routetype[]>(`${this.url}api/traildetails/routetype`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('RouteTypeService.show(): error retrieving this route:');
         return throwError(err);

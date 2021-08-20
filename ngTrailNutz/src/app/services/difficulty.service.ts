@@ -24,7 +24,7 @@ export class DifficultyService {
 
 
   show(): Observable<Difficulty[]> {
-    return this.http.get<Difficulty[]>(`${this.url}traildetails/difficulty`, this.getHttpOptions()).pipe(
+    return this.http.get<Difficulty[]>(`${this.url}api/traildetails/difficulty`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('DifficultyService.show(): error retrieving this difficulty:');
         return throwError(err);

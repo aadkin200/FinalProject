@@ -30,7 +30,7 @@ export class TrailService {
   }
 
   public show(trailId: any) {
-    return this.http.get<Trail>(`${this.url}/${trailId}`)
+    return this.http.get<Trail>(`${this.baseUrl}trail/${trailId}`)
     .pipe(
       catchError((err: any) => {
         console.log(err);

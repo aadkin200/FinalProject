@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Amenity } from 'src/app/models/amenity';
 import { Difficulty } from 'src/app/models/difficulty';
 import { Routetype } from 'src/app/models/routetype';
@@ -16,23 +17,45 @@ import { TrailService } from 'src/app/services/trail.service';
 export class NewTrailFormComponent implements OnInit {
 
   newTrail = new Trail();
-  newDifficulty: Difficulty[] = [];
+  newDifficulties: Difficulty[] = [];
   newAmenities: Amenity[] = [];
-  newRouteType: Routetype[] = [];
+  newRouteTypes: Routetype[] = [];
+
+  newDifficulty = new Difficulty();
+  newRouteType = new Routetype();
+
 
 
   constructor(private trailService: TrailService,
               private difficultyService: DifficultyService,
               private amenityService: AmenityService,
-              private routeType: RouteTypeService) { }
+              private routeTypeService: RouteTypeService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.difficultyService.show().subscribe(
       data => {
-        this.newDifficulty = data;
+        this.newDifficulties = data;
       },
       error => {
-        console.log(error);
+        console.log("error in new-trail-form.component.ts ngOnInit()", error);
+      }
+    );
+
+    this.amenityService.show().subscribe(
+      data => {
+        this.newAmenities = data;
+      },
+      error => {
+        console.log("error in new-trail-form.component.ts ngOnInit()", error);
+      }
+    );
+
+    this.routeTypeService.show().subscribe(
+      data => {
+        this.newRouteTypes = data;
+      },
+      error => {
         console.log("error in new-trail-form.component.ts ngOnInit()", error);
       }
     );
@@ -51,9 +74,12 @@ export class NewTrailFormComponent implements OnInit {
   }
 
   addTrail(): void {
+    this.newTrail.difficulty = this.newDifficulty;
+    this.newTrail.routeType = this.newRouteType;
+    console.log(this.newTrail);
     this.trailService.create(this.newTrail).subscribe(
       data => {
-        this.reload(this.newTrail.id);
+        this.router.navigateByUrl(`trail/${data.id}`);
       },
       error => {
         console.log(error);
