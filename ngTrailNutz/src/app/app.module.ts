@@ -17,6 +17,8 @@ import { DifficultyService } from './services/difficulty.service';
 import { AmenityService } from './services/amenity.service';
 import { RouteTypeService } from './services/route-type.service';
 import { AppRoutingModule } from './app-routing.module';
+import { GoogleMapsModule } from '@angular/google-maps'
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    GoogleMapsModule
   ],
   providers: [
     AuthService,
