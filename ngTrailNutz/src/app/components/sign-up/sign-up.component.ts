@@ -28,17 +28,18 @@ export class SignUpComponent implements OnInit {
 
       this.auth.register(this.newUser).subscribe(
         data => {
-          this.auth.login(this.newUser.username, this.newUser.password).subscribe(
-            stuff=>{
+          console.log(newUser.username , newUser.password)
+          this.auth.login(newUser.username, newUser.password).subscribe(
+            info=>{
               this.router.navigateByUrl("/profile")
+              this.newUser = new User();
 
 
-            }, botch=> {
+            }, fail=> {
+              console.log("error creating account", fail)
 
             }
           )
-
-
 
         },
         error => {
@@ -46,7 +47,7 @@ export class SignUpComponent implements OnInit {
           console.log("error")
         }
       );
-      this.newUser = new User();
+
     }
 
 
