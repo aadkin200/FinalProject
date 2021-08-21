@@ -24,6 +24,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private String email;
 	private String username;
 	private String role;
 	private String password;
@@ -188,6 +189,14 @@ public class User {
 
 	public void setTrails(List<Trail> trails) {
 		this.trails = trails;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

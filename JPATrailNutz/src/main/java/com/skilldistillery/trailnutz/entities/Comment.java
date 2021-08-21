@@ -24,7 +24,7 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	private String message;
 	
 	@Column(name = "created_at")
@@ -71,6 +71,7 @@ public class Comment {
 		this.enabled = enabled;
 		this.subject = subject;
 		this.trail = trail;
+
 	}
 
 
@@ -190,8 +191,6 @@ public class Comment {
 				+ ", updatedAt=" + updatedAt + ", parentComment=" + parentComment + ", replies=" + replies
 				+ ", enabled=" + enabled + ", subject=" + subject + ", trail=" + trail + "]";
 	}
-	
-	
 	
 	
 }

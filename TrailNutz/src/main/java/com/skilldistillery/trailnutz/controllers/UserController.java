@@ -20,7 +20,6 @@ import com.skilldistillery.trailnutz.services.UserService;
 @RestController
 @RequestMapping("api")
 @CrossOrigin({"*", "http://localhost:4210"})
-
 public class UserController {
 	
 	@Autowired
