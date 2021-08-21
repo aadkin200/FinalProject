@@ -10,18 +10,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserprofileComponent implements OnInit {
   user:User = new User();
+
   constructor(private auth: AuthService, private userSvc: UserService) { }
 
   ngOnInit(): void {
     this.userSvc.getUser().subscribe(
       user=>{
         this.user = user;
-      },
+      }
+      ,
       err=>{
         console.error("userprofile: ngOnInit(): error getting user", err);
       }
     )
+
   }
+
+
 
 
 

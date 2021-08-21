@@ -13,7 +13,8 @@ import { TrailService } from 'src/app/services/trail.service';
 export class TrailFeedComponent implements OnInit {
 
   trails: Trail[] = [];
-  // trailImages: TrailImage[] = [];
+
+  newTrailFormBool: boolean = false;
 
   constructor(
     private trailSrv: TrailService,
@@ -23,6 +24,10 @@ export class TrailFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFeed();
+  }
+
+  newTrailFormFillOut() {
+    this.newTrailFormBool = true;
   }
 
   loadFeed(){

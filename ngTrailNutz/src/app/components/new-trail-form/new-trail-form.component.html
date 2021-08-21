@@ -8,6 +8,18 @@
     Wildlife: <input type="text" name="wildlife" [(ngModel)]="newTrail.wildlife">
     Details: <input type="text" name="details" [(ngModel)]="newTrail.details">
     Distance: <input type="number" name="distanceMiles" [(ngModel)]="newTrail.distanceMiles">
+    Difficulty:
+    <select name="difficulty" [(ngModel)]="newDifficulty">
+      <option *ngFor="let difficulty of newDifficulties" [ngValue]="difficulty">{{difficulty.name}}</option>
+    </select>
+    Route Type:
+    <select name="routeType" [(ngModel)]="newRouteType">
+      <option *ngFor="let routeType of newRouteTypes" [ngValue]="routeType">{{routeType.name}}</option>
+    </select>
+    Amenities:
+    <div *ngFor="let amenity of newAmenities">
+      {{amenity.name}}<input type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
+    </div>
     <button (click)="addTrail()">Create Trail</button>
   </form>
 </div>
