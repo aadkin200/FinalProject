@@ -3,18 +3,16 @@
   <label>Create your TrailNutz Hiker Account today!</label> <br>
 
 
-  <label for = "username">Username:</label>
-		<input type="text" id="username" name="username" size="15" [(ngModel)]="newUser.username"/> <br>
+    <label for = "username">Username:</label>
+		<input type="text" id="username" name="username"  [(ngModel)]="newUser.username"/> <br>
 
 		<label for = "password">Password:</label>
-		<input type="password" id="password" name="password" size="15"[(ngModel)]="newUser.password"/> <br>
+		<input type="password" id="password" name="password" [(ngModel)]="newUser.password"/> <br>
 
     <label for = "email">Email:</label>
-		<input type="text" id="email" name="email" size="15" [(ngModel)]="newUser.email"/> <br>
+		<input type="text" id="email" name="email"  [(ngModel)]="newUser.email"/> <br>
 
-
-
-  <button  (click)="register(newUser)" >Register</button>
+  <button  (click)="register()" >Register</button>
 </div>
 
 

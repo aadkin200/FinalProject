@@ -5,20 +5,20 @@ import { TrailResource } from "./trail-resource";
 export class User {
   id:number;
   username:string;
-  email:string;
-  role:string;
   password:string;
-  enabled: boolean;
-  favoriteTrailFood:string;
-  firstName:string;
-  lastName:string;
-  imageUrl:string;
-  createdAt:string;
-  favoriteTrails: Trail[];
-  trailImages: TrailImage[];
-  trailResouces: TrailResource[];
-  comments: Comment[];
-  trails: Trail[];
+  email:string;
+  role?:string;
+  enabled?: boolean;
+  favoriteTrailFood?:string;
+  firstName?:string;
+  lastName?:string;
+  imageUrl?:string;
+  createdAt?:string;
+  favoriteTrails?: Trail[];
+  trailImages?: TrailImage[];
+  trailResouces?: TrailResource[];
+  comments?: Comment[];
+  trails?: Trail[];
 
   constructor(
     id:number = 0 ,
@@ -40,9 +40,9 @@ export class User {
   ){
     this.id = id ,
     this.username = username,
+    this.password = password
     this.email = email,
     this.role = role,
-    this.password = password,
     this.enabled = enabled,
     this.favoriteTrailFood = favoriteTrailFood,
     this.firstName = firstName,

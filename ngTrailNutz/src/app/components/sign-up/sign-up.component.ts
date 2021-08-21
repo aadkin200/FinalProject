@@ -14,7 +14,6 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SignUpComponent implements OnInit {
 
-  user:User = new User();
   newUser:User = new User();
 
   constructor(private auth: AuthService, private router: Router
@@ -24,20 +23,16 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(newUser: User){
-
+  register(){
+      this.removeEmpty();
       this.auth.register(this.newUser).subscribe(
         data => {
-          console.log(newUser.username , newUser.password)
-          this.auth.login(newUser.username, newUser.password).subscribe(
+          this.auth.login(this.newUser.username, this.newUser.password).subscribe(
             info=>{
               this.router.navigateByUrl("/profile")
               this.newUser = new User();
-
-
             }, fail=> {
               console.log("error creating account", fail)
-
             }
           )
 
@@ -49,7 +44,19 @@ export class SignUpComponent implements OnInit {
       );
 
     }
-
+    removeEmpty(){
+      delete this.newUser.role;
+      delete this.newUser.enabled;
+      delete this.newUser.favoriteTrailFood;
+      delete this.newUser.firstName;
+      delete this.newUser.lastName;
+      delete this.newUser.favoriteTrails;
+      delete this.newUser.imageUrl;
+      delete this.newUser.trails;
+      delete this.newUser.comments;
+      delete this.newUser.trailImages;
+      delete this.newUser.trailResouces;
+    }
 
 
 

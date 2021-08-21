@@ -22,9 +22,11 @@ export class AuthService {
     const httpOptions = {
       headers: new HttpHeaders({
         'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': `Basic ${credentials}`
+        'Authorization': `Basic ${credentials}`,
+        'Access-Control-Allow-Origin': 'http://localhost:8091'
       })
     };
+    console.log(credentials);
     console.log(username,password);
 
     // create request to authenticate credentials
