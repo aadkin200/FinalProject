@@ -42,8 +42,8 @@ export class UserprofileComponent implements OnInit {
     }
   }
 
-  setEditUser() : void {
-    this.editUser = Object.assign({}, this.selected);
+  setEditUser(user: any) : void {
+    this.editUser = user;
   }
 
   displayEdit(user: any): void {
