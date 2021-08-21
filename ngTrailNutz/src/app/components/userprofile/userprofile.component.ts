@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserprofileComponent implements OnInit {
   user:User = new User();
+
   constructor(private auth: AuthService, private userSvc: UserService) { }
 
   ngOnInit(): void {
@@ -24,6 +25,8 @@ export class UserprofileComponent implements OnInit {
     )
 
   }
+
+
 
 
 
