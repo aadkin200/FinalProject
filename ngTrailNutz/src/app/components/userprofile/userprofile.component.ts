@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserprofileComponent implements OnInit {
   user:User = new User();
+  totalMiles: number = 0;
 
   constructor(private auth: AuthService, private userSvc: UserService) { }
 
@@ -23,7 +24,20 @@ export class UserprofileComponent implements OnInit {
         console.error("userprofile: ngOnInit(): error getting user", err);
       }
     )
+  }
 
+  getTotalMiles(user: User) {
+    console.log(user.id);
+
+    if (user.trails != undefined) {
+      for(let i=0; i<user.trails.length; i++) {
+        this.totalMiles+=user.trails[i].distanceMiles;
+        console.log(user.trails[i].distanceMiles);
+
+        console.log(this.totalMiles);
+
+      }
+    }
   }
 
 
