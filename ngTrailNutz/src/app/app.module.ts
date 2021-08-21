@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,6 +16,7 @@ import { AuthService } from './services/auth.service';
 import { DifficultyService } from './services/difficulty.service';
 import { AmenityService } from './services/amenity.service';
 import { RouteTypeService } from './services/route-type.service';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -31,8 +32,8 @@ import { RouteTypeService } from './services/route-type.service';
     NotFoundComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     FormsModule,
     HttpClientModule
   ],
