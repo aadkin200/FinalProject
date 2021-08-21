@@ -3,7 +3,7 @@
     <div class="row pe-1">
       <img
         class="singleImage"
-        [src]="trail.trailImages[0].imageUrl"
+        [src]="mainImg"
         alt="trail images"
       />
     </div>
@@ -13,10 +13,12 @@
         <!-- thumbnail images -->
         <div class="trailImages row ps-2">
           <img
+
             class="thumbnail"
             *ngFor="let image of trail.trailImages"
             [src]="image.imageUrl"
             alt="trail images"
+            (click)="changeMainImg(image)"
           />
         </div>
         <!-- Details box -->
