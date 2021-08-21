@@ -1,8 +1,10 @@
-<p>Login to get started!</p>
-<div>
+<div >
   <form *ngIf="!loggedIn()">
     Username: <input type="text" placeholder="Username" name="username" [(ngModel)]="loginUser.username"><br>
     Password: <input type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password"><br>
-    <button (click)="login(loginUser)">login</button>
+    <button (click)="login(loginUser)">Login</button> <br>
+    If you do not have an account, click here to <a [routerLink]="['/signup']">Signup</a>
   </form>
 </div>
+
+
