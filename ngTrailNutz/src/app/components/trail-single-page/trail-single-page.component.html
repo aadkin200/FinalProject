@@ -3,11 +3,37 @@
     <img class="singleImage" [src]="trail.trailImages[0].imageUrl" alt="trail images">
   </div>
   <div class="row">
+    <!-- left side -->
       <div class="col-md-6">
-
+        <!-- thumbnail images -->
+        <div class="trailImages row">
+          <img class="thumbnail" *ngFor="let image of trail.trailImages"  [src]="image.imageUrl" alt="trail images">
+        </div>
+        <!-- Details box -->
+        <div class="detailsBox">
+          <!-- map -->
+          <div>
+            a map
+          </div>
+          <!-- trail controls -->
+          <div class="row justify-content-end">
+            <button class="btn btn-outline-dark w-25 m-1">Edit</button>
+            <button class="btn w-25 btn-outline-danger m-1">Delete</button>
+          </div>
+          <!-- trail details -->
+          <div>
+            trail details
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-
+      <!-- right side -->
+      <div class="col-md-6 pe-1">
+        <!-- comments -->
+        <!-- Input for new comments -->
+        <textarea class="w-100" name="" id="" rows="3"></textarea>
+        <!-- if they have no parent Comment its a top level comment -->
+        <!-- TODO fix this to where parent/child show up appropriately -->
+        <div></div>
       </div>
   </div>
 </div>

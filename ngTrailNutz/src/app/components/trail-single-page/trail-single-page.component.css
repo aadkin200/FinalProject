@@ -1,3 +1,10 @@
 .singleImage {
-  width:100vw;
+  aspect-ratio: 21/9;
+  padding: 0;
+}
+
+.thumbnail {
+  min-width: 5vw;
+  max-width: 8vw;
+  padding: 1%;
 }
