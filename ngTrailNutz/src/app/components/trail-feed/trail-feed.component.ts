@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
+import { TrailImage } from 'src/app/models/trail-image';
+import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
 
 @Component({
@@ -11,9 +13,11 @@ import { TrailService } from 'src/app/services/trail.service';
 export class TrailFeedComponent implements OnInit {
 
   trails: Trail[] = [];
+  // trailImages: TrailImage[] = [];
 
   constructor(
     private trailSrv: TrailService,
+    // private imageSrv: TrailImageService,
     private router: Router
   ) { }
 
@@ -32,6 +36,11 @@ export class TrailFeedComponent implements OnInit {
 
       }
     );
+  //   this.trailSrv.index().subscribe(
+  //     trails => {
+  //       this.trailImages = trails.
+  //     }
+  //   );
   }
 
   displayTrail(trail: Trail){
@@ -39,4 +48,5 @@ export class TrailFeedComponent implements OnInit {
     this.router.navigateByUrl(`trail/${trail.id}`);
 
   }
+
 }
