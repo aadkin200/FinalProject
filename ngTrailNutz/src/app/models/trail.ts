@@ -4,6 +4,7 @@ import { Routetype } from "./routetype";
 import { TrailImage } from "./trail-image";
 import { TrailResource } from "./trail-resource";
 import { User } from "./user";
+import { Comment } from "./comment";
 
 export class Trail {
   id: number;
@@ -21,7 +22,6 @@ export class Trail {
   updatedAt: string;
   enabled: boolean;
   approved: boolean;
-
   users: User[];
   user: User;
   difficulty: Difficulty;
@@ -48,8 +48,6 @@ export class Trail {
     updatedAt: string = '',
     enabled: boolean = true,
     approved: boolean = true,
-
-
     users: User[] = [],
     user: User = new User(),
     difficulty: Difficulty = new Difficulty(),
@@ -74,7 +72,6 @@ export class Trail {
     this.updatedAt = updatedAt;
     this.enabled = enabled;
     this.approved = approved;
-
     this.users = users;
     this.user = user;
     this.difficulty = difficulty;

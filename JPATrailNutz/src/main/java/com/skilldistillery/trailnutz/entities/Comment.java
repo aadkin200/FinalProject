@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Comment {
@@ -33,7 +34,7 @@ public class Comment {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("replies")
 	@ManyToOne
 	@JoinColumn(name = "in_reply_to")
 	private Comment parentComment;
