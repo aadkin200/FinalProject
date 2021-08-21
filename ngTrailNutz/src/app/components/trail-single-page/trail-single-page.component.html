@@ -1,19 +1,34 @@
-<div class="container-fluid">
-  <div class="row p-1">
-    <img class="singleImage" [src]="trail.trailImages[0].imageUrl" alt="trail images">
-  </div>
-  <div class="row">
-    <!-- left side -->
-      <div class="col-md-6">
+<div class="container-fluid card mt-3">
+  <div class="singleCardView mx-auto pt-3">
+    <div class="row pe-1">
+      <img
+        class="singleImage"
+        [src]="trail.trailImages[0].imageUrl"
+        alt="trail images"
+      />
+    </div>
+    <div class="row">
+      <!-- left side -->
+      <div class="col-md-6 ps-0">
         <!-- thumbnail images -->
-        <div class="trailImages row">
-          <img class="thumbnail" *ngFor="let image of trail.trailImages"  [src]="image.imageUrl" alt="trail images">
+        <div class="trailImages row ps-2">
+          <img
+            class="thumbnail"
+            *ngFor="let image of trail.trailImages"
+            [src]="image.imageUrl"
+            alt="trail images"
+          />
         </div>
         <!-- Details box -->
         <div class="detailsBox">
           <!-- map -->
-          <div>
-            a map
+          <div class="d-flex w-100">
+
+            <div class="my-google-map">
+              <google-map height="250" width="42vw" id="mymap" [options]="mapOptions">
+                 <map-marker [position]="marker.position"></map-marker>
+              </google-map>
+           </div>
           </div>
           <!-- trail controls -->
           <div class="row justify-content-end">
@@ -21,19 +36,30 @@
             <button class="btn btn-outline-danger m-1 trailBtn">Delete</button>
           </div>
           <!-- trail details -->
-          <div>
-            trail details
-          </div>
+          <div>trail details</div>
         </div>
       </div>
       <!-- right side -->
       <div class="col-md-6 pe-1">
         <!-- comments -->
         <!-- Input for new comments -->
-        <textarea class="w-100" name="" id="" rows="3"></textarea>
+        <form class="mt-1">
+          <label for="subject">Subject</label>
+
+          <input type="text" class="form-control" placeholder="Subject" aria-label="Subject line" aria-describedby="basic-addon2">
+          <label for="subject">Comment</label>
+          <div class="input-group mb-3">
+            <textarea type="text" class="form-control" rows="1" placeholder="Comment" aria-label="comment body" aria-describedby="basic-addon2"></textarea>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Submit</button>
+            </div>
+          </div>
+        </form>
+
         <!-- if they have no parent Comment its a top level comment -->
         <!-- TODO fix this to where parent/child show up appropriately -->
         <div></div>
       </div>
+    </div>
   </div>
 </div>

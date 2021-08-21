@@ -1,14 +1,29 @@
 .singleImage {
   aspect-ratio: 21/9;
   padding: 0;
+
 }
+
 
 .thumbnail {
   min-width: 5vw;
   max-width: 8vw;
   padding: 1%;
+  opacity: .5;
 }
+.thumbnail:hover{
+  scale: 1.1;
+  opacity: 1;
+  cursor: pointer;
+}
+
 
 .trailBtn {
   width: 5rem;
 }
+
+.singleCardView {
+  width: 90%;
+}
+
+

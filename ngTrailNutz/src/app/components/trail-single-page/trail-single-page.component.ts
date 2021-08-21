@@ -6,27 +6,43 @@ import { TrailService } from 'src/app/services/trail.service';
 @Component({
   selector: 'app-trail-single-page',
   templateUrl: './trail-single-page.component.html',
-  styleUrls: ['./trail-single-page.component.css']
+  styleUrls: ['./trail-single-page.component.css'],
 })
 export class TrailSinglePageComponent implements OnInit {
-  trail:Trail = new Trail();
-  constructor(private trailSvc: TrailService, private activatedRoute: ActivatedRoute) { }
+  trail: Trail = new Trail();
+  mapOptions: google.maps.MapOptions = {
+    center: { lat: 38.9987208, lng: -77.2538699 },
+    zoom: 14,
+  };
+  marker = {
+    position: { lat: 38.9987208, lng: -77.2538699 },
+  };
 
+  constructor(
+    private trailSvc: TrailService,
+    private activatedRoute: ActivatedRoute,
+  ) {}
+
+  trailLat: string = '';
+  trailLong: string = '';
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
   }
 
-  getSingleTrail(trailId:number):void {
+  getSingleTrail(trailId: number): void {
     this.trailSvc.show(trailId).subscribe(
-      data=>{
+      (data) => {
         this.trail = data;
-        console.log(this.trail)
+        console.log(this.trail);
+        this.mapOptions.center = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
+        this.marker.position = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
+        console.log()
       },
-      err=>{
-        console.error(err, `No trail recieved singleComponent`)
+      (err) => {
+        console.error(err, `No trail recieved singleComponent`);
       }
-    )
+    );
   }
 
 }
