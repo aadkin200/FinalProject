@@ -28,7 +28,6 @@ export class TrailFeedComponent implements OnInit {
   constructor(
     private trailSrv: TrailService,
     private carousel: NgbCarousel,
-    // private imageSrv: TrailImageService,
     private router: Router
   ) { }
 

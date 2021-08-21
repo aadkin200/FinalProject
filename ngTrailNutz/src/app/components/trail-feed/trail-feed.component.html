@@ -21,36 +21,15 @@
     <tbody>
       <tr>
         <td>
-          <!-- <div id="carouselFade" class="carousel slide carousel-fade" data-ride="carousel">
-            <ol class="carousel-indicators" *ngFor="let trailImage of trail.trailImages">
 
-                  <li data-target="carouselFade" data-slide-to=@trailImage.id></li>
-
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img [src]="trail.trailImages[0].imageUrl" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" *ngFor="let trailImage of trail.trailImages">
-              <img [src]="trailImage.imageUrl" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="carouselFade" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="carouselFade" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a> -->
-          <ngb-carousel #carousel [interval]="2000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+          <ngb-carousel #carousel [interval]="2550" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
             <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
               <div class="carousel-caption">
-                <h3>My slide {{i + 1}} title</h3>
+                <h3> {{i + 1}} </h3>
               </div>
-              <a href="https://www.google.fr/?q=Number+{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
+              <a href="trailImage.imageUrl{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
                 <div class="picsum-img-wrapper">
-                  <img [src]="trailImage" alt="My image {{i + 1}} description">
+                  <img [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
                 </div>
               </a>
             </ng-template>
@@ -58,37 +37,13 @@
 
           <hr>
 
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="pauseOnHover" [(ngModel)]="pauseOnHover">
-            <label class="form-check-label" for="pauseOnHover">Pause on hover</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="pauseOnFocus" [(ngModel)]="pauseOnFocus">
-            <label class="form-check-label" for="pauseOnFocus">Pause on focus</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="unpauseOnArrow" [(ngModel)]="unpauseOnArrow">
-            <label class="form-check-label" for="unpauseOnArrow">Unpause when clicking on arrows</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="pauseOnIndicator" [(ngModel)]="pauseOnIndicator">
-            <label class="form-check-label" for="pauseOnIndicator">Pause when clicking on navigation indicator</label>
-          </div>
-          <button type="button" (click)="togglePaused()" class="btn btn-outline-dark btn-sm">
-            {{paused ? 'Cycle' : 'Pause' }}
-          </button>
         </td>
         <td (click)="displayTrail(trail)">{{trail.name}}</td>
         <td>{{trail.distanceMiles}}</td>
         <td>{{trail.city}}</td>
         <td>{{trail.state}}</td>
-      <!-- </tr> -->
-    <!-- </tbody> -->
-  <!-- </table> -->
-  <!-- </div> -->
-  <script>
-    $(function () {
-        $(".carousel-item").first().addClass("active");
-        $("ol.carousel-indicators").find("li").eq(0).addClass("active");
-    })
-</script>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
