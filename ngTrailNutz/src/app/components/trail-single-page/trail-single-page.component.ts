@@ -10,11 +10,17 @@ import { TrailService } from 'src/app/services/trail.service';
 })
 export class TrailSinglePageComponent implements OnInit {
   trail:Trail = new Trail();
+  editTrail: Trail | null = null;
   constructor(private trailSvc: TrailService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
+  }
+
+  editTrailMethod() {
+    this.editTrail = this.trail;
+
   }
 
   getSingleTrail(trailId:number):void {
