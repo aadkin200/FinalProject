@@ -19,6 +19,7 @@ import { RouteTypeService } from './services/route-type.service';
 import { AppRoutingModule } from './app-routing.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgbCarousel, NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
 
 
 
@@ -32,7 +33,8 @@ import { NgbCarousel, NgbModule } from '@ng-bootstrap/ng-bootstrap'
     TrailSinglePageComponent,
     SignUpComponent,
     NewTrailFormComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UserprofileComponent
   ],
   imports: [
     AppRoutingModule,

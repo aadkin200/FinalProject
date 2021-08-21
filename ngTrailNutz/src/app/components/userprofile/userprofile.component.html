@@ -70,9 +70,20 @@
       </div>
     </div>
     <div class="card-body text-center">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
+      <a href="#" class="card-link">Home</a>
+      <a href="feed" class="card-link">Trails</a>
+      <button (click)="setEditUser()">Edit</button>
     </div>
   </div>
 
 </div>
+
+<form *ngIf="editUser">
+  First Name: <input type="text" name="firstName" [(ngModel)]="editUser.firstName"><br>
+  Last Name: <input type="text" name="firstName" [(ngModel)]="editUser.lastName"><br>
+  Favorite Trail Food: <input type="text" name="Strength" [(ngModel)]="editUser.favoriteTrailFood"><br>
+
+  <input type="submit" name="Save" value="Save" (click)=updateUser(user)>
+  <input type="submit" name="Cancel" value="Cancel" (click)="editUser = null">
+
+</form>
