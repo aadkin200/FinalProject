@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleMap } from '@angular/google-maps';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
 import { TrailImage } from 'src/app/models/trail-image';
@@ -11,14 +13,14 @@ import { TrailService } from 'src/app/services/trail.service';
 })
 export class TrailSinglePageComponent implements OnInit {
   trail: Trail = new Trail();
+  mainImage:string = "";
   mapOptions: google.maps.MapOptions = {
-    center: { lat: 38.9987208, lng: -77.2538699 },
-    zoom: 14,
+    zoom: 14
   };
+  latlng = { lat: 0, lng: 0 };
   marker = {
-    position: { lat: 38.9987208, lng: -77.2538699 },
+    position: { lat: 0, lng: 0 },
   };
-  mainImg:string = "";
 
   constructor(
     private trailSvc: TrailService,
@@ -30,17 +32,14 @@ export class TrailSinglePageComponent implements OnInit {
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
-
   }
 
   getSingleTrail(trailId: number): void {
     this.trailSvc.show(trailId).subscribe(
       (data) => {
         this.trail = data;
-        console.log(this.trail);
-        this.mapOptions.center = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
-        this.marker.position = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
-        this.mainImg = this.trail.trailImages[0].imageUrl;
+        this.mainImage = this.trail.trailImages[0].imageUrl;
+        this.changeMapCord();
       },
       (err) => {
         console.error(err, `No trail recieved singleComponent`);
@@ -49,7 +48,10 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   changeMainImg(image:TrailImage){
-    this.mainImg = image.imageUrl;
+    this.mainImage = image.imageUrl;
   }
-
+  changeMapCord(){
+        this.latlng = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
+        this.marker.position = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
+  }
 }
