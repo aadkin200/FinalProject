@@ -12,7 +12,7 @@
   opacity: .5;
 }
 .thumbnail:hover{
-  scale: 1.1;
+  transform: scale(1.2);
   opacity: 1;
   cursor: pointer;
 }
