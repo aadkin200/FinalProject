@@ -3,7 +3,7 @@
     <div class="row pe-1">
       <img
         class="singleImage"
-        [src]="mainImg"
+        [src]="mainImage"
         alt="trail images"
       />
     </div>
@@ -25,9 +25,8 @@
         <div class="detailsBox">
           <!-- map -->
           <div class="d-flex w-100">
-
             <div class="my-google-map">
-              <google-map height="250" width="42vw" id="mymap" [options]="mapOptions">
+              <google-map height="250" width="42vw" [center]="latlng" [options]="mapOptions">
                  <map-marker [position]="marker.position"></map-marker>
               </google-map>
            </div>
