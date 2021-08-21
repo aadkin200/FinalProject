@@ -6,11 +6,37 @@
   <button (click)="newTrailFormFillOut()">Create Trail</button>
 </div>
 <!-- <p>trail-feed works!</p> -->
-<div id='trailFeed' *ngFor="let trail of trails">
-  <p>{{trail.trailImages}}</p>
-  <p>{{trail.name}}</p>
-  <p>{{trail.distanceMiles}}</p>
-  <p>{{trail.difficulty}}</p>
 
-  <button (click)="displayTrail(trail)">More Info</button>
-</div>
+<!-- <div id='trailFeed' *ngFor="let trail of trails">
+
+  <p id='trailImages' *ngFor="let trailImage of trail.trailImages">
+    <img [src]="trailImage"></p>
+
+  <p id='trailName' (click)="displayTrail(trail)">{{trail.name}}</p>
+  <p id='trailDist'>{{trail.distanceMiles}}</p>
+
+  <p>{{trail.city}}</p>
+  <p>{{trail.state}}</p>
+
+
+</div> -->
+<div id='trailFeed' *ngFor="let trail of trails">
+  <table>
+    <thead id='trailImages' *ngFor="let trailImage of trail.trailImages"><img [src]="trailImage">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td (click)="displayTrail(trail)">{{trail.name}}</td>
+        <td>{{trail.distanceMiles}}</td>
+        <td>{{trail.city}}</td>
+        <td>{{trail.state}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
