@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent},
   { path: 'profile', component: UserprofileComponent},
   { path: 'feed', component: TrailFeedComponent},
-  { path: 'trail/:id', component: TrailSinglePageComponent},
+  { path: 'trail/:trailId', component: TrailSinglePageComponent},
   { path: 'newtrail', component: NewTrailFormComponent},
   { path: '**', component: NotFoundComponent}
 ];

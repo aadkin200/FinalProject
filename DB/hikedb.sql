@@ -340,10 +340,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `hikedb`;
-INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (1, 1, 1, 'https://images.unsplash.com/photo-1465311354905-789ff5f7a457?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', '2020-01-01 10:10');
-INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (2, 1, 1, 'https://images.unsplash.com/photo-1465188035480-cf3a60801ea5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', '2020-01-01 10:10');
-INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (3, 1, 1, 'https://images.unsplash.com/photo-1623985404931-69bfff1851f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=526&q=80', '2020-01-01 10:10');
-INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (4, 1, 1, 'https://images.unsplash.com/photo-1595848565561-beb2c42c65af?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80', '2020-01-01 10:10');
+INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (1, 1, 1, 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80', '2020-01-01 10:10');
+INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (2, 1, 1, 'https://images.unsplash.com/uploads/1412533519888a485b488/bb9f9777?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80', '2020-01-01 10:10');
+INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (3, 1, 1, 'https://images.unsplash.com/photo-1458442310124-dde6edb43d10?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80', '2020-01-01 10:10');
+INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (4, 1, 1, 'https://images.unsplash.com/photo-1587502537147-2ba64a62e3d3?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1117&q=80', '2020-01-01 10:10');
 
 COMMIT;
 
