@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleMap } from '@angular/google-maps';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
 import { TrailImage } from 'src/app/models/trail-image';
+import { CommentService } from 'src/app/services/comment.service';
 import { TrailService } from 'src/app/services/trail.service';
 
 @Component({
@@ -25,6 +24,7 @@ export class TrailSinglePageComponent implements OnInit {
   constructor(
     private trailSvc: TrailService,
     private activatedRoute: ActivatedRoute,
+    private commentSvc: CommentService
   ) {}
 
   trailLat: string = '';
@@ -40,6 +40,7 @@ export class TrailSinglePageComponent implements OnInit {
         this.trail = data;
         this.mainImage = this.trail.trailImages[0].imageUrl;
         this.changeMapCord();
+        console.log(this.trail)
       },
       (err) => {
         console.error(err, `No trail recieved singleComponent`);

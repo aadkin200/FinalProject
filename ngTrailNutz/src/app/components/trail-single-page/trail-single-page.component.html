@@ -46,7 +46,6 @@
         <!-- Input for new comments -->
         <form class="mt-1">
           <label for="subject">Subject</label>
-
           <input type="text" class="form-control" placeholder="Subject" aria-label="Subject line" aria-describedby="basic-addon2">
           <label for="subject">Comment</label>
           <div class="input-group mb-3">
@@ -59,7 +58,35 @@
 
         <!-- if they have no parent Comment its a top level comment -->
         <!-- TODO fix this to where parent/child show up appropriately -->
-        <div></div>
+        <div *ngFor="let com of trail.comments">
+          <!-- Check to see if parent comment -->
+          <div *ngIf="!com.parentComment">
+            <div class="card mt-1">
+              <p>{{com.user.username}}</p>
+              <p>{{com.createdAt | date:'M/d/yy h:mm a'}}</p>
+              <h6>{{com.subject}}</h6>
+              <p>{{com.message}}</p>
+              <p *ngIf="com.replies">
+                <p>
+                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" attr.data-bs-target="#c{{com.id}}" aria-expanded="false" aria-controls="collapseExample">
+                    View Replies
+                  </button>
+                </p>
+                <!-- Populate replies if they exist -->
+                <div class="collapse" id="c{{com.id}}"  *ngFor="let reply of com.replies">
+                  <div class="card ms-3">
+                    <p>{{reply.user.username}}</p>
+                    <p>{{reply.createdAt | date:'M/d/yy h:mm a'}}</p>
+                    {{reply.message}}
+                  </div>
+                </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
