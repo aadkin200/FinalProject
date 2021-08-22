@@ -72,7 +72,9 @@
     <div class="card-body text-center">
       <a href="#" class="card-link">Home</a>
       <a href="feed" class="card-link">Trails</a>
+
       <button (click)="setEditUser(user)">Edit</button>
+      <button (click)="disableUser(user.id)">Disable Account</button>
     </div>
   </div>
 
@@ -81,9 +83,28 @@
 <form *ngIf="editUser">
   First Name: <input type="text" name="firstName" [(ngModel)]="editUser.firstName"><br>
   Last Name: <input type="text" name="firstName" [(ngModel)]="editUser.lastName"><br>
-  Favorite Trail Food: <input type="text" name="Strength" [(ngModel)]="editUser.favoriteTrailFood"><br>
+  Profile Image: <input type="text" name="imageUrl" [(ngModel)]="editUser.imageUrl"><br>
+  Favorite Trail Food: <input type="text" name="favoriteTrailFood" [(ngModel)]="editUser.favoriteTrailFood"><br>
 
   <button (click)="updateUser(editUser)">Submit</button>
   <input type="submit" name="Cancel" value="Cancel" (click)="editUser = null">
 
 </form>
+
+<div class="container-fluid card p-3">
+<div class="col-md-6">
+  <h5 class="card-title">Favorite Trails</h5>
+
+  <ul class="list-group list-group-flush" *ngFor="let trails of user.favoriteTrails">
+    <li>
+      <p>{{trails.name}}</p>
+    </li>
+    <li>
+      <p>{{trails.city}}</p>
+    </li>
+    <li>
+      <p>{{trails.state}}</p>
+    </li>
+  </ul>
+</div>
+</div>

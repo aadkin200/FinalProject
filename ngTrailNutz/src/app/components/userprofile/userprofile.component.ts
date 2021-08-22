@@ -66,7 +66,15 @@ export class UserprofileComponent implements OnInit {
     );
     this.editUser = null;
     this.selected = null;
-    // this.todos = this.todoService.index();
+  }
+
+  disableUser(userId: number) {
+    this.userSvc.disable(userId).subscribe(
+      error => {
+        console.log(error);
+        console.log("error disabling user through service")
+      }
+    );
   }
 
 }
