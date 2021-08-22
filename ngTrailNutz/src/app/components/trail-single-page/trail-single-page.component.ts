@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
 import { TrailImage } from 'src/app/models/trail-image';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -13,6 +16,7 @@ import { TrailService } from 'src/app/services/trail.service';
   styleUrls: ['./trail-single-page.component.css'],
 })
 export class TrailSinglePageComponent implements OnInit {
+  loggedInUser: User = new User();
   trail: Trail = new Trail();
   mainTrailImage:TrailImage = new TrailImage;
   mapOptions: google.maps.MapOptions = {
@@ -28,7 +32,8 @@ export class TrailSinglePageComponent implements OnInit {
   constructor(
     private trailSvc: TrailService,
     private activatedRoute: ActivatedRoute,
-    private trailImgsvc: TrailImageService
+    private trailImgsvc: TrailImageService,
+    private userSvc: UserService
   ) {}
 
   trailLat: string = '';
@@ -36,6 +41,16 @@ export class TrailSinglePageComponent implements OnInit {
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
+    this.userSvc.getUser().subscribe(
+      user=>{
+        this.loggedInUser = user;
+      }
+      ,
+      err=>{
+        console.error("SinglePageView: ngOnInit(): error getting user", err);
+      }
+    )
+
   }
 
   getSingleTrail(trailId: number): void {

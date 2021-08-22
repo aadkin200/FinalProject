@@ -1,8 +1,14 @@
 <div class="container-fluid card mt-3">
   <div class="singleCardView mx-auto pt-3">
     <div class="row pe-1 pictureContainer">
-      <img class="singleImage" [src]="mainTrailImage.imageUrl" alt="trail images" />
-      <button class="btn btn-danger" (click)="deleteTrailImage()">Delete</button>
+      <img
+        class="singleImage"
+        [src]="mainTrailImage.imageUrl"
+        alt="trail images"
+      />
+      <button class="btn btn-danger" (click)="deleteTrailImage()">
+        Delete
+      </button>
     </div>
     <div class="row">
       <!-- left side -->
@@ -119,34 +125,192 @@
         <div *ngFor="let com of trail.comments">
           <!-- Check to see if parent comment -->
           <div *ngIf="!com.parentComment">
-            <div class="card mt-1">
-              <p>{{ com.user.username }}</p>
-              <p>{{ com.createdAt | date: "M/d/yy h:mm a" }}</p>
-              <h6>{{ com.subject }}</h6>
-              <p>{{ com.message }}</p>
-              <p *ngIf="com.replies"></p>
-              <p>
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  attr.data-bs-target="#c{{ com.id }}"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  View Replies
-                </button>
-              </p>
-              <!-- Populate replies if they exist -->
+            <div class="mt-1">
+              <div class="container card">
+                <div class="d-flex justify-content-center row">
+                  <div class="col">
+                    <div
+                      class="d-flex flex-column comment-section"
+                      id="myGroup"
+                    >
+                      <div class="bg-white p-2">
+                        <div class="d-flex flex-row user-info">
+                          <img
+                            class="rounded-circle"
+                            [src]="com.user.imageUrl"
+                            width="40"
+                          />
+                          <div
+                            class="
+                              d-flex
+                              flex-column
+                              justify-content-start
+                              ml-2
+                            "
+                          >
+                            <span class="d-block font-weight-bold name">{{
+                              com.user.username
+                            }}</span
+                            ><span class="date text-black-50">{{
+                              com.createdAt | date: "M/d/yy | h:mm a"
+                            }}</span>
+                          </div>
+                        </div>
+                        <div class="mt-2">
+                          <p class="comment-text">{{ com.message }}</p>
+                        </div>
+                      </div>
+                      <div class="bg-white p-2">
+                        <div class="d-flex flex-row fs-12">
+                          <div
+                            class="like p-2 cursor action-collapse"
+                            data-bs-toggle="collapse"
+                            attr.data-bs-target="#com{{ com.id }}"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                          >
+                            <i-bs name="brush" width="10" height="10"> </i-bs
+                            ><span class="ml-1">Comment</span>
+                          </div>
+                          <div
+                            class="like p-2 cursor action-collapse"
+                            data-bs-toggle="collapse"
+                            attr.data-bs-target="#c{{ com.id }}"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                          >
+                            <i class="fa fa-share"></i
+                            ><span class="ml-1">View Replies</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="com{{ com.id }}" class="bg-light p-2 collapse">
+                        <div class="d-flex flex-row align-items-start">
+                          <img
+                            class="rounded-circle"
+                            [src]="loggedInUser.imageUrl"
+                            width="40"
+                          /><textarea
+                            class="form-control ml-1 shadow-none textarea"
+                          ></textarea>
+                        </div>
+                        <div class="mt-2 text-right">
+                          <button
+                            class="btn btn-primary btn-sm shadow-none"
+                            type="button"
+                          >
+                            Post comment</button
+                          ><button
+                            class="
+                              btn btn-outline-primary btn-sm
+                              ml-1
+                              shadow-none
+                            "
+                            type="button"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div
                 class="collapse"
                 id="c{{ com.id }}"
                 *ngFor="let reply of com.replies"
               >
-                <div class="card ms-3">
-                  <p>{{ reply.user.username }}</p>
-                  <p>{{ reply.createdAt | date: "M/d/yy h:mm a" }}</p>
-                  {{ reply.message }}
+              <div class="ms-2">
+                <div class="container card card-bg-gray">
+                  <div class="d-flex justify-content-center row">
+                    <div class="col">
+                      <div
+                        class="d-flex flex-column comment-section"
+                        id="myGroup"
+                      >
+                        <div class="bg-gray p-2">
+                          <div class="d-flex flex-row user-info">
+                            <img
+                              class="rounded-circle"
+                              [src]="reply.user.imageUrl"
+                              width="40"
+                            />
+                            <div
+                              class="
+                                d-flex
+                                flex-column
+                                justify-content-start
+                                ml-2
+                              "
+                            >
+                              <span class="d-block font-weight-bold name">{{
+                                reply.user.username
+                              }}</span
+                              ><span class="date text-black-50">{{
+                                reply.createdAt | date: "M/d/yy | h:mm a"
+                              }}</span>
+                            </div>
+                          </div>
+                          <div class="mt-2">
+                            <p class="comment-text">{{ reply.message }}</p>
+                          </div>
+                        </div>
+                        <div class="p-2">
+                          <div class="d-flex flex-row fs-12">
+                            <div
+                              class="like p-2 cursor action-collapse"
+                              data-bs-toggle="collapse"
+                              attr.data-bs-target="#com{{ reply.id }}"
+                              aria-expanded="false"
+                              aria-controls="collapseExample"
+                            >
+                              <i-bs name="brush" width="10" height="10"> </i-bs
+                              ><span class="ml-1">Comment</span>
+                            </div>
+                            <div
+                              class="like p-2 cursor action-collapse"
+                              data-bs-toggle="collapse"
+                              attr.data-bs-target="#c{{ reply.id }}"
+                              aria-expanded="false"
+                              aria-controls="collapseExample"
+                            >
+                              <i class="fa fa-share"></i
+                              ><span *ngIf="reply.replies.length > 0" class="ml-1">View Replies</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="com{{ reply.id }}" class="bg-light p-2 collapse">
+                          <div class="d-flex flex-row align-items-start">
+                            <img
+                              class="rounded-circle"
+                              [src]="loggedInUser.imageUrl"
+                              width="40"
+                            /><textarea
+                              class="form-control ml-1 shadow-none textarea"
+                            ></textarea>
+                          </div>
+                          <div class="mt-2 text-right">
+                            <button
+                              class="btn btn-primary btn-sm shadow-none"
+                              type="button"
+                            >
+                              Post comment</button
+                            ><button
+                              class="
+                                btn btn-outline-primary btn-sm
+                                ml-1
+                                shadow-none
+                              "
+                              type="button"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

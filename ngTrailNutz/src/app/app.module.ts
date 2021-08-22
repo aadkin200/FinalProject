@@ -21,12 +21,13 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { NgbCarousel, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
-import { imageFill, images } from 'ngx-bootstrap-icons';
+import { imageFill, images, brush } from 'ngx-bootstrap-icons';
 
 
 const icons = {
   imageFill,
-  images
+  images,
+  brush
 };
 
 
