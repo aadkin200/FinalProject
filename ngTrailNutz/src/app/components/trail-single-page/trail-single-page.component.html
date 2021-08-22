@@ -47,12 +47,14 @@
             />
           </ng-template>
           <button
+
             class="btn thumbnail"
             placement="right"
             #add="ngbPopover"
             [ngbPopover]="addImage"
             [autoClose]="false"
             [popoverTitle]="addImageTitle"
+            [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
           >
             <i-bs width="5vw" height="5vh" name="images"></i-bs>
           </button>
@@ -92,7 +94,7 @@
       <div class="col-md-6 pe-1">
         <!-- comments -->
         <!-- Input for new comments -->
-        <form class="mt-1">
+        <form [ngClass]="isLoggedIn() ? 'mt1': 'd-none'">
           <label for="subject">Subject</label>
           <input
             type="text"
@@ -163,6 +165,7 @@
                       <div class="bg-white p-2">
                         <div class="d-flex flex-row fs-12">
                           <div
+                            [ngClass]="isLoggedIn() ? 'like p-2 cursor action-collapse': 'd-none'"
                             class="like p-2 cursor action-collapse"
                             data-bs-toggle="collapse"
                             attr.data-bs-target="#com{{ com.id }}"
@@ -170,7 +173,7 @@
                             aria-controls="collapseExample"
                           >
                             <i-bs name="brush" width="10" height="10"> </i-bs
-                            ><span class="ml-1">Comment</span>
+                            ><span class="ml-1" >Comment</span>
                           </div>
                           <div
                             class="like p-2 cursor action-collapse"
@@ -185,7 +188,9 @@
                         </div>
                       </div>
                       <div id="com{{ com.id }}" class="bg-light p-2 collapse">
-                        <div class="d-flex flex-row align-items-start">
+                        <div
+                        [ngClass]="isLoggedIn() ? 'd-flex flex-row align-items-start': 'd-none'"
+                         >
                           <img
                             class="rounded-circle"
                             [src]="loggedInUser.imageUrl"

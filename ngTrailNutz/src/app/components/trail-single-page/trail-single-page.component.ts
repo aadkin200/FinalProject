@@ -33,7 +33,8 @@ export class TrailSinglePageComponent implements OnInit {
     private trailSvc: TrailService,
     private activatedRoute: ActivatedRoute,
     private trailImgsvc: TrailImageService,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private authSvc: AuthService
   ) {}
 
   trailLat: string = '';
@@ -96,5 +97,9 @@ export class TrailSinglePageComponent implements OnInit {
         console.error("Error Deleting Trail Image:deleteTrailImage() single page");
       }
     )
+  }
+
+  isLoggedIn():boolean{
+    return this.authSvc.checkLogin();
   }
 }
