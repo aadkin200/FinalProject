@@ -20,6 +20,21 @@
     <div *ngFor="let amenity of newAmenities">
       {{amenity.name}}<input type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
     </div>
+    <div>
+      <input id="autoComplete" type="text" placeholder="Enter Hike Location">
+      <div>
+        Latitude: <input id="lat" type="number" name="trailheadLatitude" [(ngModel)]="newTrail.trailheadLatitude">
+        Longitude: <input id="lng" type="number" name="trailheadLongitude" [(ngModel)]="newTrail.trailheadLongitude">
+      </div>
+    </div>
+    <div class="d-flex w-100">
+      <div id="my-google-map" class="my-google-map">
+        <google-map id="newMap" height="250" width="42vw" [center]="latlng" [options]="mapOptions">
+           <map-marker id="mapMarker" [position]="marker.position"></map-marker>
+        </google-map>
+     </div>
+    </div>
     <button (click)="addTrail()">Create Trail</button>
+
   </form>
 </div>

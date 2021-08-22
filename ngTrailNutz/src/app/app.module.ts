@@ -18,7 +18,7 @@ import { AmenityService } from './services/amenity.service';
 import { RouteTypeService } from './services/route-type.service';
 import { AppRoutingModule } from './app-routing.module';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
