@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
 import { TrailImage } from 'src/app/models/trail-image';
 import { CommentService } from 'src/app/services/comment.service';
+import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
+
 
 @Component({
   selector: 'app-trail-single-page',
@@ -12,7 +14,7 @@ import { TrailService } from 'src/app/services/trail.service';
 })
 export class TrailSinglePageComponent implements OnInit {
   trail: Trail = new Trail();
-  mainImage:string = "";
+  mainTrailImage:TrailImage = new TrailImage;
   mapOptions: google.maps.MapOptions = {
     zoom: 14
   };
@@ -21,10 +23,12 @@ export class TrailSinglePageComponent implements OnInit {
     position: { lat: 0, lng: 0 },
   };
 
+  trailImage: TrailImage = new TrailImage();
+
   constructor(
     private trailSvc: TrailService,
     private activatedRoute: ActivatedRoute,
-    private commentSvc: CommentService
+    private trailImgsvc: TrailImageService
   ) {}
 
   trailLat: string = '';
@@ -38,7 +42,7 @@ export class TrailSinglePageComponent implements OnInit {
     this.trailSvc.show(trailId).subscribe(
       (data) => {
         this.trail = data;
-        this.mainImage = this.trail.trailImages[0].imageUrl;
+        this.mainTrailImage = this.trail.trailImages[0];
         this.changeMapCord();
         console.log(this.trail)
       },
@@ -49,10 +53,33 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   changeMainImg(image:TrailImage){
-    this.mainImage = image.imageUrl;
+    this.mainTrailImage = image;
   }
   changeMapCord(){
         this.latlng = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
         this.marker.position = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
+  }
+
+  addTrailImage(){
+    this.trailImgsvc.addImage(this.trailImage, this.trail.id).subscribe(
+      trailImg=>{
+        this.getSingleTrail(this.trail.id);
+        this.trailImage = new TrailImage;
+      },
+      err=>{
+        console.log("Error creating TrailImage:addTrailImage() singlepage");
+      }
+    )
+  }
+
+  deleteTrailImage(){
+    this.trailImgsvc.removeImage(this.mainTrailImage, this.trail.id).subscribe(
+      del=>{
+        this.getSingleTrail(this.trail.id);
+      },
+      err=>{
+        console.error("Error Deleting Trail Image:deleteTrailImage() single page");
+      }
+    )
   }
 }

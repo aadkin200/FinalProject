@@ -20,7 +20,7 @@ export class TrailImageService {
     ) { }
 
   addImage(trailImage: TrailImage, trailId: any) {
-    return this.http.post<TrailImage>(`${this.baseUrl}/trail/${trailId}/trailimg`, trailImage, this.getHttpOptions())
+    return this.http.post<TrailImage>(`${this.baseUrl}api/trail/${trailId}/trailimg`, trailImage, this.getHttpOptions())
     .pipe(
       catchError((err: any) => {
         console.log(err);
@@ -29,8 +29,8 @@ export class TrailImageService {
     )
   }
 
-  removeImage(trailImgId: any, trailId: any) {
-    return this.http.delete<TrailImage>(`${this.baseUrl}/trail/${trailId}/trailimg/${trailImgId}`, this.getHttpOptions())
+  removeImage(trailImg: TrailImage, trailId: any) {
+    return this.http.delete<TrailImage>(`${this.baseUrl}api/trail/${trailId}/trailimg/${trailImg.id}`, this.getHttpOptions())
     .pipe(
       catchError((err: any) => {
         console.log(err);

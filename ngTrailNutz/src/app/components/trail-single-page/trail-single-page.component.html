@@ -1,19 +1,56 @@
 <div class="container-fluid card mt-3">
   <div class="singleCardView mx-auto pt-3">
-    <div class="row pe-1">
-      <img
-        class="singleImage"
-        [src]="mainImage"
-        alt="trail images"
-      />
+    <div class="row pe-1 pictureContainer">
+      <img class="singleImage" [src]="mainTrailImage.imageUrl" alt="trail images" />
+      <button class="btn btn-danger" (click)="deleteTrailImage()">Delete</button>
     </div>
     <div class="row">
       <!-- left side -->
       <div class="col-md-6 ps-0">
+        <!-- Add new image -->
         <!-- thumbnail images -->
         <div class="trailImages row ps-2">
+          <ng-template #addImageTitle>Add new trail image</ng-template>
+          <ng-template #addImage>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                rows="1"
+                [(ngModel)]="trailImage.imageUrl"
+                placeholder="image url"
+                aria-label="add image"
+                aria-describedby="basic-addon2"
+              />
+              <div class="input-group-append">
+                <button
+                  (click)="addTrailImage()"
+                  class="btn btn-outline-secondary"
+                  type="submit"
+                  (click)="add.close()"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+            <input
+              type="hidden"
+              role="uploadcare-uploader"
+              data-public-key="aa6ba1052436d3b43dca"
+              name="my_file_input"
+            />
+          </ng-template>
+          <button
+            class="btn thumbnail"
+            placement="right"
+            #add="ngbPopover"
+            [ngbPopover]="addImage"
+            [autoClose]="false"
+            [popoverTitle]="addImageTitle"
+          >
+            <i-bs width="5vw" height="5vh" name="images"></i-bs>
+          </button>
           <img
-
             class="thumbnail"
             *ngFor="let image of trail.trailImages"
             [src]="image.imageUrl"
@@ -26,10 +63,15 @@
           <!-- map -->
           <div class="d-flex w-100">
             <div class="my-google-map">
-              <google-map height="250" width="42vw" [center]="latlng" [options]="mapOptions">
-                 <map-marker [position]="marker.position"></map-marker>
+              <google-map
+                height="250"
+                width="42vw"
+                [center]="latlng"
+                [options]="mapOptions"
+              >
+                <map-marker [position]="marker.position"></map-marker>
               </google-map>
-           </div>
+            </div>
           </div>
           <!-- trail controls -->
           <div class="row justify-content-end">
@@ -46,45 +88,68 @@
         <!-- Input for new comments -->
         <form class="mt-1">
           <label for="subject">Subject</label>
-          <input type="text" class="form-control" placeholder="Subject" aria-label="Subject line" aria-describedby="basic-addon2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Subject"
+            aria-label="Subject line"
+            aria-describedby="basic-addon2"
+          />
           <label for="subject">Comment</label>
           <div class="input-group mb-3">
-            <textarea type="text" class="form-control" rows="1" placeholder="Comment" aria-label="comment body" aria-describedby="basic-addon2"></textarea>
+            <textarea
+              type="text"
+              class="form-control"
+              rows="1"
+              placeholder="Comment"
+              aria-label="comment body"
+              aria-describedby="basic-addon2"
+            ></textarea>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">Submit</button>
+              <button class="btn btn-outline-secondary" type="button">
+                Submit
+              </button>
             </div>
           </div>
         </form>
 
         <!-- if they have no parent Comment its a top level comment -->
         <!-- TODO fix this to where parent/child show up appropriately -->
+
         <div *ngFor="let com of trail.comments">
           <!-- Check to see if parent comment -->
           <div *ngIf="!com.parentComment">
             <div class="card mt-1">
-              <p>{{com.user.username}}</p>
-              <p>{{com.createdAt | date:'M/d/yy h:mm a'}}</p>
-              <h6>{{com.subject}}</h6>
-              <p>{{com.message}}</p>
-              <p *ngIf="com.replies">
-                <p>
-                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" attr.data-bs-target="#c{{com.id}}" aria-expanded="false" aria-controls="collapseExample">
-                    View Replies
-                  </button>
-                </p>
-                <!-- Populate replies if they exist -->
-                <div class="collapse" id="c{{com.id}}"  *ngFor="let reply of com.replies">
-                  <div class="card ms-3">
-                    <p>{{reply.user.username}}</p>
-                    <p>{{reply.createdAt | date:'M/d/yy h:mm a'}}</p>
-                    {{reply.message}}
-                  </div>
+              <p>{{ com.user.username }}</p>
+              <p>{{ com.createdAt | date: "M/d/yy h:mm a" }}</p>
+              <h6>{{ com.subject }}</h6>
+              <p>{{ com.message }}</p>
+              <p *ngIf="com.replies"></p>
+              <p>
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  attr.data-bs-target="#c{{ com.id }}"
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+                >
+                  View Replies
+                </button>
+              </p>
+              <!-- Populate replies if they exist -->
+              <div
+                class="collapse"
+                id="c{{ com.id }}"
+                *ngFor="let reply of com.replies"
+              >
+                <div class="card ms-3">
+                  <p>{{ reply.user.username }}</p>
+                  <p>{{ reply.createdAt | date: "M/d/yy h:mm a" }}</p>
+                  {{ reply.message }}
                 </div>
+              </div>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
