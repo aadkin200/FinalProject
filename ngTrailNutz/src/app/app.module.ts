@@ -22,6 +22,7 @@ import { NgbCarousel, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { imageFill, images, brush } from 'ngx-bootstrap-icons';
+import { OrderModule } from 'ngx-order-pipe';
 
 
 const icons = {
@@ -51,7 +52,8 @@ const icons = {
     HttpClientModule,
     GoogleMapsModule,
     NgbModule,
-    NgxBootstrapIconsModule.pick(icons)
+    NgxBootstrapIconsModule.pick(icons),
+    OrderModule
   ],
   providers: [
     AuthService,

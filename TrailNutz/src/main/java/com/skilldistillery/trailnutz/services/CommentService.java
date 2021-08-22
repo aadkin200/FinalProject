@@ -14,5 +14,7 @@ public interface CommentService {
 	
 	Comment updateComment(int trailId, int commId, Comment comment, String username);
 	
+	List<Comment> findByParentComment_Id(int commentId);
+	
 	boolean disableComment(int userId, int commId, String username);
 }

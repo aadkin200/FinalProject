@@ -10,4 +10,5 @@ import com.skilldistillery.trailnutz.entities.Trail;
 public interface CommentRepository extends JpaRepository<Comment, Integer>{
 
 	List<Comment> findByTrail_Id(Integer trailId);
+	List<Comment> findByParentComment_Id(int commentId);
 }

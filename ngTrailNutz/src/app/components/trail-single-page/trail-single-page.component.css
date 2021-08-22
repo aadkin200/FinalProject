@@ -31,6 +31,7 @@
 }
 
 .thumbnail {
+  aspect-ratio: 21/9;
   min-width: 5vw;
   max-width: 8vw;
   padding: 1%;

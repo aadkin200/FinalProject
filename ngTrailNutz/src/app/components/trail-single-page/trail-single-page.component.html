@@ -124,7 +124,7 @@
         <!-- if they have no parent Comment its a top level comment -->
         <!-- TODO fix this to where parent/child show up appropriately -->
 
-        <div *ngFor="let com of trail.comments">
+        <div ngfor *ngFor="let com of trail.comments | orderBy: 'com.createdAt'">
           <!-- Check to see if parent comment -->
           <div *ngIf="!com.parentComment">
             <div class="mt-1">
@@ -159,6 +159,7 @@
                           </div>
                         </div>
                         <div class="mt-2">
+                          <h6>{{com.subject}}</h6>
                           <p class="comment-text">{{ com.message }}</p>
                         </div>
                       </div>
@@ -176,11 +177,8 @@
                             ><span class="ml-1" >Comment</span>
                           </div>
                           <div
-                            class="like p-2 cursor action-collapse"
-                            data-bs-toggle="collapse"
-                            attr.data-bs-target="#c{{ com.id }}"
-                            aria-expanded="false"
-                            aria-controls="collapseExample"
+                          type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                          aria-controls="collapseExample"
                           >
                             <i class="fa fa-share"></i
                             ><span class="ml-1">View Replies</span>
@@ -195,17 +193,21 @@
                             class="rounded-circle"
                             [src]="loggedInUser.imageUrl"
                             width="40"
-                          /><textarea
+                          /><textarea [(ngModel)]="currentComment.message"
                             class="form-control ml-1 shadow-none textarea"
                           ></textarea>
                         </div>
                         <div class="mt-2 text-right">
                           <button
+
                             class="btn btn-primary btn-sm shadow-none"
                             type="button"
+                            (click)="postReply(com)"
                           >
                             Post comment</button
                           ><button
+                           attr.data-bs-target="#com{{ com.id }}"
+                           class="btn btn-primary btn-sm shadow-none"
                             class="
                               btn btn-outline-primary btn-sm
                               ml-1
@@ -222,9 +224,8 @@
                 </div>
               </div>
               <div
-                class="collapse"
-                id="c{{ com.id }}"
-                *ngFor="let reply of com.replies"
+              *ngFor="let reply of com.replies | orderBy:com.replies.createdAt"
+              #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed"
               >
               <div class="ms-2">
                 <div class="container card card-bg-gray">

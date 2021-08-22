@@ -8,6 +8,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
 import { UserService } from 'src/app/services/user.service';
+import { Comment } from 'src/app/models/comment';
 
 
 @Component({
@@ -18,7 +19,10 @@ import { UserService } from 'src/app/services/user.service';
 export class TrailSinglePageComponent implements OnInit {
   loggedInUser: User = new User();
   trail: Trail = new Trail();
+  currentComment = new Comment();
   mainTrailImage:TrailImage = new TrailImage;
+  replyCollapse:boolean[] = [];
+
   mapOptions: google.maps.MapOptions = {
     zoom: 14
   };
@@ -28,13 +32,14 @@ export class TrailSinglePageComponent implements OnInit {
   };
 
   trailImage: TrailImage = new TrailImage();
-
+  isCollapsed: boolean = false;
   constructor(
     private trailSvc: TrailService,
     private activatedRoute: ActivatedRoute,
     private trailImgsvc: TrailImageService,
     private userSvc: UserService,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private commentSvc: CommentService
   ) {}
 
   trailLat: string = '';
@@ -60,7 +65,8 @@ export class TrailSinglePageComponent implements OnInit {
         this.trail = data;
         this.mainTrailImage = this.trail.trailImages[0];
         this.changeMapCord();
-        console.log(this.trail)
+        this.createBoolArray();
+        console.log(this.replyCollapse)
       },
       (err) => {
         console.error(err, `No trail recieved singleComponent`);
@@ -101,5 +107,41 @@ export class TrailSinglePageComponent implements OnInit {
 
   isLoggedIn():boolean{
     return this.authSvc.checkLogin();
+  }
+
+  createBoolArray(){
+    for(let i = 0; i < this.trail.comments.length; i++){
+      this.replyCollapse.push(false);
+    }
+  }
+  test(id:number){
+    console.log(id);
+  }
+
+  postReply(parentComment:Comment){
+    this.currentComment.parentComment = parentComment;
+    delete this.currentComment.createdAt;
+    delete this.currentComment.updatedAt;
+    console.log(parentComment);
+    this.commentSvc.create(this.currentComment, this.trail.id).subscribe(
+      success=>{
+        this.commentSvc.getReply(parentComment.id).subscribe(
+          reply=>{
+            this.trail.comments.forEach(comment => {
+              if(comment.id == parentComment.id){
+                comment.replies = reply;
+              }
+            })
+          },
+          error=>{
+
+          }
+        )
+      },
+      err=>{
+        console.error(err);
+
+      }
+    )
   }
 }
