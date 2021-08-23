@@ -22,18 +22,20 @@
       <tr>
         <td>
 
-          <ngb-carousel #carousel [interval]="2550" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
-            <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
-              <div class="carousel-caption">
-                <h3> {{i + 1}} </h3>
-              </div>
-              <a href="trailImage.imageUrl{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
-                <div class="picsum-img-wrapper">
-                  <img [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
+          <div class="carousel-inner" role="listbox" style="max-width: 900px; max-height: 600px;">
+            <ngb-carousel #carousel [interval]="2550" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+              <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
+                <div class="w-50" class="carousel-caption">
+                  <h3> {{i + 1}} </h3>
                 </div>
-              </a>
-            </ng-template>
-          </ngb-carousel>
+                <a href="trailImage.imageUrl{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
+                  <div class="picsum-img-wrapper">
+                    <img style="width: 900px; height: 600px;" [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
+                  </div>
+                </a>
+              </ng-template>
+            </ngb-carousel>
+          </div>
 
           <hr>
 
