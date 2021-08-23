@@ -1,14 +1,14 @@
 <div *ngIf="newTrailFormBool">
   <app-new-trail-form></app-new-trail-form>
 </div>
-<div *ngIf="!newTrailFormBool">
+<div class="d-flex justify-content-center" *ngIf="!newTrailFormBool">
   <br>
-  <button (click)="newTrailFormFillOut()">Create Trail</button>
+  <button class="btn btn-success acorn-button" (click)="newTrailFormFillOut()">Create Trail</button>
 </div>
 <!-- <p>trail-feed works!</p> -->
 
-<div id='trailFeed'>
-  <table *ngFor="let trail of trails">
+<!-- <div class="" id='trailFeed'>
+  <table class="tableD" *ngFor="let trail of trails">
     <thead>
         <tr>
           <th></th>
@@ -19,33 +19,39 @@
         </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-
-          <div class="carousel-inner" role="listbox" style="max-width: 900px; max-height: 600px;">
-            <ngb-carousel #carousel [interval]="2550" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
-              <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
-                <div class="w-50" class="carousel-caption">
-                  <h3> {{i + 1}} </h3>
-                </div>
-                <a href="trailImage.imageUrl{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
-                  <div class="picsum-img-wrapper">
-                    <img style="width: 900px; height: 600px;" [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
-                  </div>
-                </a>
-              </ng-template>
-            </ngb-carousel>
-          </div>
-
-          <hr>
-
-        </td>
-        <td (click)="displayTrail(trail)">{{trail.name}}</td>
-        <td>{{trail.distanceMiles}}</td>
-        <td>{{trail.city}}</td>
-        <td>{{trail.state}}</td>
-      </tr>
+      <div class="bordCSS">
+        <tr>
+          <td>{{trail.distanceMiles}}</td>
+          <td>{{trail.city}}</td>
+          <td>{{trail.state}}</td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+        </tr>
+      </div>
     </tbody>
   </table>
-  </div>
+</div> -->
 
+<div class="">
+  <div class="justify-content-center tableD" *ngFor="let trail of trails">
+    <div class="carousel-inner m-0" role="listbox" style="max-width: 900px; max-height: 600px;">
+      <td class="clickable-thing" (click)="displayTrail(trail)">{{trail.name}}</td>
+      <ngb-carousel #carousel [interval]="2550" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+        <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
+          <div class="w-50" class="carousel-caption">
+            <h3> {{i + 1}} </h3>
+          </div>
+          <a href="trailImage.imageUrl{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
+            <div class="picsum-img-wrapper">
+              <img style="width: 900px; height: 600px;" [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
+            </div>
+          </a>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+    <img class="locationPNG" src="../../../assets/images/locationPNG.png" alt="">{{trail.city}}, {{trail.state}}
+  </div>
+  <br>
+</div>

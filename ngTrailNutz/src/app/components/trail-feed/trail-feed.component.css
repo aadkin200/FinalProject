@@ -1,1 +1,36 @@
+.tableD {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+  width: 48%;
+  padding: 0px;
+  background-color: rgba(181,206,131,255);
+  border-style: solid;
+  border-color: rgba(181,206,131,255);
+  border-radius: 20px;
+  padding: 5px;
+  background-clip: padding-box;
+}
 
+.locationPNG {
+  width: 50px;
+}
+
+
+/* .bordCSS {
+  border-style: solid;
+  border-color: rgba(181,206,131,255);
+  border-radius: 10px;
+} */
+
+.clickable-thing:hover {
+  cursor: pointer;
+  color: whitesmoke;
+  text-decoration: underline;
+}
+
+.acorn-button {
+  background-color: rgba(181,206,131,255) !important;
+  border-color: rgba(181,206,131,255) !important;
+  margin: 20px;
+}
