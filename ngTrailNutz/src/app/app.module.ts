@@ -23,6 +23,7 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { imageFill, images, brush } from 'ngx-bootstrap-icons';
 import { OrderModule } from 'ngx-order-pipe';
+import { AdminViewComponent } from './components/admin-view/admin-view.component';
 
 
 
@@ -44,7 +45,8 @@ const icons = {
     SignUpComponent,
     NewTrailFormComponent,
     NotFoundComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    AdminViewComponent
   ],
   imports: [
     AppRoutingModule,

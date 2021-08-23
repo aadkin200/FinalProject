@@ -11,21 +11,13 @@ import { UserService } from 'src/app/services/user.service';
 export class UserprofileComponent implements OnInit {
   user:User = new User();
   totalMiles: number = 0;
-  editUser: User | null = null;
+  editUser: User = new User();
   selected: User | null = null;
 
   constructor(private auth: AuthService, private userSvc: UserService) { }
 
   ngOnInit(): void {
-    this.userSvc.getUser().subscribe(
-      user=>{
-        this.user = user;
-      }
-      ,
-      err=>{
-        console.error("userprofile: ngOnInit(): error getting user", err);
-      }
-    )
+   this.reload();
   }
 
   getTotalMiles(user: User) {
@@ -42,33 +34,39 @@ export class UserprofileComponent implements OnInit {
     }
   }
 
-  setEditUser(user: any) : void {
-    this.editUser = user;
+  setSelected(user: any) : void {
+
+    this.selected = user;
+
+    this.displayEdit(user);
   }
 
   displayEdit(user: any): void {
-    this.selected = user;
+    this.editUser = user;
   }
 
-  closeEdit(): void {
-    this.selected = null;
-  }
+  // closeEdit(): void {
+  //   this.selected = null;
+  // }
 
   updateUser(user: User) {
-    this.userSvc.update(user).subscribe(
-      data => {
-        this.ngOnInit();
+    console.log(this.editUser);
+
+    this.removeEmpty();
+    this.userSvc.update(this.editUser).subscribe(
+      data=>{
+        this.reload();
       },
       error => {
         console.log(error);
         console.log("error updating user through service")
       }
     );
-    this.editUser = null;
     this.selected = null;
   }
 
   disableUser(userId: number) {
+
     this.userSvc.disable(userId).subscribe(
       error => {
         console.log(error);
@@ -77,4 +75,28 @@ export class UserprofileComponent implements OnInit {
     );
   }
 
+  removeEmpty(){
+    delete this.editUser.role;
+    delete this.editUser.enabled;
+    // delete this.editUser.favoriteTrailFood;
+    // delete this.editUser.firstName;
+    // delete this.editUser.lastName;
+    delete this.editUser.favoriteTrails;
+    // delete this.editUser.imageUrl;
+    delete this.editUser.trails;
+    delete this.editUser.comments;
+    delete this.editUser.trailImages;
+    delete this.editUser.trailResouces;
+  }
+
+  reload() {
+    this.userSvc.getUser().subscribe(
+      data => {
+        this.user = data;
+      },
+      err => {
+        console.log("Error retreiving user from service")
+      }
+    );
+  }
 }
