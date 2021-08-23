@@ -6,7 +6,7 @@
         [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
-      <button class="btn btn-danger" (click)="deleteTrailImage()">
+      <button *ngIf="isLoggedIn()" class="btn btn-danger" (click)="deleteTrailImage()">
         Delete
       </button>
     </div>

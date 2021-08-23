@@ -31,7 +31,7 @@ public class TrailImageController {
 	@PostMapping("trail/{trailId}/trailimg")
 	public TrailImage addTrailImage(@RequestBody TrailImage trailImage, @PathVariable int trailId,
 			HttpServletRequest req, HttpServletResponse res, Principal principal) {
-
+		System.out.println(trailImage);
 		TrailImage trailImg = tiServ.addTrailImage(principal.getName(), trailImage, trailId);
 		if (trailImage == null) {
 

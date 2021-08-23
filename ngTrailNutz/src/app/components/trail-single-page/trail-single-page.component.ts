@@ -99,6 +99,7 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   addTrailImage(){
+    console.log(this.trailImage, "why are you broken now");
     this.trailImgsvc.addImage(this.trailImage, this.trail.id).subscribe(
       trailImg=>{
         this.getSingleTrail(this.trail.id);
