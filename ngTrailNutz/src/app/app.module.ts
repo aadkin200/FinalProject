@@ -61,7 +61,8 @@ const icons = {
     AmenityService,
     RouteTypeService,
     NgbCarousel,
-    NgbDropdown
+    NgbDropdown,
+    OrderModule
   ],
   bootstrap: [AppComponent]
 })

@@ -97,6 +97,8 @@
         <form [ngClass]="isLoggedIn() ? 'mt1': 'd-none'">
           <label for="subject">Subject</label>
           <input
+            [(ngModel)]="topComment.subject"
+            name="subject"
             type="text"
             class="form-control"
             placeholder="Subject"
@@ -106,7 +108,9 @@
           <label for="subject">Comment</label>
           <div class="input-group mb-3">
             <textarea
+              [(ngModel)]="topComment.message"
               type="text"
+              name="topComment"
               class="form-control"
               rows="1"
               placeholder="Comment"
@@ -114,7 +118,7 @@
               aria-describedby="basic-addon2"
             ></textarea>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">
+              <button class="btn btn-outline-secondary" type="button" (click)="postComment()">
                 Submit
               </button>
             </div>
@@ -124,7 +128,7 @@
         <!-- if they have no parent Comment its a top level comment -->
         <!-- TODO fix this to where parent/child show up appropriately -->
 
-        <div ngfor *ngFor="let com of trail.comments | orderBy: 'com.createdAt'">
+        <div ngfor *ngFor="let com of trail.comments; let i = index">
           <!-- Check to see if parent comment -->
           <div *ngIf="!com.parentComment">
             <div class="mt-1">
@@ -177,7 +181,7 @@
                             ><span class="ml-1" >Comment</span>
                           </div>
                           <div
-                          type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                          type="button" class="btn btn-outline-primary" (click)="replyCollapse[i] = !replyCollapse[i]" [attr.aria-expanded]="replyCollapse[i]"
                           aria-controls="collapseExample"
                           >
                             <i class="fa fa-share"></i
@@ -225,7 +229,7 @@
               </div>
               <div
               *ngFor="let reply of com.replies | orderBy:com.replies.createdAt"
-              #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed"
+              #collapse="ngbCollapse" [(ngbCollapse)]="!replyCollapse[i]"
               >
               <div class="ms-2">
                 <div class="container card card-bg-gray">
@@ -274,16 +278,6 @@
                               <i-bs name="brush" width="10" height="10"> </i-bs
                               ><span class="ml-1">Comment</span>
                             </div>
-                            <div
-                              class="like p-2 cursor action-collapse"
-                              data-bs-toggle="collapse"
-                              attr.data-bs-target="#c{{ reply.id }}"
-                              aria-expanded="false"
-                              aria-controls="collapseExample"
-                            >
-                              <i class="fa fa-share"></i
-                              ><span *ngIf="reply.replies.length > 0" class="ml-1">View Replies</span>
-                            </div>
                           </div>
                         </div>
                         <div id="com{{ reply.id }}" class="bg-light p-2 collapse">
@@ -314,6 +308,7 @@
                             </button>
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>

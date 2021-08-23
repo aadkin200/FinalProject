@@ -9,6 +9,7 @@ import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
 import { UserService } from 'src/app/services/user.service';
 import { Comment } from 'src/app/models/comment';
+import { OrderModule, OrderPipe } from 'ngx-order-pipe';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class TrailSinglePageComponent implements OnInit {
   loggedInUser: User = new User();
   trail: Trail = new Trail();
   currentComment = new Comment();
+  topComment = new Comment();
   mainTrailImage:TrailImage = new TrailImage;
   replyCollapse:boolean[] = [];
 
@@ -39,7 +41,8 @@ export class TrailSinglePageComponent implements OnInit {
     private trailImgsvc: TrailImageService,
     private userSvc: UserService,
     private authSvc: AuthService,
-    private commentSvc: CommentService
+    private commentSvc: CommentService,
+    private orderPipe : OrderPipe
   ) {}
 
   trailLat: string = '';
@@ -66,7 +69,7 @@ export class TrailSinglePageComponent implements OnInit {
         this.mainTrailImage = this.trail.trailImages[0];
         this.changeMapCord();
         this.createBoolArray();
-        console.log(this.replyCollapse)
+        this.trail.comments = this.orderPipe.transform(this.trail.comments, this.trail.comments.forEach(com=> com.createdAt));
       },
       (err) => {
         console.error(err, `No trail recieved singleComponent`);
@@ -118,10 +121,28 @@ export class TrailSinglePageComponent implements OnInit {
     console.log(id);
   }
 
+  postComment(){
+    this.removeProperties();
+    console.log(this.topComment)
+    this.commentSvc.create(this.topComment, this.trail.id).subscribe(
+      success=>{
+        this.getSingleTrail(this.trail.id);
+        this.clearCommentBlock();
+      },
+      err=> {
+        console.log(`error creating comment`)
+      }
+    )
+  }
+
+  clearCommentBlock(){
+    this.currentComment = new Comment();
+    this.topComment = new Comment();
+  }
+
   postReply(parentComment:Comment){
     this.currentComment.parentComment = parentComment;
-    delete this.currentComment.createdAt;
-    delete this.currentComment.updatedAt;
+    this.removeProperties();
     console.log(parentComment);
     this.commentSvc.create(this.currentComment, this.trail.id).subscribe(
       success=>{
@@ -130,6 +151,7 @@ export class TrailSinglePageComponent implements OnInit {
             this.trail.comments.forEach(comment => {
               if(comment.id == parentComment.id){
                 comment.replies = reply;
+                this.clearCommentBlock();
               }
             })
           },
@@ -143,5 +165,12 @@ export class TrailSinglePageComponent implements OnInit {
 
       }
     )
+  }
+
+  removeProperties(){
+    delete this.topComment.createdAt;
+    delete this.topComment.updatedAt;
+    delete this.currentComment.createdAt;
+    delete this.currentComment.updatedAt;
   }
 }
