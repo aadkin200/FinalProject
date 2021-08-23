@@ -204,20 +204,23 @@
                         </div>
                         <div class="mt-2 text-right">
                           <button
-
+                          data-bs-toggle="collapse"
+                          attr.data-bs-target="#com{{ com.id }}"
                             class="btn btn-primary btn-sm shadow-none"
                             type="button"
                             (click)="postReply(com)"
                           >
                             Post comment</button
                           ><button
-                           attr.data-bs-target="#com{{ com.id }}"
+                          data-bs-toggle="collapse"
+                          attr.data-bs-target="#com{{ com.id }}"
                            class="btn btn-primary btn-sm shadow-none"
                             class="
                               btn btn-outline-primary btn-sm
                               ml-1
                               shadow-none
                             "
+                            (click)="clearCommentBlock()"
                             type="button"
                           >
                             Cancel
