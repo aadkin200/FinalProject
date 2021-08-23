@@ -81,6 +81,14 @@ export class TrailSinglePageComponent implements OnInit {
     this.mainTrailImage = image;
   }
   changeMapCord(){
+    console.log(this.trail.trailheadLongitude + '-----------------------long');
+    console.log(this.trail.trailheadLatitude + '-------------------------lat');
+    console.log(parseFloat(this.trail.trailheadLatitude) + '---------------parse lat');
+    console.log(parseFloat(this.trail.trailheadLatitude));
+
+
+
+
         this.latlng = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
         this.marker.position = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
   }

@@ -25,6 +25,7 @@ import { imageFill, images, brush } from 'ngx-bootstrap-icons';
 import { OrderModule } from 'ngx-order-pipe';
 
 
+
 const icons = {
   imageFill,
   images,
