@@ -1,6 +1,7 @@
 package com.skilldistillery.trailnutz.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +25,11 @@ public class UserController {
 	
 	@Autowired
 	private UserService userSvc;
+	
+	@GetMapping("allusers")
+	public List<User> getAllUsers() {
+		return userSvc.getAllUsers();
+	}
 	
 	@GetMapping("user")
 	public User getUserByUsername(Principal principal) {
