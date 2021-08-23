@@ -66,7 +66,12 @@ export class TrailSinglePageComponent implements OnInit {
     this.trailSvc.show(trailId).subscribe(
       (data) => {
         this.trail = data;
-        this.mainTrailImage = this.trail.trailImages[0];
+        if(this.trail.trailImages.length > 0){
+          this.mainTrailImage = this.trail.trailImages[0];
+        }else{
+          this.mainTrailImage.imageUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png`
+        }
+
         this.changeMapCord();
         this.createBoolArray();
         this.trail.comments = this.orderPipe.transform(this.trail.comments, this.trail.comments.forEach(com=> com.createdAt));
