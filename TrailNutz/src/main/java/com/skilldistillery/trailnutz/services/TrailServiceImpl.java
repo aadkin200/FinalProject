@@ -42,7 +42,10 @@ public class TrailServiceImpl implements TrailService{
 
 	@Override
 	public Trail update(String username, Trail trail, int trailId) {
+		//Sysouts used to prevent lazy loading issues on update
+		System.out.println(trail.getTrailImages());
 		Trail managed = trailRepo.findByUser_UsernameAndId(username, trailId);
+		System.out.println(managed.getTrailImages());
 		if(managed != null) {
 			managed.setName(trail.getName());
 			managed.setElevationChangeFeet(trail.getElevationChangeFeet());
