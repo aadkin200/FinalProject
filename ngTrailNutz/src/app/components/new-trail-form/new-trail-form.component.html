@@ -1,39 +1,48 @@
 <p>new-trail-form works!</p>
-<div>
-  <form>
-    <div class="form-group">
+<div class="d-flex justify-content-center outterDiv">
+  <div class="">
+    <div class="">
+      <div class="">
+            <div>
+              <form>
+                <div class="form-group">
 
-      Name: <input type="text" name="name" [(ngModel)]="newTrail.name"><br>
-      <!-- <div class="d-flex w-100">
-        <div id="my-google-map" class="my-google-map">
-          <google-map id="newMap" height="250" width="42vw" [center]="latlng" [options]="mapOptions">
-            <map-marker id="mapMarker" [position]="marker.position"></map-marker>
-          </google-map>
-        </div>
-      </div> -->
-      Address: <input id="autoComplete" type="text" placeholder="Enter Hike Location"><br>
-      Latitude: <input id="lat" type="number" name="trailheadLatitude" [(ngModel)]="newTrail.trailheadLatitude"><br>
-      Longitude: <input id="lng" type="number" name="trailheadLongitude" [(ngModel)]="newTrail.trailheadLongitude"><br>
-      City:<input type="text" name="city" [(ngModel)]="newTrail.city"><br>
-      State: <input type="text" name="state" [(ngModel)]="newTrail.state"><br>
-      Hazards: <input type="text" name="hazards" [(ngModel)]="newTrail.hazards"><br>
-      Wildlife: <input type="text" name="wildlife" [(ngModel)]="newTrail.wildlife"><br>
-      Details: <input type="text" name="details" [(ngModel)]="newTrail.details"><br>
-      Distance: <input type="number" name="distanceMiles" [(ngModel)]="newTrail.distanceMiles"><br>
-      Difficulty:
-      <select name="difficulty" [(ngModel)]="newDifficulty">
-        <option *ngFor="let difficulty of newDifficulties" [ngValue]="difficulty">{{difficulty.name}}</option>
-      </select><br>
-      Route Type:
-      <select name="routeType" [(ngModel)]="newRouteType">
-        <option *ngFor="let routeType of newRouteTypes" [ngValue]="routeType">{{routeType.name}}</option>
-      </select><br>
-      Amenities:
-      <div *ngFor="let amenity of newAmenities">
-        {{amenity.name}}<input type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
-      </div>
-      <button (click)="addTrail()">Create Trail</button>
+                  Name: <input type="text" name="name" [(ngModel)]="newTrail.name"><br>
+                  <!-- <div class="d-flex w-100">
+                    <div id="my-google-map" class="my-google-map">
+                      <google-map id="newMap" height="250" width="42vw" [center]="latlng" [options]="mapOptions">
+                        <map-marker id="mapMarker" [position]="marker.position"></map-marker>
+                      </google-map>
+                    </div>
+                  </div> -->
+                  Address: <input id="autoComplete" type="text" placeholder="Enter Hike Location"><br>
+                  Latitude: <input id="lat" type="number" name="trailheadLatitude" [(ngModel)]="newTrail.trailheadLatitude"><br>
+                  Longitude: <input id="lng" type="number" name="trailheadLongitude" [(ngModel)]="newTrail.trailheadLongitude"><br>
+                  City:<input type="text" name="city" [(ngModel)]="newTrail.city"><br>
+                  State: <input type="text" name="state" [(ngModel)]="newTrail.state"><br>
+                  Hazards: <input type="text" name="hazards" [(ngModel)]="newTrail.hazards"><br>
+                  Wildlife: <input type="text" name="wildlife" [(ngModel)]="newTrail.wildlife"><br>
+                  Details: <input type="text" name="details" [(ngModel)]="newTrail.details"><br>
+                  Distance: <input type="number" name="distanceMiles" [(ngModel)]="newTrail.distanceMiles"><br>
+                  Difficulty:
+                  <select name="difficulty" [(ngModel)]="newDifficulty">
+                    <option *ngFor="let difficulty of newDifficulties" [ngValue]="difficulty">{{difficulty.name}}</option>
+                  </select><br>
+                  Route Type:
+                  <select name="routeType" [(ngModel)]="newRouteType">
+                    <option *ngFor="let routeType of newRouteTypes" [ngValue]="routeType">{{routeType.name}}</option>
+                  </select><br>
+                  Amenities:
+                  <div *ngFor="let amenity of newAmenities">
+                    {{amenity.name}}<input type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
+                  </div>
+                  <button (click)="addTrail()">Create Trail</button>
 
+                </div>
+              </form>
+            </div>
+          </div>
     </div>
-  </form>
+  </div>
+  <br>
 </div>
