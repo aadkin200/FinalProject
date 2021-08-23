@@ -6,13 +6,14 @@ import { Comment } from '../models/comment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Trail } from '../models/trail';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
 
-  private url = environment.baseUrl + 'api/trail/{trialId}/comment';
+  private url = environment.baseUrl + 'api/trail/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,20 +22,25 @@ export class CommentService {
   };
 
   constructor(
-      private http: HttpClient
+      private http: HttpClient,
+      private auth: AuthService
   ) { }
 
-  create(comment: Comment): Observable<Comment> {
-  comment.user = new User();
-  comment.message = '';
-  comment.createdAt = 0;
-  comment.updatedAt = 0;
-  comment.parentComment= 0;
-  comment.replies = [];
-  comment.enabled = true;
-  comment.subject = '';
-  comment.trail = new Trail();
-    return this.http.post<Comment>(this.url, comment, this.httpOptions).pipe(
+  getHttpOptions() {
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': `Basic ${credentials}`
+      }),
+    };
+    return httpOptions;
+  }
+
+
+  create(comment: Comment, trailId:number): Observable<Comment> {
+    return this.http.post<Comment>(`${this.url}${trailId}/comment`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.create(): error creating comment');
         return throwError(err);
@@ -43,7 +49,7 @@ export class CommentService {
   }
 
   update(comment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${this.url}/${comment.id}`, comment, this.httpOptions).pipe(
+    return this.http.put<Comment>(`${this.url}/${comment.id}`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.update(): error updating comment');
         return throwError(err);
@@ -51,13 +57,25 @@ export class CommentService {
     );
   }
 
+  getReply(commentId: number): Observable<Comment> {
+    return this.http.get<Comment>(`${this.url}comment/${commentId}`, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error('CommentService.getReply(): error updating comment');
+        return throwError(err);
+      })
+    );
+  }
+
   disable(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`, this.httpOptions).pipe(
+    return this.http.delete<void>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.disable(): error disabling comment');
         return throwError(err);
       })
     );
   }
+
+
+
 
 }

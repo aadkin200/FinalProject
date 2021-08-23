@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
 import { TrailImage } from 'src/app/models/trail-image';
 import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
+import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-trail-feed',
@@ -16,9 +17,17 @@ export class TrailFeedComponent implements OnInit {
 
   newTrailFormBool: boolean = false;
 
+  paused = false;
+  unpauseOnArrow = false;
+  pauseOnIndicator = false;
+  pauseOnHover = true;
+  pauseOnFocus = true;
+
+  // @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
+
   constructor(
     private trailSrv: TrailService,
-    // private imageSrv: TrailImageService,
+    private carousel: NgbCarousel,
     private router: Router
   ) { }
 
@@ -41,17 +50,30 @@ export class TrailFeedComponent implements OnInit {
 
       }
     );
-  //   this.trailSrv.index().subscribe(
-  //     trails => {
-  //       this.trailImages = trails.
-  //     }
-  //   );
   }
 
   displayTrail(trail: Trail){
 
     this.router.navigateByUrl(`trail/${trail.id}`);
+  }
 
+  togglePaused() {
+    if (this.paused) {
+      this.carousel.cycle();
+    } else {
+      this.carousel.pause();
+    }
+    this.paused = !this.paused;
+  }
+
+  onSlide(slideEvent: NgbSlideEvent) {
+    if (this.unpauseOnArrow && slideEvent.paused &&
+      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
+      this.togglePaused();
+    }
+    if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
+      this.togglePaused();
+    }
   }
 
 }

@@ -26,9 +26,6 @@ export class AuthService {
         'Access-Control-Allow-Origin': 'http://localhost:8091'
       })
     };
-    console.log(credentials);
-    console.log(username,password);
-
     // create request to authenticate credentials
     return this.http
       .get(this.baseUrl + 'authenticate', httpOptions)

@@ -4,8 +4,34 @@
 
 }
 
+.pictureContainer{
+  position: relative;
+}
+
+.pictureContainer:before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;left:0;right:0;
+  background-color:rgba(0,0,0,0);
+}
+
+.pictureContainer button {
+  position: absolute;
+  width: 15%;
+  bottom: 0%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  opacity:0;
+}
+.pictureContainer:hover button {
+  opacity: 1;
+}
 
 .thumbnail {
+  aspect-ratio: 21/9;
   min-width: 5vw;
   max-width: 8vw;
   padding: 1%;
@@ -17,6 +43,9 @@
   cursor: pointer;
 }
 
+.card-bg-gray {
+  background-color: aliceblue !important;
+}
 
 .trailBtn {
   width: 5rem;
@@ -24,6 +53,70 @@
 
 .singleCardView {
   width: 90%;
+}
+
+body {
+  background: #eee
+}
+
+.date {
+  font-size: 11px
+}
+
+.comment-text {
+  font-size: 12px
+}
+
+.fs-12 {
+  font-size: 12px
+}
+
+.shadow-none {
+  box-shadow: none
+}
+
+.name {
+  color: #007bff
+}
+
+.cursor:hover {
+  color: blue
+}
+
+.cursor {
+  cursor: pointer
+}
+
+.textarea {
+  resize: none
+}
+
+.fa-facebook {
+  color: #3b5999
+}
+
+.fa-twitter {
+  color: #55acee
+}
+
+.fa-linkedin {
+  color: #0077B5
+}
+
+.fa-instagram {
+  color: #e4405f
+}
+
+.fa-dribbble {
+  color: #ea4c89
+}
+
+.fa-pinterest {
+  color: #bd081c
+}
+
+.fa {
+  cursor: pointer
 }
 
 

@@ -15,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class SignUpComponent implements OnInit {
 
   newUser:User = new User();
+  selected:User = new User();
 
   constructor(private auth: AuthService, private router: Router
     ) {

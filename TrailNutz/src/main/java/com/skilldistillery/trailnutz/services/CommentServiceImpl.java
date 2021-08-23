@@ -85,5 +85,10 @@ public class CommentServiceImpl implements CommentService{
 		}
 		return false;
 	}
+
+	@Override
+	public List<Comment> findByParentComment_Id(int commentId) {
+		return commRepo.findByParentComment_Id(commentId);
+	}
 	
 }

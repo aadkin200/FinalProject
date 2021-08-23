@@ -10,6 +10,7 @@ import { AmenityService } from 'src/app/services/amenity.service';
 import { DifficultyService } from 'src/app/services/difficulty.service';
 import { RouteTypeService } from 'src/app/services/route-type.service';
 import { TrailService } from 'src/app/services/trail.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-new-trail-form',

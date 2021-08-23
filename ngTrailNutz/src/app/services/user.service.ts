@@ -37,7 +37,7 @@ export class UserService {
   }
 
   update(user:User):Observable<User>{
-    return this.http.put<User>(`${this.baseUrl}api/user/${user.id}`, user, this.getHttpOptions()).pipe(
+    return this.http.put<User>(`${this.baseUrl}api/user`, user, this.getHttpOptions()).pipe(
        catchError((err:any) => {
          console.error(`User.update: error updating user`);
          return throwError(err);

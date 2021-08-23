@@ -6,10 +6,10 @@ export class Comment {
   id: number;
   user: User;
   message: string;
-  createdAt: number;
-  updatedAt: number;
-  parentComment: number;
-  replies: Comment[];
+  createdAt?: number;
+  updatedAt?: number;
+  parentComment: Comment | any;
+  replies: Comment[] | any;
   enabled: boolean;
   subject: string;
   trail: Trail;
@@ -20,7 +20,7 @@ constructor(
   message: string = '',
   createdAt: number = 0,
   updatedAt: number = 0,
-  parentComment: number = 0,
+  parentComment = undefined,
   replies: Comment[] = [],
   enabled: boolean = true,
   subject: string = '',

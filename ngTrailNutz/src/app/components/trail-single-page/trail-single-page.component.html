@@ -1,19 +1,64 @@
 <div class="container-fluid card mt-3">
   <div class="singleCardView mx-auto pt-3">
-    <div class="row pe-1">
+    <div class="row pe-1 pictureContainer">
       <img
         class="singleImage"
-        [src]="mainImage"
+        [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
+      <button class="btn btn-danger" (click)="deleteTrailImage()">
+        Delete
+      </button>
     </div>
     <div class="row">
       <!-- left side -->
       <div class="col-md-6 ps-0">
+        <!-- Add new image -->
         <!-- thumbnail images -->
         <div class="trailImages row ps-2">
-          <img
+          <ng-template #addImageTitle>Add new trail image</ng-template>
+          <ng-template #addImage>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                rows="1"
+                [(ngModel)]="trailImage.imageUrl"
+                placeholder="image url"
+                aria-label="add image"
+                aria-describedby="basic-addon2"
+              />
+              <div class="input-group-append">
+                <button
+                  (click)="addTrailImage()"
+                  class="btn btn-outline-secondary"
+                  type="submit"
+                  (click)="add.close()"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+            <input
+              type="hidden"
+              role="uploadcare-uploader"
+              data-public-key="aa6ba1052436d3b43dca"
+              name="my_file_input"
+            />
+          </ng-template>
+          <button
 
+            class="btn thumbnail"
+            placement="right"
+            #add="ngbPopover"
+            [ngbPopover]="addImage"
+            [autoClose]="false"
+            [popoverTitle]="addImageTitle"
+            [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
+          >
+            <i-bs width="5vw" height="5vh" name="images"></i-bs>
+          </button>
+          <img
             class="thumbnail"
             *ngFor="let image of trail.trailImages"
             [src]="image.imageUrl"
@@ -26,10 +71,15 @@
           <!-- map -->
           <div class="d-flex w-100">
             <div class="my-google-map">
-              <google-map height="250" width="42vw" [center]="latlng" [options]="mapOptions">
-                 <map-marker [position]="marker.position"></map-marker>
+              <google-map
+                height="250"
+                width="42vw"
+                [center]="latlng"
+                [options]="mapOptions"
+              >
+                <map-marker [position]="marker.position"></map-marker>
               </google-map>
-           </div>
+            </div>
           </div>
           <!-- trail controls -->
           <div class="row justify-content-end">
@@ -44,22 +94,234 @@
       <div class="col-md-6 pe-1">
         <!-- comments -->
         <!-- Input for new comments -->
-        <form class="mt-1">
+        <form [ngClass]="isLoggedIn() ? 'mt1': 'd-none'">
           <label for="subject">Subject</label>
-
-          <input type="text" class="form-control" placeholder="Subject" aria-label="Subject line" aria-describedby="basic-addon2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Subject"
+            aria-label="Subject line"
+            aria-describedby="basic-addon2"
+          />
           <label for="subject">Comment</label>
           <div class="input-group mb-3">
-            <textarea type="text" class="form-control" rows="1" placeholder="Comment" aria-label="comment body" aria-describedby="basic-addon2"></textarea>
+            <textarea
+              type="text"
+              class="form-control"
+              rows="1"
+              placeholder="Comment"
+              aria-label="comment body"
+              aria-describedby="basic-addon2"
+            ></textarea>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">Submit</button>
+              <button class="btn btn-outline-secondary" type="button">
+                Submit
+              </button>
             </div>
           </div>
         </form>
 
         <!-- if they have no parent Comment its a top level comment -->
         <!-- TODO fix this to where parent/child show up appropriately -->
-        <div></div>
+
+        <div ngfor *ngFor="let com of trail.comments | orderBy: 'com.createdAt'">
+          <!-- Check to see if parent comment -->
+          <div *ngIf="!com.parentComment">
+            <div class="mt-1">
+              <div class="container card">
+                <div class="d-flex justify-content-center row">
+                  <div class="col">
+                    <div
+                      class="d-flex flex-column comment-section"
+                      id="myGroup"
+                    >
+                      <div class="bg-white p-2">
+                        <div class="d-flex flex-row user-info">
+                          <img
+                            class="rounded-circle"
+                            [src]="com.user.imageUrl"
+                            width="40"
+                          />
+                          <div
+                            class="
+                              d-flex
+                              flex-column
+                              justify-content-start
+                              ml-2
+                            "
+                          >
+                            <span class="d-block font-weight-bold name">{{
+                              com.user.username
+                            }}</span
+                            ><span class="date text-black-50">{{
+                              com.createdAt | date: "M/d/yy | h:mm a"
+                            }}</span>
+                          </div>
+                        </div>
+                        <div class="mt-2">
+                          <h6>{{com.subject}}</h6>
+                          <p class="comment-text">{{ com.message }}</p>
+                        </div>
+                      </div>
+                      <div class="bg-white p-2">
+                        <div class="d-flex flex-row fs-12">
+                          <div
+                            [ngClass]="isLoggedIn() ? 'like p-2 cursor action-collapse': 'd-none'"
+                            class="like p-2 cursor action-collapse"
+                            data-bs-toggle="collapse"
+                            attr.data-bs-target="#com{{ com.id }}"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                          >
+                            <i-bs name="brush" width="10" height="10"> </i-bs
+                            ><span class="ml-1" >Comment</span>
+                          </div>
+                          <div
+                          type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                          aria-controls="collapseExample"
+                          >
+                            <i class="fa fa-share"></i
+                            ><span class="ml-1">View Replies</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="com{{ com.id }}" class="bg-light p-2 collapse">
+                        <div
+                        [ngClass]="isLoggedIn() ? 'd-flex flex-row align-items-start': 'd-none'"
+                         >
+                          <img
+                            class="rounded-circle"
+                            [src]="loggedInUser.imageUrl"
+                            width="40"
+                          /><textarea [(ngModel)]="currentComment.message"
+                            class="form-control ml-1 shadow-none textarea"
+                          ></textarea>
+                        </div>
+                        <div class="mt-2 text-right">
+                          <button
+
+                            class="btn btn-primary btn-sm shadow-none"
+                            type="button"
+                            (click)="postReply(com)"
+                          >
+                            Post comment</button
+                          ><button
+                           attr.data-bs-target="#com{{ com.id }}"
+                           class="btn btn-primary btn-sm shadow-none"
+                            class="
+                              btn btn-outline-primary btn-sm
+                              ml-1
+                              shadow-none
+                            "
+                            type="button"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+              *ngFor="let reply of com.replies | orderBy:com.replies.createdAt"
+              #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed"
+              >
+              <div class="ms-2">
+                <div class="container card card-bg-gray">
+                  <div class="d-flex justify-content-center row">
+                    <div class="col">
+                      <div
+                        class="d-flex flex-column comment-section"
+                        id="myGroup"
+                      >
+                        <div class="bg-gray p-2">
+                          <div class="d-flex flex-row user-info">
+                            <img
+                              class="rounded-circle"
+                              [src]="reply.user.imageUrl"
+                              width="40"
+                            />
+                            <div
+                              class="
+                                d-flex
+                                flex-column
+                                justify-content-start
+                                ml-2
+                              "
+                            >
+                              <span class="d-block font-weight-bold name">{{
+                                reply.user.username
+                              }}</span
+                              ><span class="date text-black-50">{{
+                                reply.createdAt | date: "M/d/yy | h:mm a"
+                              }}</span>
+                            </div>
+                          </div>
+                          <div class="mt-2">
+                            <p class="comment-text">{{ reply.message }}</p>
+                          </div>
+                        </div>
+                        <div class="p-2">
+                          <div class="d-flex flex-row fs-12">
+                            <div
+                              class="like p-2 cursor action-collapse"
+                              data-bs-toggle="collapse"
+                              attr.data-bs-target="#com{{ reply.id }}"
+                              aria-expanded="false"
+                              aria-controls="collapseExample"
+                            >
+                              <i-bs name="brush" width="10" height="10"> </i-bs
+                              ><span class="ml-1">Comment</span>
+                            </div>
+                            <div
+                              class="like p-2 cursor action-collapse"
+                              data-bs-toggle="collapse"
+                              attr.data-bs-target="#c{{ reply.id }}"
+                              aria-expanded="false"
+                              aria-controls="collapseExample"
+                            >
+                              <i class="fa fa-share"></i
+                              ><span *ngIf="reply.replies.length > 0" class="ml-1">View Replies</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="com{{ reply.id }}" class="bg-light p-2 collapse">
+                          <div class="d-flex flex-row align-items-start">
+                            <img
+                              class="rounded-circle"
+                              [src]="loggedInUser.imageUrl"
+                              width="40"
+                            /><textarea
+                              class="form-control ml-1 shadow-none textarea"
+                            ></textarea>
+                          </div>
+                          <div class="mt-2 text-right">
+                            <button
+                              class="btn btn-primary btn-sm shadow-none"
+                              type="button"
+                            >
+                              Post comment</button
+                            ><button
+                              class="
+                                btn btn-outline-primary btn-sm
+                                ml-1
+                                shadow-none
+                              "
+                              type="button"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

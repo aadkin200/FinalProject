@@ -12,7 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Comment {
@@ -27,13 +31,14 @@ public class Comment {
 
 	private String message;
 	
+	@CreationTimestamp
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
-	
+	@UpdateTimestamp
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("replies")
 	@ManyToOne
 	@JoinColumn(name = "in_reply_to")
 	private Comment parentComment;

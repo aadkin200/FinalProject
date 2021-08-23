@@ -18,8 +18,19 @@ import { AmenityService } from './services/amenity.service';
 import { RouteTypeService } from './services/route-type.service';
 import { AppRoutingModule } from './app-routing.module';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { imageFill, images, brush } from 'ngx-bootstrap-icons';
+import { OrderModule } from 'ngx-order-pipe';
 
+
+
+const icons = {
+  imageFill,
+  images,
+  brush
+};
 
 
 @NgModule({
@@ -32,7 +43,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TrailSinglePageComponent,
     SignUpComponent,
     NewTrailFormComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UserprofileComponent
   ],
   imports: [
     AppRoutingModule,
@@ -40,13 +52,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     GoogleMapsModule,
-    NgbModule
+    NgbModule,
+    NgxBootstrapIconsModule.pick(icons),
+    OrderModule
   ],
   providers: [
     AuthService,
     DifficultyService,
     AmenityService,
-    RouteTypeService
+    RouteTypeService,
+    NgbCarousel,
+    NgbDropdown
   ],
   bootstrap: [AppComponent]
 })
