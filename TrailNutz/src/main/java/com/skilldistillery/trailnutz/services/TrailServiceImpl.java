@@ -54,6 +54,8 @@ public class TrailServiceImpl implements TrailService{
 			managed.setWildlife(trail.getWildlife());
 			managed.setDetails(trail.getDetails());
 			managed.setDistanceMiles(trail.getDistanceMiles());
+			managed.setRouteType(trail.getRouteType());
+			managed.setDifficulty(trail.getDifficulty());
 			managed.setCreatedAt(trail.getCreatedAt());
 			managed.setUpdatedAt(LocalDateTime.now());
 			managed.setEnabled(trail.isEnabled());
