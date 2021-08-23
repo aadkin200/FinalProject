@@ -10,6 +10,7 @@
   border-radius: 20px;
   padding: 5px;
   background-clip: padding-box;
+  box-shadow: -10px 5px 30px 8px grey;
 }
 
 .locationPNG {
