@@ -183,9 +183,10 @@
                           <div
                           type="button" class="btn btn-outline-primary" (click)="replyCollapse[i] = !replyCollapse[i]" [attr.aria-expanded]="replyCollapse[i]"
                           aria-controls="collapseExample"
+                          *ngIf="com.replies.length > 0"
                           >
                             <i class="fa fa-share"></i
-                            ><span class="ml-1">View Replies</span>
+                            ><span  class="ml-1">View Replies</span>
                           </div>
                         </div>
                       </div>
