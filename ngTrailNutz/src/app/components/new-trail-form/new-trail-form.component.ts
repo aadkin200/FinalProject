@@ -116,13 +116,21 @@ export class NewTrailFormComponent implements OnInit {
       this.marker.position.lat = parseFloat(place.geometry?.location.lat()+'');
       this.marker.position.lng = parseFloat(place.geometry?.location.lng()+'');
       let map = document.getElementById('newMap');
-      this.viewTestCoordinates(this.marker.position.lat);
+      this.viewTestCoordinates(place);
 
 
       this.newTrail.trailheadLatitude = place.geometry?.location.lat()+'';
       this.newTrail.trailheadLongitude = place.geometry?.location.lng()+'';
-
-
+      if(place.address_components) {
+        for(let i=0; i<place.address_components?.length; i++) {
+          if(place.address_components[i].types[0] === "administrative_area_level_1") {
+            this.newTrail.state = place.address_components[i].short_name;
+          }
+          if(place.address_components[i].types[0] === "locality") {
+            this.newTrail.city = place.address_components[i].long_name;
+          }
+        }
+      }
     })
 
   }
