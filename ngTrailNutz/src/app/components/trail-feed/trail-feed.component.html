@@ -8,37 +8,9 @@
 </div>
 <!-- <p>trail-feed works!</p> -->
 
-<!-- <div class="" id='trailFeed'>
-  <table class="tableD" *ngFor="let trail of trails">
-    <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-    </thead>
-    <tbody>
-      <div class="bordCSS">
-        <tr>
-          <td>{{trail.distanceMiles}}</td>
-          <td>{{trail.city}}</td>
-          <td>{{trail.state}}</td>
-        </tr>
-        <tr>
-          <td>
-          </td>
-        </tr>
-      </div>
-    </tbody>
-  </table>
-</div> -->
-
-<div class="">
+<div>
   <div class="justify-content-center tableD" *ngFor="let trail of trails">
     <div class="carousel-inner m-0" role="listbox" style="max-width: 900px; max-height: 600px;">
-      <td class="clickable-thing" (click)="displayTrail(trail)">{{trail.name}}</td>
       <ngb-carousel #carousel [interval]="2550" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
         <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
           <div class="w-50" class="carousel-caption">
@@ -52,7 +24,9 @@
         </ng-template>
       </ngb-carousel>
     </div>
-    <img class="locationPNG" src="../../../assets/images/locationPNG.png" alt="">{{trail.city}}, {{trail.state}}
+    <h2 class="clickable-thing" (click)="displayTrail(trail)">{{trail.name}}</h2><br>
+    {{trail.city}}, {{trail.state}}<img class="locationPNG" src="../../../assets/images/locationPNG.png" alt=""><br>
+    <div class="centeredEM">{{trail.details}}</div>
   </div>
   <br>
 </div>

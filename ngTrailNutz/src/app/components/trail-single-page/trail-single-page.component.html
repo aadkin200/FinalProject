@@ -6,7 +6,7 @@
         [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
-      <button *ngIf="isLoggedIn()" class="btn btn-danger" (click)="deleteTrailImage()">
+      <button  [ngClass]="mainTrailImage.user.username === loggedInUser.username || loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-danger' : 'd-none'" (click)="deleteTrailImage()">
         Delete
       </button>
     </div>
@@ -83,12 +83,12 @@
           </div>
           <!-- trail controls -->
           <div class="row justify-content-end">
-            <button class="btn btn-outline-dark m-1 trailBtn" (click)="isEditing = !isEditing">Edit</button>
-            <button class="btn btn-outline-danger m-1 trailBtn">Delete</button>
+            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" class="btn btn-outline-dark m-1 trailBtn" (click)="isEditing = !isEditing">Edit</button>
+            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" class="btn btn-outline-dark m-1 trailBtn" class="btn btn-outline-danger m-1 trailBtn">Delete</button>
           </div>
           <!-- trail details -->
           <section>
-            <div class="row">
+            <div class="row mt-2">
               <div class="col-4">Added:</div>
               <div class="col">{{trail.createdAt | date: "MMM-dd-YYYY"}}</div>
             </div>
@@ -187,10 +187,60 @@
           <div class="text-center mb-2" *ngIf="isEditing">
             <button class="btn w-50 mt-2 btn-success" (click)="editTrail()">Submit</button>
           </div>
-          <section class="border p-1 text-center">
+          <section class=" p-1 text-center">
             <h1>Trail Resources</h1>
             <hr>
           </section>
+          <div class="row m-2 text-center">
+            <ng-template #addResouceTitle>Add new </ng-template>
+            <ng-template #addResouce>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  rows="1"
+                  [(ngModel)]="trailImage.imageUrl"
+                  placeholder="image url"
+                  aria-label="add image"
+                  aria-describedby="basic-addon2"
+                />
+                <div class="input-group-append">
+                  <button
+                    (click)="addTrailImage()"
+                    class="btn btn-outline-secondary"
+                    type="submit"
+                    (click)="add.close()"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+              <input
+                type="hidden"
+                role="uploadcare-uploader"
+                data-public-key="aa6ba1052436d3b43dca"
+                name="my_file_input"
+              />
+            </ng-template>
+            <button
+
+              class="btn thumbnail"
+              placement="top"
+              #add="ngbPopover"
+              [ngbPopover]="addResouce"
+              [autoClose]="false"
+              [popoverTitle]="addResouceTitle"
+              [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
+            >
+              <i-bs width="5vw" height="5vh" name="images"></i-bs>
+            </button>
+            <div class="border thumbnail" *ngFor="let resource of trail.trailResource">
+              <h6>{{resource.title}}</h6>
+              <p>{{resource.createdAt | date: "M/d/YY"}}</p>
+              <a href="{{resource.resourceUrl}}" target="_blank" rel="noopener noreferrer">Resource</a>
+              {{resource.user}}
+            </div>
+          </div>
 
         </div>
       </div>
@@ -402,6 +452,7 @@
                             <button
                               class="btn btn-primary btn-sm shadow-none"
                               type="button"
+                              (click)="postReply(com)"
                             >
                               Post comment</button
                             ><button

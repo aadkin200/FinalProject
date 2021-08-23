@@ -15,7 +15,6 @@ import { Difficulty } from 'src/app/models/difficulty';
 import { Routetype } from 'src/app/models/routetype';
 import { RouteTypeService } from 'src/app/services/route-type.service';
 
-
 @Component({
   selector: 'app-trail-single-page',
   templateUrl: './trail-single-page.component.html',
@@ -26,25 +25,27 @@ export class TrailSinglePageComponent implements OnInit {
   trail: Trail = new Trail();
   currentComment = new Comment();
   topComment = new Comment();
-  mainTrailImage:TrailImage = new TrailImage;
-  replyCollapse:boolean[] = [];
-  isEditing:boolean = false;
-  newDifficulties:Difficulty[] = [];
-  newRoutes:Routetype[] = [];
-  newRoute:Routetype = new Routetype();
-  newDifficulty:Difficulty = new Difficulty();
+  mainTrailImage: TrailImage = new TrailImage();
+  replyCollapse: boolean[] = [];
+  isEditing: boolean = false;
+  newDifficulties: Difficulty[] = [];
+  newRoutes: Routetype[] = [];
+  newRoute: Routetype = new Routetype();
+  newDifficulty: Difficulty = new Difficulty();
   editingTrail = new Trail();
-
+  trailImage: TrailImage = new TrailImage();
+  trailLat: string = '';
+  trailLong: string = '';
   mapOptions: google.maps.MapOptions = {
-    zoom: 14
+    zoom: 14,
   };
   latlng = { lat: 0, lng: 0 };
   marker = {
     position: { lat: 0, lng: 0 },
   };
 
-  trailImage: TrailImage = new TrailImage();
-  isCollapsed: boolean = false;
+
+
   constructor(
     private trailSvc: TrailService,
     private activatedRoute: ActivatedRoute,
@@ -52,41 +53,39 @@ export class TrailSinglePageComponent implements OnInit {
     private userSvc: UserService,
     private authSvc: AuthService,
     private commentSvc: CommentService,
-    private orderPipe : OrderPipe,
+    private orderPipe: OrderPipe,
     private difficultyService: DifficultyService,
     private routeService: RouteTypeService
   ) {}
 
-  trailLat: string = '';
-  trailLong: string = '';
+
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
     this.userSvc.getUser().subscribe(
-      user=>{
+      (user) => {
         this.loggedInUser = user;
+      },
+      (err) => {
+        console.error('SinglePageView: ngOnInit(): error getting user', err);
       }
-      ,
-      err=>{
-        console.error("SinglePageView: ngOnInit(): error getting user", err);
-      }
-    )
+    );
 
     this.difficultyService.show().subscribe(
-      data => {
+      (data) => {
         this.newDifficulties = data;
       },
-      error => {
-        console.log("error singleTrail ngOnInit() difficulty", error);
+      (error) => {
+        console.log('error singleTrail ngOnInit() difficulty', error);
       }
     );
 
     this.routeService.show().subscribe(
-      data => {
+      (data) => {
         this.newRoutes = data;
       },
-      error => {
-        console.log("error singleTrail ngOnInit() routeType", error);
+      (error) => {
+        console.log('error singleTrail ngOnInit() routeType', error);
       }
     );
 
@@ -96,18 +95,20 @@ export class TrailSinglePageComponent implements OnInit {
     this.trailSvc.show(trailId).subscribe(
       (data) => {
         this.trail = data;
-        if(this.trail.trailImages.length > 0){
+        if (this.trail.trailImages.length > 0) {
           this.mainTrailImage = this.trail.trailImages[0];
-        }else{
-          this.mainTrailImage.imageUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png`
+        } else {
+          this.mainTrailImage.imageUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png`;
         }
-        console.log(this.trail);
         this.newDifficulty = this.trail.difficulty;
         this.newRoute = this.trail.routeType;
         this.changeMapCord();
         this.editingTrail = Object.assign({}, this.trail);
         this.createBoolArray();
-        this.trail.comments = this.orderPipe.transform(this.trail.comments, this.trail.comments.forEach(com=> com.createdAt));
+        this.trail.comments = this.orderPipe.transform(
+          this.trail.comments,
+          this.trail.comments.forEach((com) => com.createdAt)
+        );
       },
       (err) => {
         console.error(err, `No trail recieved singleComponent`);
@@ -115,118 +116,124 @@ export class TrailSinglePageComponent implements OnInit {
     );
   }
 
-  editTrail(){
+  editTrail() {
     this.isEditing = false;
-    for(let d of this.newDifficulties){
-      if(this.newDifficulty.name === d.name){
-        this.editingTrail.difficulty  = d;
+    for (let d of this.newDifficulties) {
+      if (this.newDifficulty.name === d.name) {
+        this.editingTrail.difficulty = d;
       }
     }
-    for(let r of this.newRoutes){
-      if(this.newRoute.name === r.name){
+    for (let r of this.newRoutes) {
+      if (this.newRoute.name === r.name) {
         this.editingTrail.routeType = r;
       }
     }
-    console.log(this.editingTrail);
-
+    this.trailSvc.update(this.editingTrail).subscribe(
+      (update) => {
+        this.getSingleTrail(this.trail.id);
+      },
+      (err) => {
+        console.error('error updating trail', err);
+      }
+    );
   }
 
-  changeMainImg(image:TrailImage){
+  changeMainImg(image: TrailImage) {
     this.mainTrailImage = image;
   }
-  changeMapCord(){
+
+  changeMapCord() {
     // console.log(this.trail.trailheadLongitude + '-----------------------long');
     // console.log(this.trail.trailheadLatitude + '-------------------------lat');
     // console.log(parseFloat(this.trail.trailheadLatitude) + '---------------parse lat');
     // console.log(parseFloat(this.trail.trailheadLatitude));
-        this.latlng = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
-        this.marker.position = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
+    this.latlng = {
+      lat: parseFloat(this.trail.trailheadLatitude),
+      lng: parseFloat(this.trail.trailheadLongitude),
+    };
+    this.marker.position = {
+      lat: parseFloat(this.trail.trailheadLatitude),
+      lng: parseFloat(this.trail.trailheadLongitude),
+    };
   }
 
-  addTrailImage(){
-    console.log(this.trailImage, "why are you broken now");
+  addTrailImage() {
     this.trailImgsvc.addImage(this.trailImage, this.trail.id).subscribe(
-      trailImg=>{
+      (trailImg) => {
         this.getSingleTrail(this.trail.id);
-        this.trailImage = new TrailImage;
+        this.trailImage = new TrailImage();
       },
-      err=>{
-        console.log("Error creating TrailImage:addTrailImage() singlepage");
+      (err) => {
+        console.log('Error creating TrailImage:addTrailImage() singlepage');
       }
-    )
+    );
   }
 
-  deleteTrailImage(){
+  deleteTrailImage() {
     this.trailImgsvc.removeImage(this.mainTrailImage, this.trail.id).subscribe(
-      del=>{
+      (del) => {
         this.getSingleTrail(this.trail.id);
       },
-      err=>{
-        console.error("Error Deleting Trail Image:deleteTrailImage() single page");
+      (err) => {
+        console.error(
+          'Error Deleting Trail Image:deleteTrailImage() single page'
+        );
       }
-    )
+    );
   }
 
-  isLoggedIn():boolean{
+  isLoggedIn(): boolean {
     return this.authSvc.checkLogin();
   }
 
-  createBoolArray(){
-    for(let i = 0; i < this.trail.comments.length; i++){
+  createBoolArray() {
+    for (let i = 0; i < this.trail.comments.length; i++) {
       this.replyCollapse.push(false);
     }
   }
-  test(id:number){
-    console.log(id);
-  }
 
-  postComment(){
+  postComment() {
     this.removeProperties();
-    console.log(this.topComment)
     this.commentSvc.create(this.topComment, this.trail.id).subscribe(
-      success=>{
+      (success) => {
         this.getSingleTrail(this.trail.id);
         this.clearCommentBlock();
       },
-      err=> {
-        console.log(`error creating comment`)
+      (err) => {
+        console.log(`error creating comment`);
       }
-    )
+    );
   }
 
-  clearCommentBlock(){
+  clearCommentBlock() {
     this.currentComment = new Comment();
     this.topComment = new Comment();
   }
 
-  postReply(parentComment:Comment){
+  postReply(parentComment: Comment) {
     this.currentComment.parentComment = parentComment;
     this.removeProperties();
-    console.log(parentComment);
     this.commentSvc.create(this.currentComment, this.trail.id).subscribe(
-      success=>{
+      (success) => {
         this.commentSvc.getReply(parentComment.id).subscribe(
-          reply=>{
-            this.trail.comments.forEach(comment => {
-              if(comment.id == parentComment.id){
+          (reply) => {
+            this.trail.comments.forEach((comment) => {
+              if (comment.id == parentComment.id) {
                 comment.replies = reply;
                 this.clearCommentBlock();
               }
-            })
+            });
           },
-          error=>{
-
-          }
-        )
+          (error) => {}
+        );
       },
-      err=>{
+      (err) => {
         console.error(err);
-
       }
-    )
+    );
   }
 
-  removeProperties(){
+  removeProperties() {
     delete this.topComment.createdAt;
     delete this.topComment.updatedAt;
     delete this.currentComment.createdAt;

@@ -50,7 +50,7 @@ export class TrailService {
   }
 
   public update(trail: Trail) {
-    return this.http.put<Trail>(`${this.url}/${trail.id}`, trail, this.getHttpOptions()).pipe(
+    return this.http.put<Trail>(`${this.url}`, trail, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('error in trail.service.ts update()');

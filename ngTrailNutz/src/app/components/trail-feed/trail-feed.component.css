@@ -10,18 +10,12 @@
   border-radius: 20px;
   padding: 5px;
   background-clip: padding-box;
+  box-shadow: -10px 5px 30px 8px grey;
 }
 
 .locationPNG {
   width: 50px;
 }
-
-
-/* .bordCSS {
-  border-style: solid;
-  border-color: rgba(181,206,131,255);
-  border-radius: 10px;
-} */
 
 .clickable-thing:hover {
   cursor: pointer;
@@ -33,4 +27,23 @@
   background-color: rgba(181,206,131,255) !important;
   border-color: rgba(181,206,131,255) !important;
   margin: 20px;
+}
+
+.clickable-thing {
+  display: inline-block;
+  /* margin: auto; */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+ /* display: flex; */
+/* justify-content: center;
+align-items: center; */
+}
+
+.centeredEM {
+  text-align: center;
+  font-style: italic;
+  /* justify-content: center; */
+  /* align-items: center; */
+
 }
