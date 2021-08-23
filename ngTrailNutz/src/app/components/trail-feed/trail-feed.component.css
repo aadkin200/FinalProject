@@ -2,15 +2,16 @@
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 20px;
-  width: 48%;
+  width: 45%;
   padding: 0px;
   background-color: rgba(181,206,131,255);
   border-style: solid;
   border-color: rgba(181,206,131,255);
   border-radius: 20px;
-  padding: 5px;
+  padding: 0px;
   background-clip: padding-box;
   box-shadow: -10px 5px 30px 8px grey;
+  overflow: hidden;
 }
 
 .locationPNG {
@@ -27,6 +28,7 @@
   background-color: rgba(181,206,131,255) !important;
   border-color: rgba(181,206,131,255) !important;
   margin: 20px;
+  color: #212629;
 }
 
 .clickable-thing {

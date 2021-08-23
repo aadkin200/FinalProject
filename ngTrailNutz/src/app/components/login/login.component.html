@@ -1,11 +1,20 @@
-<div >
-  <form *ngIf="!loggedIn()">
-    <h4>Login:</h4>
-    Username: <input type="text" placeholder="Username" name="username" [(ngModel)]="loginUser.username"><br>
-    Password: <input type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password"><br>
-    <button (click)="login(loginUser)">Login</button> <br>
-    If you do not have an account, click here to <a [routerLink]="['/signup']">Signup</a>
-  </form>
+<div *ngIf="!loggedIn()" class="outter-div">
+  <div class="flex-container">
+    <div class="flex-child">
+      <div class="login-flex">
+        <form>
+          <h4>Login:</h4>
+          Username: <input class="input-text" type="text" placeholder="Username" name="username" [(ngModel)]="loginUser.username"><br>
+          Password: <input class="input-text" type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password"><br>
+          <button class="btn acorn-button" (click)="login(loginUser)">Login</button>
+          <a [routerLink]="['/signup']"><button class="btn acorn-button">Sign Up</button></a>
+        </form>
+      </div>
+    </div>
+    <div class="flex-child">
+      <img class="homescreen-img" src="../../../assets/images/homeScreenNutz.jpg" alt="">
+    </div>
+  </div>
 </div>
 
 
