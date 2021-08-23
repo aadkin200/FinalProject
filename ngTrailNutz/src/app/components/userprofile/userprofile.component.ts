@@ -20,6 +20,7 @@ export class UserprofileComponent implements OnInit {
    this.reload();
   }
 
+
   getTotalMiles(user: User) {
     console.log(user.id);
 
@@ -34,12 +35,12 @@ export class UserprofileComponent implements OnInit {
     }
   }
 
+
   setSelected(user: any) : void {
-
     this.selected = user;
-
     this.displayEdit(user);
   }
+
 
   displayEdit(user: any): void {
     this.editUser = user;
@@ -65,15 +66,15 @@ export class UserprofileComponent implements OnInit {
     this.selected = null;
   }
 
-  disableUser(userId: number) {
+  // disableUser(userId: number) {
 
-    this.userSvc.disable(userId).subscribe(
-      error => {
-        console.log(error);
-        console.log("error disabling user through service")
-      }
-    );
-  }
+  //   this.userSvc.disable(userId).subscribe(
+  //     error => {
+  //       console.log(error);
+  //       console.log("error disabling user through service")
+  //     }
+  //   );
+  // }
 
   removeEmpty(){
     delete this.editUser.role;
