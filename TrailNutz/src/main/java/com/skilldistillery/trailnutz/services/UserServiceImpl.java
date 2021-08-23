@@ -34,10 +34,11 @@ public class UserServiceImpl implements UserService{
 				managedUser.setImageUrl(user.getImageUrl());
 				managedUser.setFirstName(user.getFirstName());
 				managedUser.setLastName(user.getLastName());
-				if(!encoder.matches(user.getPassword(), managedUser.getPassword())) {
-					managedUser.setPassword(encoder.encode(user.getPassword()));
+				if(user.getPassword().length() < 40) {
+					if(!encoder.matches(user.getPassword(), managedUser.getPassword())) {
+						managedUser.setPassword(encoder.encode(user.getPassword()));
+					}
 				}
-				
 				userRepo.saveAndFlush(managedUser);
 			}
 		} catch (Exception e) {
