@@ -73,21 +73,21 @@
       <a href="#" class="card-link">Home</a>
       <a href="feed" class="card-link">Trails</a>
 
-      <button (click)="setEditUser(user)">Edit</button>
+      <button (click)="setSelected(user)">Edit</button>
       <button (click)="disableUser(user.id)">Disable Account</button>
     </div>
   </div>
 
 </div>
 
-<form *ngIf="editUser">
+<form *ngIf="selected">
   First Name: <input type="text" name="firstName" [(ngModel)]="editUser.firstName"><br>
-  Last Name: <input type="text" name="firstName" [(ngModel)]="editUser.lastName"><br>
+  Last Name: <input type="text" name="lastName" [(ngModel)]="editUser.lastName"><br>
   Profile Image: <input type="text" name="imageUrl" [(ngModel)]="editUser.imageUrl"><br>
   Favorite Trail Food: <input type="text" name="favoriteTrailFood" [(ngModel)]="editUser.favoriteTrailFood"><br>
 
   <button (click)="updateUser(editUser)">Submit</button>
-  <input type="submit" name="Cancel" value="Cancel" (click)="editUser = null">
+  <input type="submit" name="Cancel" value="Cancel" (click)="selected = null">
 
 </form>
 
