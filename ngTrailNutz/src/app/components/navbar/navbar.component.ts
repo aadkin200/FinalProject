@@ -41,8 +41,6 @@ export class NavbarComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
-=======
   isAdmin(): boolean{
     // console.log(this.user.role);
     if (this.user.role === "ADMIN") {
@@ -51,7 +49,6 @@ export class NavbarComponent implements OnInit {
     } else {
       return false;
     }
->>>>>>> 865e6aee7119adc36244bc6d211d11dc61cc2ae0
   }
 }
 
