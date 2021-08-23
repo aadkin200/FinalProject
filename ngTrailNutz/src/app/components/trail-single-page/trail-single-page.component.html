@@ -83,13 +83,118 @@
           </div>
           <!-- trail controls -->
           <div class="row justify-content-end">
-            <button class="btn btn-outline-dark m-1 trailBtn">Edit</button>
+            <button class="btn btn-outline-dark m-1 trailBtn" (click)="isEditing = !isEditing">Edit</button>
             <button class="btn btn-outline-danger m-1 trailBtn">Delete</button>
           </div>
           <!-- trail details -->
-          <div>trail details</div>
+          <section>
+            <div class="row">
+              <div class="col-4">Added:</div>
+              <div class="col">{{trail.createdAt | date: "MMM-dd-YYYY"}}</div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Created By:</div>
+              <div class="col">{{trail.user.username}}</div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Trail Name:</div>
+              <div *ngIf="!isEditing" class="col">{{trail.name}}</div>
+              <div *ngIf="isEditing" class="col">
+                <input class="form-control" type="text" name="trailName" [(ngModel)]="editingTrail.name">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Distance Mile:</div>
+              <div class="col" *ngIf="!isEditing">{{trail.distanceMiles}} miles</div>
+              <div *ngIf="isEditing" class="col">
+                <input class="form-control" type="number" name="distance" [(ngModel)]="editingTrail.distanceMiles">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Elevation Change:</div>
+              <div *ngIf="!isEditing" class="col">{{trail.elevationChangeFeet}} feet</div>
+              <div *ngIf="isEditing" class="col">
+                <input class="form-control" type="number" name="elevation" [(ngModel)]="editingTrail.elevationChangeFeet">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Known hazards:</div>
+              <div *ngIf="!isEditing" class="col">{{trail.hazards}}</div>
+              <div *ngIf="isEditing" class="col">
+                <input class="form-control" type="text" name="hazards" [(ngModel)]="editingTrail.hazards">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Route type:</div>
+              <div *ngIf="!isEditing" class="col">
+                <p>{{trail.routeType.name}}</p>
+                <p>{{trail.routeType.description}}</p>
+              </div>
+              <div *ngIf="isEditing" class="col">
+                <select class="form-control" name="difficulty" [(ngModel)]="newRoute.name">
+                  <option *ngFor="let route of newRoutes" selected [ngValue]="route.name">{{route.name}}</option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Difficulty:</div>
+              <div class="col">
+                <div *ngIf="isEditing">
+                  <select class="form-control" name="difficulty" [(ngModel)]="newDifficulty.name">
+                    <option *ngFor="let difficulty of newDifficulties" selected [ngValue]="difficulty.name">{{difficulty.name}}</option>
+                  </select>
+                </div>
+                <div *ngIf="!isEditing">
+                  <p>{{trail.difficulty.name}}</p>
+                  <p>{{trail.difficulty.description}}</p>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Details:</div>
+              <div *ngIf="!isEditing" class="col">{{trail.details}}</div>
+              <div *ngIf="isEditing" class="col">
+                <textarea class="form-control textarea" rows="4" type="text" name="details" [(ngModel)]="editingTrail.details"></textarea>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Wildlife:</div>
+              <div *ngIf="!isEditing" class="col">{{trail.wildlife}}</div>
+              <div *ngIf="isEditing" class="col">
+                <textarea class="form-control textarea" rows="4" type="text" name="wildlife" [(ngModel)]="editingTrail.wildlife"></textarea>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">Amenities:</div>
+              <div class="col p-0" *ngIf="!isEditing">
+                <div class="p-0" *ngFor="let amen of trail.amenities" class="col">{{amen.name}}</div>
+              </div>
+              <div *ngIf="isEditing" class="col">
+                what do we want here? Checkboxes?
+              </div>
+            </div>
+          </section>
+          <div class="text-center mb-2" *ngIf="isEditing">
+            <button class="btn w-50 mt-2 btn-success" (click)="editTrail()">Submit</button>
+          </div>
+          <section class="border p-1 text-center">
+            <h1>Trail Resources</h1>
+            <hr>
+          </section>
+
         </div>
       </div>
+
       <!-- right side -->
       <div class="col-md-6 pe-1">
         <!-- comments -->
@@ -126,7 +231,6 @@
         </form>
 
         <!-- if they have no parent Comment its a top level comment -->
-        <!-- TODO fix this to where parent/child show up appropriately -->
 
         <div ngfor *ngFor="let com of trail.comments; let i = index">
           <!-- Check to see if parent comment -->

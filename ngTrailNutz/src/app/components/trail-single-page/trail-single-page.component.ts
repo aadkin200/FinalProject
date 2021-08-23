@@ -9,7 +9,11 @@ import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
 import { UserService } from 'src/app/services/user.service';
 import { Comment } from 'src/app/models/comment';
-import { OrderModule, OrderPipe } from 'ngx-order-pipe';
+import { OrderPipe } from 'ngx-order-pipe';
+import { DifficultyService } from 'src/app/services/difficulty.service';
+import { Difficulty } from 'src/app/models/difficulty';
+import { Routetype } from 'src/app/models/routetype';
+import { RouteTypeService } from 'src/app/services/route-type.service';
 
 
 @Component({
@@ -24,6 +28,12 @@ export class TrailSinglePageComponent implements OnInit {
   topComment = new Comment();
   mainTrailImage:TrailImage = new TrailImage;
   replyCollapse:boolean[] = [];
+  isEditing:boolean = false;
+  newDifficulties:Difficulty[] = [];
+  newRoutes:Routetype[] = [];
+  newRoute:Routetype = new Routetype();
+  newDifficulty:Difficulty = new Difficulty();
+  editingTrail = new Trail();
 
   mapOptions: google.maps.MapOptions = {
     zoom: 14
@@ -42,7 +52,9 @@ export class TrailSinglePageComponent implements OnInit {
     private userSvc: UserService,
     private authSvc: AuthService,
     private commentSvc: CommentService,
-    private orderPipe : OrderPipe
+    private orderPipe : OrderPipe,
+    private difficultyService: DifficultyService,
+    private routeService: RouteTypeService
   ) {}
 
   trailLat: string = '';
@@ -60,6 +72,24 @@ export class TrailSinglePageComponent implements OnInit {
       }
     )
 
+    this.difficultyService.show().subscribe(
+      data => {
+        this.newDifficulties = data;
+      },
+      error => {
+        console.log("error singleTrail ngOnInit() difficulty", error);
+      }
+    );
+
+    this.routeService.show().subscribe(
+      data => {
+        this.newRoutes = data;
+      },
+      error => {
+        console.log("error singleTrail ngOnInit() routeType", error);
+      }
+    );
+
   }
 
   getSingleTrail(trailId: number): void {
@@ -71,8 +101,11 @@ export class TrailSinglePageComponent implements OnInit {
         }else{
           this.mainTrailImage.imageUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png`
         }
-
+        console.log(this.trail);
+        this.newDifficulty = this.trail.difficulty;
+        this.newRoute = this.trail.routeType;
         this.changeMapCord();
+        this.editingTrail = Object.assign({}, this.trail);
         this.createBoolArray();
         this.trail.comments = this.orderPipe.transform(this.trail.comments, this.trail.comments.forEach(com=> com.createdAt));
       },
@@ -82,18 +115,30 @@ export class TrailSinglePageComponent implements OnInit {
     );
   }
 
+  editTrail(){
+    this.isEditing = false;
+    for(let d of this.newDifficulties){
+      if(this.newDifficulty.name === d.name){
+        this.editingTrail.difficulty  = d;
+      }
+    }
+    for(let r of this.newRoutes){
+      if(this.newRoute.name === r.name){
+        this.editingTrail.routeType = r;
+      }
+    }
+    console.log(this.editingTrail);
+
+  }
+
   changeMainImg(image:TrailImage){
     this.mainTrailImage = image;
   }
   changeMapCord(){
-    console.log(this.trail.trailheadLongitude + '-----------------------long');
-    console.log(this.trail.trailheadLatitude + '-------------------------lat');
-    console.log(parseFloat(this.trail.trailheadLatitude) + '---------------parse lat');
-    console.log(parseFloat(this.trail.trailheadLatitude));
-
-
-
-
+    // console.log(this.trail.trailheadLongitude + '-----------------------long');
+    // console.log(this.trail.trailheadLatitude + '-------------------------lat');
+    // console.log(parseFloat(this.trail.trailheadLatitude) + '---------------parse lat');
+    // console.log(parseFloat(this.trail.trailheadLatitude));
         this.latlng = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
         this.marker.position = { lat: parseFloat(this.trail.trailheadLatitude), lng: parseFloat(this.trail.trailheadLongitude)};
   }
