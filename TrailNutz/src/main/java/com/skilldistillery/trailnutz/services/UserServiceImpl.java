@@ -1,12 +1,11 @@
 package com.skilldistillery.trailnutz.services;
 
-import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.skilldistillery.trailnutz.entities.User;
 import com.skilldistillery.trailnutz.repositories.UserRepository;
@@ -81,5 +80,10 @@ public class UserServiceImpl implements UserService{
 			return false;
 		}
 		return false;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userRepo.findAll();
 	}
 }
