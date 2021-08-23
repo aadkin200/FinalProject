@@ -33,7 +33,9 @@ export class TrailSinglePageComponent implements OnInit {
   newRoute: Routetype = new Routetype();
   newDifficulty: Difficulty = new Difficulty();
   editingTrail = new Trail();
-
+  trailImage: TrailImage = new TrailImage();
+  trailLat: string = '';
+  trailLong: string = '';
   mapOptions: google.maps.MapOptions = {
     zoom: 14,
   };
@@ -42,8 +44,8 @@ export class TrailSinglePageComponent implements OnInit {
     position: { lat: 0, lng: 0 },
   };
 
-  trailImage: TrailImage = new TrailImage();
-  isCollapsed: boolean = false;
+
+
   constructor(
     private trailSvc: TrailService,
     private activatedRoute: ActivatedRoute,
@@ -56,8 +58,7 @@ export class TrailSinglePageComponent implements OnInit {
     private routeService: RouteTypeService
   ) {}
 
-  trailLat: string = '';
-  trailLong: string = '';
+
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
@@ -87,6 +88,7 @@ export class TrailSinglePageComponent implements OnInit {
         console.log('error singleTrail ngOnInit() routeType', error);
       }
     );
+
   }
 
   getSingleTrail(trailId: number): void {

@@ -6,7 +6,7 @@
         [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
-      <button *ngIf="isLoggedIn()" class="btn btn-danger" (click)="deleteTrailImage()">
+      <button  [ngClass]="mainTrailImage.user.username === loggedInUser.username || loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-danger' : 'd-none'" (click)="deleteTrailImage()">
         Delete
       </button>
     </div>
@@ -83,12 +83,12 @@
           </div>
           <!-- trail controls -->
           <div class="row justify-content-end">
-            <button class="btn btn-outline-dark m-1 trailBtn" (click)="isEditing = !isEditing">Edit</button>
-            <button class="btn btn-outline-danger m-1 trailBtn">Delete</button>
+            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" class="btn btn-outline-dark m-1 trailBtn" (click)="isEditing = !isEditing">Edit</button>
+            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" class="btn btn-outline-dark m-1 trailBtn" class="btn btn-outline-danger m-1 trailBtn">Delete</button>
           </div>
           <!-- trail details -->
           <section>
-            <div class="row">
+            <div class="row mt-2">
               <div class="col-4">Added:</div>
               <div class="col">{{trail.createdAt | date: "MMM-dd-YYYY"}}</div>
             </div>
@@ -402,6 +402,7 @@
                             <button
                               class="btn btn-primary btn-sm shadow-none"
                               type="button"
+                              (click)="postReply(com)"
                             >
                               Post comment</button
                             ><button

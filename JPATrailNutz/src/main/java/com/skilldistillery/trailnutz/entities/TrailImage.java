@@ -34,7 +34,7 @@ public class TrailImage {
 	@JoinColumn(name="trail_id")
 	private Trail trail;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("trailImages")
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
