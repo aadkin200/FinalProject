@@ -193,58 +193,74 @@
             <hr>
           </section>
           <div class="row m-2 text-center">
-            <ng-template #addResouceTitle>Add new </ng-template>
+            <ng-template #addResouceTitle>Add new trail resource</ng-template>
             <ng-template #addResouce>
               <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  rows="1"
-                  [(ngModel)]="trailImage.imageUrl"
-                  placeholder="image url"
-                  aria-label="add image"
-                  aria-describedby="basic-addon2"
+                <div>
+                  <label for="resourceUrl">Title</label>
+                  <input
+                    name="resourceTitle"
+                    type="text"
+                    class="form-control"
+                    rows="1"
+                    placeholder="Title"
+                    aria-label="add image"
+                    aria-describedby="basic-addon2"
+                    [(ngModel)]="tr.title"
+                  />
+                </div>
+                <div>
+                  <label for="resourceUrl">ResourceUrl</label>
+                  <input
+                    name="resourceUrl"
+                    type="text"
+                    class="form-control"
+                    rows="1"
+                    placeholder="trail resource url"
+                    aria-label="add image"
+                    aria-describedby="basic-addon2"
+                    [(ngModel)]="tr.resourceUrl"
+                  />
+              </div>
+                <!-- TODO add on click for trail Resources -->
+                <div class="d-flex justify-content-between w-100 mt-2">
+                  <input
+                  type="hidden"
+                  role="uploadcare-uploader"
+                  data-public-key="aa6ba1052436d3b43dca"
+                  name="my_file_input"
                 />
-                <div class="input-group-append">
                   <button
-                    (click)="addTrailImage()"
+                  (click)="addTrailResource()"
                     class="btn btn-outline-secondary"
                     type="submit"
-                    (click)="add.close()"
+                    (click)="trs.close()"
                   >
                     Add
                   </button>
                 </div>
               </div>
-              <input
-                type="hidden"
-                role="uploadcare-uploader"
-                data-public-key="aa6ba1052436d3b43dca"
-                name="my_file_input"
-              />
+
             </ng-template>
             <button
-
-              class="btn thumbnail"
-              placement="top"
-              #add="ngbPopover"
+              class="btn thumbnail m-1"
+              placement="right"
+              #trs="ngbPopover"
               [ngbPopover]="addResouce"
               [autoClose]="false"
               [popoverTitle]="addResouceTitle"
               [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
             >
-              <i-bs width="5vw" height="5vh" name="images"></i-bs>
+              <i-bs width="5vw" height="5vh" name="circleSquare"></i-bs>
             </button>
-            <div class="border thumbnail" *ngFor="let resource of trail.trailResource">
+            <div class="card thumbnail m-1" *ngFor="let resource of trail.trailResource; let i = index">
               <h6>{{resource.title}}</h6>
-              <p>{{resource.createdAt | date: "M/d/YY"}}</p>
-              <a href="{{resource.resourceUrl}}" target="_blank" rel="noopener noreferrer">Resource</a>
-              {{resource.user}}
+              <a href="{{resource.resourceUrl}}" target="_blank" rel="noopener noreferrer">Resource {{i}}</a>
             </div>
           </div>
-
         </div>
       </div>
+      <!-- TODO Set up some kind of delete for the trail resources -->
 
       <!-- right side -->
       <div class="col-md-6 pe-1">
