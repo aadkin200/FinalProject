@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Type } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Trail } from 'src/app/models/trail';
 import { TrailImage } from 'src/app/models/trail-image';
 import { User } from 'src/app/models/user';
@@ -16,6 +16,7 @@ import { Routetype } from 'src/app/models/routetype';
 import { RouteTypeService } from 'src/app/services/route-type.service';
 import { TrailResource } from 'src/app/models/trail-resource';
 import { TrailResourceService } from 'src/app/services/trail-resource.service';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-trail-single-page',
@@ -42,6 +43,7 @@ export class TrailSinglePageComponent implements OnInit {
   trailImage: TrailImage = new TrailImage();
   trailLat: string = '';
   trailLong: string = '';
+  closeModal: string = '';
   mapOptions: google.maps.MapOptions = {
     zoom: 14,
   };
@@ -62,9 +64,39 @@ export class TrailSinglePageComponent implements OnInit {
     private orderPipe: OrderPipe,
     private difficultyService: DifficultyService,
     private routeService: RouteTypeService,
-    private trailResSvc: TrailResourceService
+    private trailResSvc: TrailResourceService,
+    private modalService: NgbModal,
+    private router: Router
   ) {}
 
+  triggerModal(content:any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((res) => {
+      this.closeModal = `Closed with: ${res}`;
+    }, (res) => {
+      this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+  deleteTrail(){
+    this.trailSvc.destroy(this.trail.id).subscribe(
+      del=>{
+        this.router.navigateByUrl("/feed");
+      },
+      err=>{
+        console.error("problem deleting trail singlepage", err);
+      }
+    )
+  }
 
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;

@@ -41,13 +41,13 @@ export class AdminViewComponent implements OnInit {
         this.loadUsers();
       },
       error => {
-        console.log(error);
         console.log("error disabling user through service")
       }
     );
   }
 
   enableUser(userId: number) {
+    // console.log(userId);
     this.userSvc.enable(userId).subscribe(
       data => {
         this.loadUsers();
