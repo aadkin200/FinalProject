@@ -62,15 +62,10 @@ public class TrailController {
 	}
 	
 	@PutMapping("trail/{trailId}")
-	public Trail destroy(@PathVariable int trailId,
+	public boolean destroy(@PathVariable int trailId,
 						HttpServletRequest req,
 						HttpServletResponse res,
 						Principal principal) {
-		Trail managed = trailSvc.show(principal.getName(), trailId);
-		managed.setEnabled(false);
-		return trailSvc.update(principal.getName(), managed, trailId);
+		return trailSvc.update(principal.getName(), trailId);
 	}
-	
-	
-
 }

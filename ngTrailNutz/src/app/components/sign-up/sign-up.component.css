@@ -5,7 +5,7 @@
 
 .flex-child {
   flex: 1;
-  margin: 0px;
+  margin-left: 100px;
   padding: 0px;
 }
 
@@ -31,5 +31,35 @@ h5{
   text-align: center;
   color:darkslategrey;
 }
+
+a{
+  color:rgb(4, 82, 39);
+}
+
+
+input{
+  border-radius: 25px;
+  border: 3px solid rgb(5, 104, 69);
+  padding: 20px;
+  width: 200px;
+  height: 15px;
+  text-align: center;
+
+}
+
+label{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+button{
+  border-radius: 20px;
+  border-bottom: 20px;
+  border: 3px solid rgb(5, 104, 69);
+  padding: 25px;
+  width: 100px;
+  height: 30px;
+  text-align:center;
+}
+
 
 

@@ -52,7 +52,7 @@ caption{
   border-width: 4px;
   margin-right: 300px;
   margin-left: 300px;
-  width: 40%;
+  width: 60%;
   background-color: rgba(181,206,131,255);
   border-color: rgba(181,206,131,255);
   border-radius: 20px;
@@ -60,6 +60,17 @@ caption{
   padding: 30px;
   overflow: hidden;
 }
+
+h3, h5, a{
+  text-align: center;
+  color:rgb(5, 92, 59);
+}
+
+img{
+  margin-left: 50px;
+}
+
+
 
 
 

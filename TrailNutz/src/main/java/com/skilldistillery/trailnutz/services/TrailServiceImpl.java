@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.trailnutz.entities.Trail;
+import com.skilldistillery.trailnutz.entities.User;
 import com.skilldistillery.trailnutz.repositories.TrailRepository;
 import com.skilldistillery.trailnutz.repositories.UserRepository;
 
@@ -85,6 +86,18 @@ public class TrailServiceImpl implements TrailService{
 		trail.getComments().removeIf(comment -> comment.getEnabled() == false);
 		trail.getComments().forEach(comment -> comment.getReplies().removeIf(reply -> reply.getEnabled() == false));
 		return trail;
+	}
+
+	@Override
+	public boolean update(String username, int trailId) {
+		User user = userRepo.findByUsername(username);
+		Trail managed = trailRepo.findById(trailId).get();
+		if(user.getRole().equalsIgnoreCase("admin") || managed.getUser().getUsername().equalsIgnoreCase(username)) {
+			managed.setEnabled(false);
+			trailRepo.saveAndFlush(managed);
+		}
+		
+		return !managed.isEnabled();
 	}
 
 
