@@ -29,10 +29,13 @@ export class TrailSinglePageComponent implements OnInit {
   topComment = new Comment();
   mainTrailImage: TrailImage = new TrailImage();
   replyCollapse: boolean[] = [];
+  editComments: boolean[] = [];
+  currentEditComment: Comment = new Comment();
   isEditing: boolean = false;
   newDifficulties: Difficulty[] = [];
   tr:TrailResource = new TrailResource;
   newRoutes: Routetype[] = [];
+  userEditComment: Comment[] = [];
   newRoute: Routetype = new Routetype();
   newDifficulty: Difficulty = new Difficulty();
   editingTrail = new Trail();
@@ -204,11 +207,21 @@ export class TrailSinglePageComponent implements OnInit {
     return this.authSvc.checkLogin();
   }
 
+
+  editComment(com:Comment, i:number){
+    this.editComments[com.id] = !this.editComments[com.id];
+    this.userEditComment[com.id] = Object.assign({}, com);
+  }
+
   createBoolArray() {
     for (let i = 0; i < this.trail.comments.length; i++) {
       this.replyCollapse.push(false);
+      this.editComments[this.trail.comments[i].id] = false;
+      // create edit comments
+      this.userEditComment[this.trail.comments[i].id] = new Comment();
     }
   }
+
 
   postComment() {
     this.removeProperties();

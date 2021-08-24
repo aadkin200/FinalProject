@@ -1,1 +1,9 @@
 
+form{
+  border: 5px solid deepskyblue;
+  padding: 30px;
+  margin: 20px;
+}
+.profileTop {
+  margin-top: 10vh;
+}
