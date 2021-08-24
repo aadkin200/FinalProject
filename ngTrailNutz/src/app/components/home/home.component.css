@@ -46,6 +46,23 @@ caption{
   overflow: hidden;
 }
 
+.dropdown-menu {
+  border-style: solid;
+  border-color:burlywood;
+  border-width: 4px;
+  margin-right: 300px;
+  margin-left: 300px;
+  width: 40%;
+  background-color: rgba(181,206,131,255);
+  border-color: rgba(181,206,131,255);
+  border-radius: 20px;
+  box-shadow: -10px 5px 30px 8px grey;
+  padding: 30px;
+  overflow: hidden;
+}
+
+
+
 
 
 
