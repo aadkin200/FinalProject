@@ -66,9 +66,7 @@ public class TrailController {
 						HttpServletRequest req,
 						HttpServletResponse res,
 						Principal principal) {
-		Trail managed = trailSvc.show(principal.getName(), trailId);
-		managed.setEnabled(false);
-		return trailSvc.update(principal.getName(), managed, trailId);
+		return trailSvc.update(principal.getName(), trailId);
 	}
 	
 	
