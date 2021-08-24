@@ -99,7 +99,6 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   addTrailResource(){
-
     this.trailResSvc.create(this.tr, this.trail.id).subscribe(
       resource=>{
         console.log(resource);
@@ -123,6 +122,7 @@ export class TrailSinglePageComponent implements OnInit {
         }
         this.newDifficulty = this.trail.difficulty;
         this.newRoute = this.trail.routeType;
+        this.trail.comments = this.trail.comments.filter(comment => comment.enabled);
         this.changeMapCord();
         this.editingTrail = Object.assign({}, this.trail);
         this.createBoolArray();
@@ -136,6 +136,7 @@ export class TrailSinglePageComponent implements OnInit {
       }
     );
   }
+
 
   editTrail() {
     this.isEditing = false;
@@ -207,6 +208,27 @@ export class TrailSinglePageComponent implements OnInit {
     return this.authSvc.checkLogin();
   }
 
+  submitEditComment(id:number){
+    this.commentSvc.update(this.userEditComment[id], this.trail.id).subscribe(
+      data=> {
+        this.getSingleTrail(this.trail.id);
+      },
+      err => {
+        console.error("submit edit comment error single page", err);
+      }
+    )
+  }
+
+  deleteComment(commentId:number){
+    this.commentSvc.disable(this.trail.id, commentId).subscribe(
+      del=>{
+        this.getSingleTrail(this.trail.id);
+      },
+      err=>{
+        console.error("Error deleting comment", err)
+      }
+    )
+  }
 
   editComment(com:Comment, i:number){
     this.editComments[com.id] = !this.editComments[com.id];
@@ -246,17 +268,7 @@ export class TrailSinglePageComponent implements OnInit {
     this.removeProperties();
     this.commentSvc.create(this.currentComment, this.trail.id).subscribe(
       (success) => {
-        this.commentSvc.getReply(parentComment.id).subscribe(
-          (reply) => {
-            this.trail.comments.forEach((comment) => {
-              if (comment.id == parentComment.id) {
-                comment.replies = reply;
-                this.clearCommentBlock();
-              }
-            });
-          },
-          (error) => {}
-        );
+        this.getSingleTrail(this.trail.id);
       },
       (err) => {
         console.error(err);

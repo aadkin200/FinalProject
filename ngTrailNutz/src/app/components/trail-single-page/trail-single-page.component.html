@@ -340,13 +340,13 @@
                           <textarea class="textarea w-100" *ngIf="editComments[com.id]" name="commentUpdate" id="" rows="5" [(ngModel)]="userEditComment[com.id].message">
                           </textarea>
                           <!-- TODO submit edit comment -->
-                          <button *ngIf="editComments[com.id]" class="btn btn-outline-success">Submit</button>
+                          <button *ngIf="editComments[com.id]" class="btn btn-outline-success" (click)="submitEditComment(com.id)">Submit</button>
                         </div>
                       </div>
                       <div class="bg-white p-2 container">
                         <div class="row fs-12">
                           <div
-                            [ngClass]="isLoggedIn() ? 'like p-2 cursor action-collapse col-2': 'd-none'"
+                            [ngClass]="isLoggedIn() ? 'like p-2 cursor action-collapse col-3': 'd-none'"
                             class="like p-2 cursor action-collapse"
                             data-bs-toggle="collapse"
                             attr.data-bs-target="#com{{ com.id }}"
@@ -362,11 +362,11 @@
                           *ngIf="com.replies.length > 0"
                           >
                             <i class="fa fa-share"></i
-                            ><span  class="ml-1">View Replies</span>
+                            ><span>Replies</span>
                           </div>
                           <!-- TODO: Disable -->
                           <!-- TODO: In place edit -->
-                          <div [ngClass]="com.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-2 text-center' : 'd-none'" (click)="editComment(com, i)">Edit</div>
+                          <div [ngClass]="com.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-3' : 'd-none'" (click)="editComment(com, i)">Edit</div>
                           <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'">Delete</div>
                         </div>
                       </div>
@@ -415,6 +415,8 @@
               *ngFor="let reply of com.replies | orderBy:com.replies.createdAt"
               #collapse="ngbCollapse" [(ngbCollapse)]="!replyCollapse[i]"
               >
+              <div *ngIf="reply.enabled">
+
               <div class="ms-2">
                 <div class="container card card-bg-gray">
                   <div class="d-flex justify-content-center row">
@@ -450,7 +452,7 @@
                           <div class="mt-2">
                             <p *ngIf="!editComments[reply.id]" class="comment-text">{{ reply.message }}</p>
                             <textarea *ngIf="editComments[reply.id]" name="replyMessage" class="form-control mb-1 shadow-none textarea h-50" rows="10" [(ngModel)]="userEditComment[reply.id].message" rows="5"></textarea>
-                            <button *ngIf="editComments[reply.id]" class="btn btn-outline-success">Submit</button>
+                            <button *ngIf="editComments[reply.id]" class="btn btn-outline-success" (click)="submitEditComment(reply.id)">Submit</button>
                           </div>
                         </div>
 
@@ -466,8 +468,8 @@
                               <i-bs name="brush" width="10" height="10"> </i-bs
                               ><span class="ml-1">Comment</span>
                             </div>
-                            <div [ngClass]="com.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-2 text-center' : 'd-none'" (click)="editComment(reply, i)">Edit</div>
-                            <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'">Delete</div>
+                            <div [ngClass]="reply.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-2 text-center' : 'd-none'" (click)="editComment(reply, i)">Edit</div>
+                            <div [ngClass]="reply.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'" (click)="deleteComment(reply.id)">Delete</div>
 
                           </div>
 
@@ -502,7 +504,7 @@
                             </button>
                           </div>
                         </div>
-
+                        </div>
                       </div>
                     </div>
                   </div>

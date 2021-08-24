@@ -48,8 +48,8 @@ export class CommentService {
     );
   }
 
-  update(comment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${this.url}/${comment.id}`, comment, this.getHttpOptions()).pipe(
+  update(comment: Comment, trailId:number): Observable<Comment> {
+    return this.http.put<Comment>(`${this.url}${trailId}/comment`, comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.update(): error updating comment');
         return throwError(err);
@@ -66,8 +66,8 @@ export class CommentService {
     );
   }
 
-  disable(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
+  disable(trailId:number, commentId: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}${trailId}/comment/${commentId}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('CommentService.disable(): error disabling comment');
         return throwError(err);
