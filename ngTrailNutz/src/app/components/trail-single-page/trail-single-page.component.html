@@ -1,9 +1,10 @@
 <app-navbar></app-navbar>
-<div class="container-fluid card mt-3">
+<div class="container-fluid card top-of-card rounded">
   <div class="singleCardView mx-auto pt-3">
+    <h1 class="text-center mb-2">{{trail.name}}</h1>
     <div class="row pe-1 pictureContainer">
       <img
-        class="singleImage"
+        class="singleImage rounded"
         [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
@@ -339,7 +340,7 @@
                           <textarea class="textarea w-100" *ngIf="editComments[com.id]" name="commentUpdate" id="" rows="5" [(ngModel)]="userEditComment[com.id].message">
                           </textarea>
                           <!-- TODO submit edit comment -->
-                          <button *ngIf="editComments[i]" class="btn btn-outline-success">Submit</button>
+                          <button *ngIf="editComments[com.id]" class="btn btn-outline-success">Submit</button>
                         </div>
                       </div>
                       <div class="bg-white p-2 container">
@@ -445,11 +446,14 @@
                               }}</span>
                             </div>
                           </div>
+                          <!-- TODO: reply update comments -->
                           <div class="mt-2">
-                            <p class="comment-text">{{ reply.message }}</p>
-                            <textarea name="replyMessage" [(ngModel)]="userEditComment[reply.id].message" rows="10"></textarea>
+                            <p *ngIf="!editComments[reply.id]" class="comment-text">{{ reply.message }}</p>
+                            <textarea *ngIf="editComments[reply.id]" name="replyMessage" class="form-control mb-1 shadow-none textarea h-50" rows="10" [(ngModel)]="userEditComment[reply.id].message" rows="5"></textarea>
+                            <button *ngIf="editComments[reply.id]" class="btn btn-outline-success">Submit</button>
                           </div>
                         </div>
+
                         <div class="p-2">
                           <div class="d-flex flex-row fs-12">
                             <div
@@ -466,8 +470,7 @@
                             <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'">Delete</div>
 
                           </div>
-                          <!-- TODO:  -->
-                          <div *ngIf=""></div>
+
 
                         </div>
                         <div id="com{{ reply.id }}" class="bg-light p-2 collapse">

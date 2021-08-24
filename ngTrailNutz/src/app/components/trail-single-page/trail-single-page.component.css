@@ -4,6 +4,10 @@
 
 }
 
+.top-of-card {
+  margin-top: 8vh;
+}
+
 .pictureContainer{
   position: relative;
 }
