@@ -7,7 +7,7 @@
         [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
-      <button  [ngClass]="mainTrailImage.user.username === loggedInUser.username || loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-danger' : 'd-none'" (click)="deleteTrailImage()">
+      <button [ngClass]="mainTrailImage.user.username === loggedInUser.username || loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-danger' : 'd-none'" (click)="deleteTrailImage()">
         Delete
       </button>
     </div>
@@ -264,7 +264,6 @@
 
       <!-- right side -->
       <div class="col-md-6 pe-1">
-        <!-- comments -->
         <!-- Input for new comments -->
         <form [ngClass]="isLoggedIn() ? 'mt1': 'd-none'">
           <label for="subject">Subject</label>
@@ -301,7 +300,7 @@
 
         <div ngfor *ngFor="let com of trail.comments; let i = index">
           <!-- Check to see if parent comment -->
-          <div *ngIf="!com.parentComment">
+          <div *ngIf="!com.parentComment && com.enabled">
             <div class="mt-1">
               <div class="container card">
                 <div class="d-flex justify-content-center row">
@@ -334,14 +333,19 @@
                           </div>
                         </div>
                         <div class="mt-2">
-                          <h6>{{com.subject}}</h6>
-                          <p class="comment-text">{{ com.message }}</p>
+                          <h6 *ngIf="!editComments[com.id]" >{{com.subject}}</h6>
+                          <p *ngIf="!editComments[com.id]" class="comment-text">{{ com.message }}</p>
+                          <input *ngIf="editComments[com.id]" type="text" name="subject" class="form-control" [(ngModel)]="userEditComment[com.id].subject">
+                          <textarea class="textarea w-100" *ngIf="editComments[com.id]" name="commentUpdate" id="" rows="5" [(ngModel)]="userEditComment[com.id].message">
+                          </textarea>
+                          <!-- TODO submit edit comment -->
+                          <button *ngIf="editComments[i]" class="btn btn-outline-success">Submit</button>
                         </div>
                       </div>
-                      <div class="bg-white p-2">
-                        <div class="d-flex flex-row fs-12">
+                      <div class="bg-white p-2 container">
+                        <div class="row fs-12">
                           <div
-                            [ngClass]="isLoggedIn() ? 'like p-2 cursor action-collapse': 'd-none'"
+                            [ngClass]="isLoggedIn() ? 'like p-2 cursor action-collapse col-2': 'd-none'"
                             class="like p-2 cursor action-collapse"
                             data-bs-toggle="collapse"
                             attr.data-bs-target="#com{{ com.id }}"
@@ -352,13 +356,17 @@
                             ><span class="ml-1" >Comment</span>
                           </div>
                           <div
-                          type="button" class="btn btn-outline-primary" (click)="replyCollapse[i] = !replyCollapse[i]" [attr.aria-expanded]="replyCollapse[i]"
+                          type="button" class="like p-2 cursor col-2" (click)="replyCollapse[i] = !replyCollapse[i]" [attr.aria-expanded]="replyCollapse[i]"
                           aria-controls="collapseExample"
                           *ngIf="com.replies.length > 0"
                           >
                             <i class="fa fa-share"></i
                             ><span  class="ml-1">View Replies</span>
                           </div>
+                          <!-- TODO: Disable -->
+                          <!-- TODO: In place edit -->
+                          <div [ngClass]="com.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-2 text-center' : 'd-none'" (click)="editComment(com, i)">Edit</div>
+                          <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'">Delete</div>
                         </div>
                       </div>
                       <div id="com{{ com.id }}" class="bg-light p-2 collapse">
@@ -439,6 +447,7 @@
                           </div>
                           <div class="mt-2">
                             <p class="comment-text">{{ reply.message }}</p>
+                            <textarea name="replyMessage" [(ngModel)]="userEditComment[reply.id].message" rows="10"></textarea>
                           </div>
                         </div>
                         <div class="p-2">
@@ -453,7 +462,13 @@
                               <i-bs name="brush" width="10" height="10"> </i-bs
                               ><span class="ml-1">Comment</span>
                             </div>
+                            <div [ngClass]="com.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-2 text-center' : 'd-none'" (click)="editComment(reply, i)">Edit</div>
+                            <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'">Delete</div>
+
                           </div>
+                          <!-- TODO:  -->
+                          <div *ngIf=""></div>
+
                         </div>
                         <div id="com{{ reply.id }}" class="bg-light p-2 collapse">
                           <div class="d-flex flex-row align-items-start">
