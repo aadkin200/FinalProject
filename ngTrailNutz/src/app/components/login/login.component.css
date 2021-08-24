@@ -1,0 +1,80 @@
+.outter-div {
+  margin-top: 200px;
+  border-style: solid;
+  border-color: blue;
+  border-width: 4px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 45%;
+  background-color: rgba(181,206,131,255);
+  border-color: rgba(181,206,131,255);
+  border-radius: 20px;
+  box-shadow: -10px 5px 30px 8px grey;
+  padding: 30px;
+  height: auto;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.acorn-button {
+  background-color: rgba(215,215,215,255) !important;
+  border-color: rgba(181,206,131,255) !important;
+  margin-right: 10px;
+  margin-top: 10px;
+  color: #212629;
+}
+
+.homescreen-img {
+  width: 600px;
+  float: right;
+  padding: 0px;
+}
+
+.flex-container {
+  display: flex;
+  padding: 0px;
+}
+
+.flex-child {
+  flex: 1;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* .flex-child:first-child {
+
+} */
+
+input[type=text] {
+  border-radius: 10px;
+  border: 0px;
+  background-color: #d7d7d7;
+}
+input.input-text:focus {
+  outline-width: 0;
+}
+
+input[type=password] {
+  border-radius: 10px;
+  border: 0px;
+  background-color: #d7d7d7;
+}
+
+.login-flex {
+  margin-left: 20px;
+}
+
+.input-text-div {
+  margin-top: 50%;
+}
+
+.github-development {
+  /* margin-top: 55%; */
+  font-size: 15px;
+  color: grey;
+}
+
+.github-image {
+  width: 20px;
+  margin-left: 5px;
+}

@@ -14,6 +14,8 @@ import { DifficultyService } from 'src/app/services/difficulty.service';
 import { Difficulty } from 'src/app/models/difficulty';
 import { Routetype } from 'src/app/models/routetype';
 import { RouteTypeService } from 'src/app/services/route-type.service';
+import { TrailResource } from 'src/app/models/trail-resource';
+import { TrailResourceService } from 'src/app/services/trail-resource.service';
 
 @Component({
   selector: 'app-trail-single-page',
@@ -29,6 +31,7 @@ export class TrailSinglePageComponent implements OnInit {
   replyCollapse: boolean[] = [];
   isEditing: boolean = false;
   newDifficulties: Difficulty[] = [];
+  tr:TrailResource = new TrailResource;
   newRoutes: Routetype[] = [];
   newRoute: Routetype = new Routetype();
   newDifficulty: Difficulty = new Difficulty();
@@ -55,7 +58,8 @@ export class TrailSinglePageComponent implements OnInit {
     private commentSvc: CommentService,
     private orderPipe: OrderPipe,
     private difficultyService: DifficultyService,
-    private routeService: RouteTypeService
+    private routeService: RouteTypeService,
+    private trailResSvc: TrailResourceService
   ) {}
 
 
@@ -89,6 +93,20 @@ export class TrailSinglePageComponent implements OnInit {
       }
     );
 
+  }
+
+  addTrailResource(){
+
+    this.trailResSvc.create(this.tr, this.trail.id).subscribe(
+      resource=>{
+        console.log(resource);
+        this.getSingleTrail(this.trail.id);
+        this.tr = new TrailResource();
+      },
+      err => {
+        console.error("Error creating trail resource: addTrailResource(): SinglePageView")
+      }
+    )
   }
 
   getSingleTrail(trailId: number): void {
