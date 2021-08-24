@@ -36,6 +36,15 @@ export class UserService {
     )
   }
 
+  getAllUsers():Observable<User[]>{
+    return this.http.get<User[]>(`${this.baseUrl}api/allusers/`, this.getHttpOptions()).pipe(
+       catchError((err:any) => {
+         console.error(`User.getAllUser: error GET users`);
+         return throwError(err);
+       })
+    )
+  }
+
   update(user:User):Observable<User>{
     return this.http.put<User>(`${this.baseUrl}api/user`, user, this.getHttpOptions()).pipe(
        catchError((err:any) => {
@@ -56,6 +65,8 @@ export class UserService {
     return this.http.put<User>(`${this.baseUrl}api/user/${userId}`, this.getHttpOptions()).pipe(
        catchError((err:any) => {
          console.error(`User.enable: error enabling user`);
+         console.log(err);
+
          return throwError(err);
        })
     )

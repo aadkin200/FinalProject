@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminViewComponent } from './components/admin-view/admin-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewTrailFormComponent } from './components/new-trail-form/new-trail-form.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'feed', component: TrailFeedComponent},
   { path: 'trail/:trailId', component: TrailSinglePageComponent},
   { path: 'newtrail', component: NewTrailFormComponent},
-  { path: '**', component: NotFoundComponent}
+  { path: 'admin', component: AdminViewComponent},
+  { path: '**', component: NotFoundComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

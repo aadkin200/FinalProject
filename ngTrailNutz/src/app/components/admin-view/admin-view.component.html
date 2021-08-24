@@ -1,2 +1,18 @@
 <app-navbar></app-navbar>
-<p>admin-view works!</p>
+<!-- <p>admin-view works!</p> -->
+<div class="containere-fluid">
+<div class="md-form">
+  <input type="search" placeholder="Username">
+</div>
+  <ul *ngFor="let user of users">
+
+    <li>{{user.username}}</li>
+    <li>{{user.role}}</li>
+    <li>{{user.enabled}}</li>
+
+    <button (click)="disableUser(user.id)">Disable Account</button>
+    <button (click)="enableUser(user.id)">Enable Account</button>
+
+  </ul>
+
+</div>

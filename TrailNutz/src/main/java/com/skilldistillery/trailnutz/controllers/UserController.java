@@ -61,6 +61,7 @@ public class UserController {
 	
 	@PutMapping("user/{userId}")
 	public void enableUser(@PathVariable int userId, Principal principal, HttpServletResponse res) {
+		System.out.println(principal);
 		boolean isEnabled = userSvc.userEnable(userId, principal.getName());
 		if(isEnabled) {
 			res.setStatus(200);
