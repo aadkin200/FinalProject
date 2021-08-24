@@ -23,6 +23,7 @@ public class TrailResourceServiceImpl implements TrailResourceService {
 
 	@Override
 	public TrailResource addTrailResource(TrailResource trailResource, String username, int trailId) {
+		System.out.println(trailResource);
 		User user = userRepo.findByUsername(username);
 		Optional<Trail> trail = trailRepo.findById(trailId);
 		if(trail.isPresent()) {

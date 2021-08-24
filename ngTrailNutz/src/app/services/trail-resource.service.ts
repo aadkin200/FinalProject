@@ -22,12 +22,6 @@ export class TrailResourceService {
   ) { }
 
   create(trailResrc: TrailResource, trailId:number): Observable<TrailResource> {
-    trailResrc.user = new User();
-    trailResrc.resourceUrl = '';
-    trailResrc.createdAt = '';
-    trailResrc.title = '';
-    trailResrc.enabled = true;
-    trailResrc.trail = new Trail();
     return this.http.post<TrailResource>(this.url + `api/trail/${trailId}/trailresources`, trailResrc, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('TrailResourceService.create(): error creating TrailResource');
