@@ -367,7 +367,7 @@
                           <!-- TODO: Disable -->
                           <!-- TODO: In place edit -->
                           <div [ngClass]="com.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-3' : 'd-none'" (click)="editComment(com, i)">Edit</div>
-                          <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'">Delete</div>
+                          <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'" (click)="deleteComment(com.id)" >Delete</div>
                         </div>
                       </div>
                       <div id="com{{ com.id }}" class="bg-light p-2 collapse">

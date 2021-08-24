@@ -76,7 +76,7 @@ public class CommentServiceImpl implements CommentService{
 				Comment comment = commentOpt.get();
 				User managedUser = userRepo.findByUsername(username);
 				
-				if(managedUser.getRole().equals("admin") || managedUser.getId() == userId) {
+				if(managedUser.getRole().equalsIgnoreCase("admin") || managedUser.getId() == userId) {
 					
 					comment.setEnabled(false);
 					commRepo.saveAndFlush(comment);
