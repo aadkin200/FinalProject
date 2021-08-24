@@ -10,15 +10,15 @@
 
 <div>
   <div class="justify-content-center tableD" *ngFor="let trail of trails">
-    <div class="carousel-inner m-0" role="listbox" style="max-width: 900px; max-height: 600px;">
-      <ngb-carousel #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+    <div class="carousel-inner m-0" role="listbox" style="max-width: 1280px; max-height: 720px;">
+      <ngb-carousel class="" #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
         <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
           <div class="w-50" class="carousel-caption">
             <h3> {{i + 1}} </h3>
           </div>
-          <a href="trailImage.imageUrl{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">
+          <a (click)="displayTrail(trail)" target="_blank" rel="nofollow noopener noreferrer">
             <div class="picsum-img-wrapper">
-              <img style="width: 900px; height: 600px;" [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
+              <img style="width: 1280px; height: 720px;" [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
             </div>
           </a>
         </ng-template>
