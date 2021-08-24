@@ -1,0 +1,25 @@
+.outterDiv {
+  margin-top: 80px;
+  margin-bottom: 20px;
+  background-color: rgba(181,206,131,255);
+  border-radius: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 45%;
+  box-shadow: -10px 5px 30px 8px grey;
+  /* text-align: center; */
+}
+
+.acorn-button {
+  background-color: rgba(215,215,215,255) !important;
+  border-color: rgba(181,206,131,255) !important;
+  color: #212629 !important;
+  margin-top: 30px;
+}
+
+.button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
