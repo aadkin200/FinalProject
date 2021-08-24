@@ -4,6 +4,10 @@
 
 }
 
+.bg-info {
+  background-color: rgba(180,204,131,.8) !important;
+}
+
 .top-of-card {
   margin-top: 8vh;
 }

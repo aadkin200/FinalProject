@@ -266,7 +266,7 @@
       <!-- right side -->
       <div class="col-md-6 pe-1">
         <!-- Input for new comments -->
-        <form [ngClass]="isLoggedIn() ? 'mt1': 'd-none'">
+        <form [ngClass]="isLoggedIn() ? 'mt-1 border p-2 bg-info text-light': 'd-none'">
           <label for="subject">Subject</label>
           <input
             [(ngModel)]="topComment.subject"
@@ -290,7 +290,7 @@
               aria-describedby="basic-addon2"
             ></textarea>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" (click)="postComment()">
+              <button class="btn btn-outline-light" type="button" (click)="postComment()">
                 Submit
               </button>
             </div>

@@ -99,6 +99,9 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   addTrailResource(){
+    if(!this.tr.title){
+      this.tr.title = "N/A";
+    }
     this.trailResSvc.create(this.tr, this.trail.id).subscribe(
       resource=>{
         console.log(resource);
@@ -269,6 +272,7 @@ export class TrailSinglePageComponent implements OnInit {
     this.commentSvc.create(this.currentComment, this.trail.id).subscribe(
       (success) => {
         this.getSingleTrail(this.trail.id);
+        this.currentComment = new Comment();
       },
       (err) => {
         console.error(err);
