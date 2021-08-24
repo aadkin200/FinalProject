@@ -4,7 +4,7 @@
     <h1 class="text-center mb-2">{{trail.name}}</h1>
     <div class="row pe-1 pictureContainer">
       <img
-        class="singleImage rounded"
+        class="shadow-lg singleImage rounded"
         [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
@@ -84,12 +84,13 @@
             </div>
           </div>
           <!-- trail controls -->
-          <div class="row justify-content-end">
-            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" class="btn btn-outline-dark m-1 trailBtn" (click)="isEditing = !isEditing">Edit</button>
-            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" class="btn btn-outline-dark m-1 trailBtn" class="btn btn-outline-danger m-1 trailBtn">Delete</button>
+          <!-- TODO trail Disable -->
+          <div class="row justify-content-center">
+            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" (click)="isEditing = !isEditing">Edit</button>
+            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-danger m-1 trailBtn' : 'd-none'" >Delete</button>
           </div>
           <!-- trail details -->
-          <section>
+          <section class="shadow-lg p-1 rounded">
             <div class="row mt-2">
               <div class="col-4">Added:</div>
               <div class="col">{{trail.createdAt | date: "MMM-dd-YYYY"}}</div>
@@ -189,11 +190,12 @@
           <div class="text-center mb-2" *ngIf="isEditing">
             <button class="btn w-50 mt-2 btn-success" (click)="editTrail()">Submit</button>
           </div>
-          <section class=" p-1 text-center">
+          <!--Trail Resouce Section -->
+          <section class=" p-1 text-center mt-2">
             <h1>Trail Resources</h1>
             <hr>
           </section>
-          <div class="row m-2 text-center">
+          <div class="row m-2 shadow-lg text-center p-2 rounded">
             <ng-template #addResouceTitle>Add new trail resource</ng-template>
             <ng-template #addResouce>
               <div class="input-group mb-3">
@@ -223,7 +225,7 @@
                     [(ngModel)]="tr.resourceUrl"
                   />
               </div>
-                <!-- TODO add on click for trail Resources -->
+
                 <div class="d-flex justify-content-between w-100 mt-2">
                   <input
                   type="hidden"
@@ -243,21 +245,31 @@
               </div>
 
             </ng-template>
-            <button
-              class="btn thumbnail m-1"
-              placement="right"
-              #trs="ngbPopover"
-              [ngbPopover]="addResouce"
-              [autoClose]="false"
-              [popoverTitle]="addResouceTitle"
-              [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
-            >
-              <i-bs width="5vw" height="5vh" name="circleSquare"></i-bs>
-            </button>
-            <div class="card thumbnail m-1" *ngFor="let resource of trail.trailResource; let i = index">
-              <h6>{{resource.title}}</h6>
-              <a href="{{resource.resourceUrl}}" target="_blank" rel="noopener noreferrer">Resource {{i}}</a>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 bg-white ">
+                  <button
+                  class="btn  col-2"
+                  placement="right"
+                  #trs="ngbPopover"
+                  [ngbPopover]="addResouce"
+                  [autoClose]="false"
+                  [popoverTitle]="addResouceTitle"
+                  [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
+                >
+                  <i-bs width="5vw" height="5vh" name="circleSquare"></i-bs>
+                </button>
+                </div>
+              <div class="card col-12 col-md-6 col-lg-4 bg-white " *ngFor="let resource of trail.trailResource; let i = index">
+                <h6>{{resource.title}}</h6>
+                <a href="{{resource.resourceUrl}}" target="_blank" rel="noopener noreferrer">Resource {{i}}</a>
+              </div>
+              </div>
+
+
+
             </div>
+
           </div>
         </div>
       </div>
@@ -266,7 +278,7 @@
       <!-- right side -->
       <div class="col-md-6 pe-1">
         <!-- Input for new comments -->
-        <form [ngClass]="isLoggedIn() ? 'mt-1 border p-2 bg-info text-light': 'd-none'">
+        <form [ngClass]="isLoggedIn() ? 'shadow-lg mt-1 border p-2 bg-info text-light': 'd-none'">
           <label for="subject">Subject</label>
           <input
             [(ngModel)]="topComment.subject"
@@ -303,7 +315,7 @@
           <!-- Check to see if parent comment -->
           <div *ngIf="!com.parentComment && com.enabled">
             <div class="mt-1">
-              <div class="container card">
+              <div class="container card shadow-lg">
                 <div class="d-flex justify-content-center row">
                   <div class="col">
                     <div
