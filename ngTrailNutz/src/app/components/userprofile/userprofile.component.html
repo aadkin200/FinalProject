@@ -44,6 +44,7 @@
 			<input type="radio" id = "photoOp" name="photoOp" value="photoOp" >
       <label for="photoOp">Photo Op</label> <br>
   </div> -->
+<div class="container">
 <div class="vh-100 mx-auto d-flex flex-column justify-content-center" style="width: 90vw;">
   <div class="container-fluid card p-3">
     <div class="row">
@@ -88,16 +89,20 @@
 <div class="container">
   <form class="form-horizontal" *ngIf="selected">
     <div class="form-group">
-    First Name: <input type="text" class="form-control" name="firstName" [(ngModel)]="editUser.firstName"><br>
+      <h5>{{user.username}}</h5>
+  <div class="row">
+     <div class="col-sm-6">
+        First Name: <input type="text" class="form-control" name="firstName" [(ngModel)]="editUser.firstName"><br>
+     </div>
+     <div class="col-sm-6">
     Last Name: <input type="text" class="form-control" name="lastName" [(ngModel)]="editUser.lastName"><br>
+     </div>
+  </div>
     Profile Image: <input type="text" class="form-control" name="imageUrl" [(ngModel)]="editUser.imageUrl"><br>
     Favorite Trail Food: <input type="text" class="form-control" name="favoriteTrailFood" [(ngModel)]="editUser.favoriteTrailFood"><br>
 
-        <div class="text-center">
+        <div class="btn-group">
           <button type="button" class="btn btn-outline-info" (click)="updateUser(editUser)">Submit</button>
-        </div>
-
-        <div class="text-right">
           <button type="button" class="btn btn-outline-danger" (click)="closeSelected()">Cancel</button>
         </div>
       </div>
@@ -120,4 +125,4 @@
     </li>
   </ul>
 </div>
-
+</div>
