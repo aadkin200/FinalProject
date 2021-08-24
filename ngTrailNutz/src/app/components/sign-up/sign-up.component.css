@@ -1,0 +1,35 @@
+.flex-container {
+  display:flexbox;
+  padding: 10px;
+}
+
+.flex-child {
+  flex: 1;
+  margin: 0px;
+  padding: 0px;
+}
+
+.outter-div {
+  margin-top: 200px;
+  border-style: solid;
+  border-color: blue;
+  border-width: 4px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 70%;
+  background-color: rgba(181,206,131,255);
+  border-color: rgba(181,206,131,255);
+  border-radius: 20px;
+  box-shadow: -10px 5px 30px 8px grey;
+  padding: 30px;
+  height: auto;
+  padding: 0px;
+  overflow: hidden;
+}
+
+h5{
+  text-align: center;
+  color:darkslategrey;
+}
+
+
