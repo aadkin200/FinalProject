@@ -63,3 +63,18 @@ input[type=password] {
 .login-flex {
   margin-left: 20px;
 }
+
+.input-text-div {
+  margin-top: 50%;
+}
+
+.github-development {
+  /* margin-top: 55%; */
+  font-size: 15px;
+  color: grey;
+}
+
+.github-image {
+  width: 20px;
+  margin-left: 5px;
+}
