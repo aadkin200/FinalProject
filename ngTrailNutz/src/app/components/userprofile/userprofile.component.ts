@@ -46,9 +46,9 @@ export class UserprofileComponent implements OnInit {
     this.editUser = user;
   }
 
-  // closeEdit(): void {
-  //   this.selected = null;
-  // }
+  closeSelected(): void {
+    this.selected = null;
+  }
 
   updateUser(user: User) {
     console.log(this.editUser);
