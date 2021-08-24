@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <br>
-
+<div class="login-box" *ngIf="!loggedIn()">
 <app-login></app-login>
-<br>
+</div>
 <br>
 
 <div class="outter-div">
@@ -28,13 +28,13 @@
 
 <ul class="intro-dropdown">
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">The views are only one piece of the magic</a>
-  <li class="dropdown-menu" aria-labelledby="navbarDropdown"><img src="https://traveltoeat.com/wp-content/uploads/2012/12/wpid-Photo-Dec-22-2012-108-PM.jpg" alt="" width="200"height="200">
+  <li class="dropdown-menu" aria-labelledby="navbarDropdown"><img src="https://traveltoeat.com/wp-content/uploads/2012/12/wpid-Photo-Dec-22-2012-108-PM.jpg" alt="" width="400"height="400">
     <caption > Rocky Mountains from Chief Hosa in Genesee Park, Colorado</caption></li>
     </ul>
     <ul class="moreimfo-dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Okay they're a lot of the magic</a>
 
-    <li class="dropdown-menu" aria-labelledby="navbarDropdown"><img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Mount_Rainier_from_above_Myrtle_Falls_in_August.JPG" alt="" width="200"height="200">
+    <li class="dropdown-menu" aria-labelledby="navbarDropdown"><img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Mount_Rainier_from_above_Myrtle_Falls_in_August.JPG" alt="" width="400"height="400">
       <caption > Mt. Rainier in Washington State</caption></li>
 
 
@@ -52,7 +52,6 @@
   </ul>
 
 <br>
-<br>
 <h3>So when you plan your next outdoor adventure make sure you share with us at TrailNutz!<br> Happy Trails!<br></h3>
 
 
@@ -61,10 +60,10 @@
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Popular fourteeners for beginners</a>
   <li class="dropdown-menu" aria-labelledby="navbarDropdown"><img src="https://cdn.5280.com/archive/2013/06/5280130601page060.jpg" alt="" width="500"height="300">
     </li>
-
-
-<br>
     </ul>
+
+    <a class="nav-link" [routerLink]="['/feed']">Search Trails Now</a>
+
 </div>
 
 <footer>TrailNutz is a SkillDistillery Final Group Project created by Alex Adkins, Brandon Stine, Kim Nettleton and Rachel Richardson</footer>
