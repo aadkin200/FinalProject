@@ -62,7 +62,7 @@ export class UserService {
     )
   }
   enable(userId:number):Observable<User>{
-    return this.http.put<User>(`${this.baseUrl}api/user/${userId}`, this.getHttpOptions()).pipe(
+    return this.http.put<User>(`${this.baseUrl}api/user/${userId}`, {}, this.getHttpOptions()).pipe(
        catchError((err:any) => {
          console.error(`User.enable: error enabling user`);
          console.log(err);

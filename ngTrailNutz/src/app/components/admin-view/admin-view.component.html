@@ -1,18 +1,26 @@
 <app-navbar></app-navbar>
 <!-- <p>admin-view works!</p> -->
-<div class="containere-fluid">
-<div class="md-form">
-  <input type="search" placeholder="Username">
-</div>
-  <ul *ngFor="let user of users">
+<body>
 
-    <li>{{user.username}}</li>
-    <li>{{user.role}}</li>
-    <li>{{user.enabled}}</li>
+  <div class="container-fluid">
 
-    <button (click)="disableUser(user.id)">Disable Account</button>
-    <button (click)="enableUser(user.id)">Enable Account</button>
+    <div class="m-1">
+     <label for="search"> Search:</label>
+     <input (keyup)="searchByUsername($event)" [value]="search"
+     class="form-control shadow-sm" type="text" name="search"/>
+    </div>
 
-  </ul>
+    <ul *ngFor="let user of users">
 
-</div>
+      <li>{{user.username}}</li>
+      <li>{{user.role}}</li>
+      <li>{{user.enabled}}</li>
+
+      <button (click)="disableUser(user.id)">Disable Account</button>
+      <button (click)="enableUser(user.id)">Enable Account</button>
+
+    </ul>
+
+  </div>
+
+</body>
