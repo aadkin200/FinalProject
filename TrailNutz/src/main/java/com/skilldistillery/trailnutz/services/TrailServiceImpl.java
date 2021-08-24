@@ -93,10 +93,11 @@ public class TrailServiceImpl implements TrailService{
 		User user = userRepo.findByUsername(username);
 		Trail managed = trailRepo.findById(trailId).get();
 		if(user.getRole().equalsIgnoreCase("admin") || managed.getUser().getUsername().equalsIgnoreCase(username)) {
-			
+			managed.setEnabled(false);
+			trailRepo.saveAndFlush(managed);
 		}
 		
-		return trailRepo.existsById(trailId);
+		return !managed.isEnabled();
 	}
 
 
