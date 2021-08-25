@@ -72,17 +72,13 @@
         </ul>
       </div>
     </div>
-    <div class="card-body text-center">
-      <a href="#" class="card-link">Home</a>
-      <a href="feed" class="card-link">Trails</a>
-    </div>
 
   </div>
-<br>
+  <br>
   <div class="container">
     <div class="row">
       <div class="text-center">
-    <button type="button" class="btn btn-outline-info" (click)="setSelected(user)">Edit</button>
+        <button type="button" (click)="setSelected(user)">Edit Profile</button>
       </div>
     </div>
   </div>
@@ -92,21 +88,22 @@
   <form class="form-horizontal rounded" *ngIf="selected">
     <div class="form-group">
       <h5>{{user.username}}</h5>
-  <div class="row">
-     <div class="col-sm-6">
-        First Name: <input type="text" class="form-control" name="firstName" [(ngModel)]="editUser.firstName"><br>
-     </div>
-     <div class="col-sm-6">
-        Last Name: <input type="text" class="form-control" name="lastName" [(ngModel)]="editUser.lastName"><br>
-     </div>
-  </div>
-    Profile Image: <input type="text" class="form-control" name="imageUrl" [(ngModel)]="editUser.imageUrl"><br>
-    Favorite Trail Food: <input type="text" class="form-control" name="favoriteTrailFood" [(ngModel)]="editUser.favoriteTrailFood"><br>
-
-        <button type="button" (click)="updateUser(editUser)">Submit</button>
-        <button type="button" id="cancelButton" (click)="closeSelected()">Cancel</button>
-
+      <div class="row">
+        <div class="col-sm-6">
+          First Name: <input type="text" class="form-control" name="firstName" [(ngModel)]="editUser.firstName"><br>
+        </div>
+        <div class="col-sm-6">
+          Last Name: <input type="text" class="form-control" name="lastName" [(ngModel)]="editUser.lastName"><br>
+        </div>
       </div>
+      Profile Image: <input type="text" class="form-control" name="imageUrl" [(ngModel)]="editUser.imageUrl"><br>
+      Favorite Trail Food: <input type="text" class="form-control" name="favoriteTrailFood" [(ngModel)]="editUser.favoriteTrailFood"><br>
+
+        <div class="text-center">
+          <button type="button" (click)="updateUser(editUser)">Submit</button>
+          <button type="button" id="cancelButton" (click)="closeSelected()">Cancel</button>
+        </div>
+    </div>
   </form>
 </div>
 
@@ -125,5 +122,9 @@
       <p>{{trails.state}}</p>
     </li>
   </ul>
+  <div class="card-body text-center">
+    <a href="#" class="card-link">Home</a>
+    <a href="feed" class="card-link">Trails</a>
+  </div>
 </div>
 </div>

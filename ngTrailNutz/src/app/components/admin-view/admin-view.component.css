@@ -1,4 +1,4 @@
-body{
+body {
   margin: 12vh;
   margin-left: 7vw;
   margin-right: 7vw;
@@ -8,6 +8,9 @@ body{
   outline-width: 15px;
   outline-style: solid;
   outline-color: lavender;
+}
+.userTable{
+  background-color: lavender !important;
 }
 table {
   border-collapse: separate;

@@ -1,42 +1,82 @@
 
 form{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  border: 5px solid deepskyblue;
-  padding: 30px;
+  border: 5px solid #548bb8e7;
+  padding: 20px;
   margin: 20px;
-  border-radius: 70px;
+  border-radius: 90px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  background-color: #88aac7;
+  opacity: 80%;
 }
 .profileBox {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   padding: 10px;
   margin-top: 12vh;
   border-radius: 18px;
-  border: 6px solid darkolivegreen;
-  background-color: sienna;
-  opacity: 90%;
+  border: 4px solid #4F88B8;
+  background-color: #4F88B8;
+  opacity: 87%;
 }
 .profileTrails{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border-radius: 70px;
   margin: 15px;
-  background-color: olivedrab;
+  background-color: #2A4F18;
   opacity: 90%;
-}
-#cancelButton{
-  margin: 10px;
-  border-radius: 12px;
+  color: rgb(93, 158, 107);
 }
 img{
-  border: 8px solid sienna;
+  border: 8px solid #4F88B8;
 }
 .card{
-  background-color: #AE6C4C;
+  background-color: #7EA8CA;
 }
 .list-group li{
-  background-color: #AE6C4C !important;
+  background-color: #7EA8CA !important;
 }
 h4{
   text-align: center;
   text-shadow: black;
   text-transform: uppercase;
+}
+a:link, a:visited {
+  border-radius: 20px;
+  background-color: #193522;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 2px 4px 0 rgba(0,0,0,0.19);
+}
+a:hover, a:active {
+  border-radius: 20px;
+  background-color: rgb(93, 158, 107);
+  color: black;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+button{
+  padding: 7px;
+  background-color: #90B1ED;
+  opacity: 95%;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 2px 4px 0 rgba(0,0,0,0.19);
+}
+button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  background-color: #9FA4F7;
+  color: white;
+}
+#cancelButton{
+  margin: 12px;
+  background-color: #B0472C;
+  border-radius: 20px;
+}
+#cancelButton:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  background-color: #8C1A00;
+  color: white;
 }
