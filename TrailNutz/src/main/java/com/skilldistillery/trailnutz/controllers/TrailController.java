@@ -85,10 +85,11 @@ public class TrailController {
 									  HttpServletResponse res,
 									  Principal principal) {
 		List<Amenity> newAmenities = new ArrayList<>();
-		System.out.println(amenities);
 		for (Amenity amenity : amenities) {
 			Amenity newAmenity = amenSvc.addAmenity(principal.getName(), amenity, trailId);
-			newAmenities.add(newAmenity);
+			if(newAmenity != null) {
+				newAmenities.add(newAmenity);
+			}
 		}
 		
 		return newAmenities;

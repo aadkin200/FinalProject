@@ -150,18 +150,19 @@ export class NewTrailFormComponent implements OnInit {
     this.newTrail.amenities = this.addToTrailAmenities;
     console.log(this.newTrail);
     let newTrailImage: TrailImage = new TrailImage();
+    console.log(this.newTrail.amenities);
     newTrailImage.imageUrl = 'https://static.wixstatic.com/media/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png/v1/fill/w_320,h_256,q_90/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png';
     this.trailService.create(this.newTrail).subscribe(
       data => {
-        // this.amenityService.addAmenity(data.amenities, data.id).subscribe(
-        //   dataAmen => {
-        //     console.log('successful amen add');
+        this.amenityService.addAmenity(data.amenities, data.id).subscribe(
+          dataAmen => {
+            console.log('successful amen add');
 
-        //   },
-        //   error => {
+          },
+          error => {
 
-        //   }
-        // )
+          }
+        )
         this.trailImageService.addImage(newTrailImage, data.id).subscribe(
           dataimage => {
             this.router.navigateByUrl(`trail/${data.id}`);

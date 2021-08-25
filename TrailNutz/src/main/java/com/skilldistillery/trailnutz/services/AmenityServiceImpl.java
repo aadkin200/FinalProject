@@ -32,25 +32,19 @@ public class AmenityServiceImpl implements AmenityService {
 
 	@Override
 	public Amenity addAmenity(String username, Amenity amenity, int trailId) {
-		User user = uRepo.findByUsername(username);
+		Amenity managedAmenity = null;
+		try {
+			managedAmenity = repo.findById(amenity.getId()).get();
+			Trail trail = tRepo.findById(trailId).get();
+			managedAmenity.getTrails().add(trail);
+			repo.saveAndFlush(managedAmenity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-	try {
-		Trail trail = tRepo.findById(trailId).get();
-		System.out.println(trail.getAmenities());
-		amenity.addTrail(trail);
-	} catch (Exception e) {
-		amenity = null;
+		
+		return managedAmenity;
+		
 	}
-	System.out.println(amenity);
-	if(amenity != null) {
-		Amenity newAmenity = repo.saveAndFlush(amenity);
-		Trail managed = tRepo.findById(trailId).get();
-		managed.addAmenity(newAmenity);
-		return newAmenity;
-	}
-	return null;
-	}
-	
-	
 
 }
