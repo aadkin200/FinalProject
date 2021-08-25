@@ -27,6 +27,15 @@ export class UserService {
     return httpOptions;
   }
 
+  setUserFavorite(trailId:number):Observable<User>{
+    return this.http.get<User>(`${this.baseUrl}api/user/${trailId}/favorite`, this.getHttpOptions()).pipe(
+      catchError((err:any) => {
+        console.error(`User.favorite: error updating favorite`);
+        return throwError(err);
+      })
+   )
+  }
+
   getUser():Observable<User>{
     return this.http.get<User>(`${this.baseUrl}api/user/`, this.getHttpOptions()).pipe(
        catchError((err:any) => {

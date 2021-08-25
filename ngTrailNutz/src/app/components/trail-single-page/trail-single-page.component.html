@@ -129,12 +129,12 @@
           <!-- TODO favorite trail-->
           <div *ngIf="isLoggedIn()" class="row justify-content-center">
             <!-- TODO favorite -->
-            <span class="btn w-25 d-flex align-items-center">
-              <p class="align-self-center m-0">Favorite?</p>
+            <span *ngIf="!userFavorite" class="btn w-25 d-flex align-items-center" (click)="setUserFavorite()">
+              <p class="align-self-center m-0 cursor">Favorite?</p>
               <i-bs name="star" width="2vh" height="2vh"> </i-bs>
             </span>
-            <span class="btn w-25 d-flex align-items-center">
-              <p class="align-self-center m-0">Unfavorite?</p>
+            <span *ngIf="userFavorite" class="btn w-25 d-flex align-items-center" (click)="setUserFavorite()">
+              <p class="align-self-center m-0 cursor">Unfavorite?</p>
               <i-bs name="star-fill" width="2vh" height="2vh"> </i-bs>
             </span>
 

@@ -44,6 +44,7 @@ export class TrailSinglePageComponent implements OnInit {
   trailLat: string = '';
   trailLong: string = '';
   closeModal: string = '';
+  userFavorite:boolean = false;
   mapOptions: google.maps.MapOptions = {
     zoom: 14,
   };
@@ -69,6 +70,45 @@ export class TrailSinglePageComponent implements OnInit {
     private router: Router
   ) {}
 
+
+
+  ngOnInit(): void {
+    let trailId = this.activatedRoute.snapshot.params.trailId;
+    this.getSingleTrail(trailId);
+    if(this.authSvc.checkLogin()){
+      this.checkForUser();
+      this.difficultyService.show().subscribe(
+        (data) => {
+          this.newDifficulties = data;
+        },
+        (error) => {
+          console.log('error singleTrail ngOnInit() difficulty', error);
+        }
+      );
+
+      this.routeService.show().subscribe(
+        (data) => {
+          this.newRoutes = data;
+        },
+        (error) => {
+          console.log('error singleTrail ngOnInit() routeType', error);
+        }
+      );
+    }
+  }
+
+  setUserFavorite(){
+    this.userFavorite = !this.userFavorite;
+    this.userSvc.setUserFavorite(this.trail.id).subscribe(
+      fav=>{
+        this.getSingleTrail(this.trail.id);
+      },
+      err=>{
+        console.error("Error updating favorite status single page app");
+      }
+    )
+  }
+
   deleteTrailResource(trailRId:number){
     this.trailResSvc.disable(trailRId, this.trail.id).subscribe(
       success=>{
@@ -78,6 +118,32 @@ export class TrailSinglePageComponent implements OnInit {
         console.error("Error deleting trail Resource");
       }
     )
+  }
+
+  isUserFavorite(){
+    if(this.loggedInUser.favoriteTrails){
+      this.loggedInUser.favoriteTrails.forEach(trail => {
+        if(trail.id == this.trail.id){
+          this.userFavorite = true;
+          return;
+        }
+      })
+    }
+
+  }
+
+  checkForUser(){
+    if(this.authSvc.checkLogin()){
+      this.userSvc.getUser().subscribe(
+        (user) => {
+          this.loggedInUser = user;
+          this.isUserFavorite();
+        },
+        (err) => {
+          console.error('SinglePageView: ngOnInit(): error getting user', err);
+        }
+      );
+    }
   }
 
   triggerModal(content:any) {
@@ -108,37 +174,6 @@ export class TrailSinglePageComponent implements OnInit {
       }
     )
   }
-  ngOnInit(): void {
-    let trailId = this.activatedRoute.snapshot.params.trailId;
-    this.getSingleTrail(trailId);
-    if(this.authSvc.checkLogin()){
-      this.userSvc.getUser().subscribe(
-        (user) => {
-          this.loggedInUser = user;
-        },
-        (err) => {
-          console.error('SinglePageView: ngOnInit(): error getting user', err);
-        }
-      );
-      this.difficultyService.show().subscribe(
-        (data) => {
-          this.newDifficulties = data;
-        },
-        (error) => {
-          console.log('error singleTrail ngOnInit() difficulty', error);
-        }
-      );
-
-      this.routeService.show().subscribe(
-        (data) => {
-          this.newRoutes = data;
-        },
-        (error) => {
-          console.log('error singleTrail ngOnInit() routeType', error);
-        }
-      );
-    }
-  }
 
   addTrailResource(){
     if(!this.tr.title){
@@ -168,7 +203,6 @@ export class TrailSinglePageComponent implements OnInit {
         this.changeMapCord();
         this.editingTrail = Object.assign({}, this.trail);
         this.createBoolArray();
-        console.log(this.trail.trailImages);
         if(this.trail.trailImages != undefined){
           if(this.trail.trailImages.length == 0){
             let trailImage = new TrailImage();
