@@ -349,9 +349,9 @@ INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at
 INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (2, 2, 1, 'https://i.wnc.io/s1024/2018-07-08_pisgah-black-balsam_art-loeb-trail-wooden-sign.jpg', '2020-01-01 10:10');
 INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (3, 3, 2, 'https://www.romanticasheville.com/sites/default/files/u13/chimney-rock-outcropping-trail.jpg', '2020-01-01 10:10');
 INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (4, 3, 2, 'https://i.wnc.io/s1024/2012-09-09_chimney-rock-state-park_outcroppings-trail-structure-rock-view.jpg', '2020-01-01 10:10');
-INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (5, 1, 2, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.romanticasheville.com%2Fgrandfather.htm&psig=AOvVaw0f6m9B2JSEyxniAEs8NInL&ust=1629999691797000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLi38JfczPICFQAAAAAdAAAAABAD', '2020-01-01 10:10');
+INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (5, 1, 2, 'https://www.romanticasheville.com/sites/default/files/images/basic_page/GrandfatherMtnFall.jpg', '2020-01-01 10:10');
 INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (6, 4, 2, 'https://ashevilletrails.com/wp-content/uploads/2018/04/roan-mountain-appalachian-trail-spring.jpg', '2020-01-01 10:10');
-INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (7, 5, 2, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.hikewnc.info%2Ftrailheads%2Fgraveyard-fields%2F&psig=AOvVaw2RXU3zRXSIm1DKO1a6Uv5y&ust=1629999812150000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjwj9LczPICFQAAAAAdAAAAABAD', '2020-01-01 10:10');
+INSERT INTO `trail_image` (`id`, `trail_id`, `user_id`, `image_url`, `created_at`) VALUES (7, 5, 2, 'http://ashevilletrails.com/wp-content/uploads/2018/02/graveyard-fields-waterfalls-trail-03.jpg', '2020-01-01 10:10');
 
 COMMIT;
 
