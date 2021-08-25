@@ -32,6 +32,16 @@ export class AmenityService {
     );
   }
 
+  addAmenity(amenities: Amenity[], trailId: any) {
+    return this.http.post<Amenity[]>(`${this.url}api/trail/${trailId}/amenity`, amenities, this.getHttpOptions())
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError("error in amenity add");
+      })
+    )
+  }
+
   getHttpOptions() {
     const credentials = this.auth.getCredentials();
     const httpOptions = {

@@ -34,7 +34,12 @@
                   </select><br>
                   Amenities:
                   <div *ngFor="let amenity of newAmenities">
-                    {{amenity.name}} &nbsp;<input class="form-check form-check-inline" type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
+                    {{amenity.name}} &nbsp;<input class="form-check form-check-inline" type="checkbox" name="amenities" [value]="amenity" (change)="pushOrPop(amenity, $event)">
+                  </div>
+                  <div>
+                    <!-- {{newAmenities[0].name}}<input type="checkbox" class="form-check form-check-inline" name="amenities" [value]="newAmenities[0].name" [(ngModel)]="newTrail.amenities">
+                    {{newAmenities[1].name}}<input type="checkbox" class="form-check form-check-inline" name="amenities" [value]="newAmenities[1]" [(ngModel)]="newTrail.amenities">
+                    {{newAmenities[2].name}}<input type="checkbox" class="form-check form-check-inline" name="amenities"  [value]="newAmenities[2]" [(ngModel)]="newTrail.amenities"> -->
                   </div>
                   <div class="button-div">
                     <button class="acorn-button btn" (click)="addTrail()">Create Trail</button>
