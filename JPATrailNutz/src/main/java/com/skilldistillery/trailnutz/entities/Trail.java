@@ -21,6 +21,7 @@ public class Trail {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@JsonIgnoreProperties({"favoriteTrails"})
 	@ManyToMany(mappedBy="favoriteTrails")
 	private List<User> users;
 	
@@ -75,6 +76,7 @@ public class Trail {
 	private List<TrailImage> trailImages;
 	@OneToMany(mappedBy="trail")
 	private List<TrailResource> trailResource;
+	@JsonIgnoreProperties("comments")
 	@OneToMany(mappedBy="trail")
 	private List<Comment> comments;
 	@ManyToMany(mappedBy="trails")

@@ -11,6 +11,7 @@ import { DifficultyService } from 'src/app/services/difficulty.service';
 import { RouteTypeService } from 'src/app/services/route-type.service';
 import { TrailService } from 'src/app/services/trail.service';
 import { FormsModule } from '@angular/forms';
+import { TrailImageService } from 'src/app/services/trail-image.service';
 
 @Component({
   selector: 'app-new-trail-form',
@@ -25,13 +26,18 @@ export class NewTrailFormComponent implements OnInit {
   zoom = 15;
   geoCoder = new google.maps.Geocoder;
 
-  newTrail = new Trail();
+  newTrail = new Trail() as Trail;
   newDifficulties: Difficulty[] = [];
   newAmenities: Amenity[] = [];
   newRouteTypes: Routetype[] = [];
+  addToTrailAmenities: Amenity[] = [];
 
   newDifficulty = new Difficulty();
   newRouteType = new Routetype();
+
+  bathroomAmenity = new Amenity();
+  roadExitAmenity = new Amenity();
+  waterSourceAmenity = new Amenity();
 
   formText = '';
 
@@ -44,22 +50,12 @@ export class NewTrailFormComponent implements OnInit {
     position: {lat: 0, lng: 0}
   };
 
-  // latlng: [] | any = null;
-  // marker: [] | any = null;
 
   trailLat: string='';
   trailLong: string='';
 
-  // map = document.getElementById('newMap');
-  // mapMarker = document.getElementById('mapMarker');
 
-  // map = new google.maps.Map(
-  //   document.getElementById("newMap") as HTMLElement,
-  //   {
-  //     center: {lat: this.lat, lng: this.lng},
-  //     zoom: this.mapOptions.zoom
-  //   }
-  // )
+
 
 
 
@@ -70,7 +66,8 @@ export class NewTrailFormComponent implements OnInit {
               private routeTypeService: RouteTypeService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private ngZone: NgZone)
+              private ngZone: NgZone,
+              private trailImageService: TrailImageService)
  { }
 
 
@@ -150,10 +147,30 @@ export class NewTrailFormComponent implements OnInit {
   addTrail(): void {
     this.newTrail.difficulty = this.newDifficulty;
     this.newTrail.routeType = this.newRouteType;
+    this.newTrail.amenities = this.addToTrailAmenities;
     console.log(this.newTrail);
+    let newTrailImage: TrailImage = new TrailImage();
+    newTrailImage.imageUrl = 'https://static.wixstatic.com/media/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png/v1/fill/w_320,h_256,q_90/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png';
     this.trailService.create(this.newTrail).subscribe(
       data => {
-        this.router.navigateByUrl(`trail/${data.id}`);
+        // this.amenityService.addAmenity(this.newTrail.amenities, data.id).subscribe(
+        //   dataAmen => {
+        //     console.log('successful amen add');
+
+        //   },
+        //   error => {
+
+        //   }
+        // )
+        this.trailImageService.addImage(newTrailImage, data.id).subscribe(
+          dataimage => {
+            this.router.navigateByUrl(`trail/${data.id}`);
+          },
+          error => {
+            console.log(error);
+            console.log('error in new-trail-form.component.ts addTrail()');
+          }
+        )
       },
       error => {
         console.log(error);
@@ -168,4 +185,12 @@ export class NewTrailFormComponent implements OnInit {
 
   }
 
+  pushOrPop(amenity:Amenity, event:any){
+    if(event.target.checked){
+      this.addToTrailAmenities.push(amenity);
+    }else {
+      let index:number = this.addToTrailAmenities.indexOf(amenity);
+      this.addToTrailAmenities.splice(index,1);
+    }
+  }
 }

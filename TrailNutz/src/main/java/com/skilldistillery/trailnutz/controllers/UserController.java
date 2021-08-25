@@ -70,5 +70,10 @@ public class UserController {
 		}
 	}
 	
-	
+	@GetMapping("user/{trailId}/favorite")
+	public User updateFavoriteTrails(@PathVariable int trailId, Principal principal, HttpServletResponse res) {
+		User user = userSvc.updateFavoriteTrails(trailId, principal.getName());
+		
+		return user;
+	}
 }

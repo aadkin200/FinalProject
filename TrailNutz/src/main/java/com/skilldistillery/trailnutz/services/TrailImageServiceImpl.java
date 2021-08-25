@@ -33,6 +33,7 @@ public class TrailImageServiceImpl implements TrailImageService {
 		
 		try {
 			Trail trail = tRepo.findById(trailId).get();
+			System.out.println(trail.getTrailImages());
 			trailImage.setTrail(trail);
 			trailImage.setUser(user);
 		} catch (Exception e) {

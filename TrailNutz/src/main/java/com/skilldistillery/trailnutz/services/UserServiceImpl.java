@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.trailnutz.entities.Trail;
 import com.skilldistillery.trailnutz.entities.User;
+import com.skilldistillery.trailnutz.repositories.TrailRepository;
 import com.skilldistillery.trailnutz.repositories.UserRepository;
 
 @Service
@@ -16,7 +18,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepository userRepo;
 	@Autowired
-	PasswordEncoder encoder;
+	private PasswordEncoder encoder;
+	@Autowired
+	private TrailRepository trailRepo;
 
 	@Override
 	public User userByUsername(String username) {
@@ -85,5 +89,26 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> getAllUsers() {
 		return userRepo.findAll();
+	}
+
+	@Override
+	public long hasFavoriteTrail(String username, int trailId) {
+		User user = userRepo.findByUsername(username);
+		return userRepo.getUserFavorites(user.getId(), trailId);
+	}
+
+	@Override
+	public User updateFavoriteTrails(int trailId, String username) {
+		Trail managedTrail = trailRepo.findById(trailId).get();
+		User managedUser = userRepo.findByUsername(username);
+		if(hasFavoriteTrail(username, trailId) > 0) {
+			managedUser.getFavoriteTrails().removeIf(trail -> trail.getId() == trailId);
+			userRepo.saveAndFlush(managedUser);
+		}else {
+			managedUser.getFavoriteTrails().add(managedTrail);
+			userRepo.saveAndFlush(managedUser);
+		}
+
+		return managedUser;
 	}
 }

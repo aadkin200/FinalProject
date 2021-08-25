@@ -41,7 +41,8 @@ public class CommentController {
 	public Comment createComment(@PathVariable Integer trailId, @RequestBody Comment comment, HttpServletRequest req,
 			HttpServletResponse res, Principal principal){
 		String username = principal.getName();
-
+		//prevent lazy load on parent comment
+		System.out.println(comment);
 		Comment newComment = commSrv.createComment(trailId, comment, username);
 		if(newComment == null) {
 			res.setStatus(400);
