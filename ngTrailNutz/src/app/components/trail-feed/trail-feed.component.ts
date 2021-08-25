@@ -39,6 +39,10 @@ export class TrailFeedComponent implements OnInit {
     this.newTrailFormBool = true;
   }
 
+  closeTrailFormFillOut() {
+    this.newTrailFormBool = false;
+  }
+
   loadFeed(){
     this.trailSrv.index().subscribe(
       trails => {
