@@ -44,6 +44,7 @@ export class TrailSinglePageComponent implements OnInit {
   trailLat: string = '';
   trailLong: string = '';
   closeModal: string = '';
+  userFavorite:boolean = false;
   mapOptions: google.maps.MapOptions = {
     zoom: 14,
   };
@@ -69,6 +70,45 @@ export class TrailSinglePageComponent implements OnInit {
     private router: Router
   ) {}
 
+
+
+  ngOnInit(): void {
+    let trailId = this.activatedRoute.snapshot.params.trailId;
+    this.getSingleTrail(trailId);
+    if(this.authSvc.checkLogin()){
+      this.checkForUser();
+      this.difficultyService.show().subscribe(
+        (data) => {
+          this.newDifficulties = data;
+        },
+        (error) => {
+          console.log('error singleTrail ngOnInit() difficulty', error);
+        }
+      );
+
+      this.routeService.show().subscribe(
+        (data) => {
+          this.newRoutes = data;
+        },
+        (error) => {
+          console.log('error singleTrail ngOnInit() routeType', error);
+        }
+      );
+    }
+  }
+
+  setUserFavorite(){
+    this.userFavorite = !this.userFavorite;
+    this.userSvc.setUserFavorite(this.trail.id).subscribe(
+      fav=>{
+        this.getSingleTrail(this.trail.id);
+      },
+      err=>{
+        console.error("Error updating favorite status single page app");
+      }
+    )
+  }
+
   deleteTrailResource(trailRId:number){
     this.trailResSvc.disable(trailRId, this.trail.id).subscribe(
       success=>{
@@ -78,6 +118,32 @@ export class TrailSinglePageComponent implements OnInit {
         console.error("Error deleting trail Resource");
       }
     )
+  }
+
+  isUserFavorite(){
+    if(this.loggedInUser.favoriteTrails){
+      this.loggedInUser.favoriteTrails.forEach(trail => {
+        if(trail.id == this.trail.id){
+          this.userFavorite = true;
+          return;
+        }
+      })
+    }
+
+  }
+
+  checkForUser(){
+    if(this.authSvc.checkLogin()){
+      this.userSvc.getUser().subscribe(
+        (user) => {
+          this.loggedInUser = user;
+          this.isUserFavorite();
+        },
+        (err) => {
+          console.error('SinglePageView: ngOnInit(): error getting user', err);
+        }
+      );
+    }
   }
 
   triggerModal(content:any) {
@@ -108,37 +174,6 @@ export class TrailSinglePageComponent implements OnInit {
       }
     )
   }
-  ngOnInit(): void {
-    let trailId = this.activatedRoute.snapshot.params.trailId;
-    this.getSingleTrail(trailId);
-    if(this.authSvc.checkLogin()){
-      this.userSvc.getUser().subscribe(
-        (user) => {
-          this.loggedInUser = user;
-        },
-        (err) => {
-          console.error('SinglePageView: ngOnInit(): error getting user', err);
-        }
-      );
-      this.difficultyService.show().subscribe(
-        (data) => {
-          this.newDifficulties = data;
-        },
-        (error) => {
-          console.log('error singleTrail ngOnInit() difficulty', error);
-        }
-      );
-
-      this.routeService.show().subscribe(
-        (data) => {
-          this.newRoutes = data;
-        },
-        (error) => {
-          console.log('error singleTrail ngOnInit() routeType', error);
-        }
-      );
-    }
-  }
 
   addTrailResource(){
     if(!this.tr.title){
@@ -160,21 +195,30 @@ export class TrailSinglePageComponent implements OnInit {
     this.trailSvc.show(trailId).subscribe(
       (data) => {
         this.trail = data;
-        if (this.trail.trailImages.length > 0) {
-          this.mainTrailImage = this.trail.trailImages[0];
-        } else {
-          this.mainTrailImage.imageUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png`;
-        }
         this.newDifficulty = this.trail.difficulty;
         this.newRoute = this.trail.routeType;
+        if(this.trail.comments != undefined){
         this.trail.comments = this.trail.comments.filter(comment => comment.enabled);
+        }
         this.changeMapCord();
         this.editingTrail = Object.assign({}, this.trail);
         this.createBoolArray();
+        if(this.trail.trailImages != undefined){
+          if(this.trail.trailImages.length == 0){
+            let trailImage = new TrailImage();
+            trailImage.imageUrl = 'http://blog.archive.org/wp-content/uploads/2016/08/nomor4041.png';
+            this.mainTrailImage = trailImage;
+          }else {
+            this.changeMainImg(this.trail.trailImages[0]);
+          }
+        }
+
+        if(this.trail.comments != undefined){
         this.trail.comments = this.orderPipe.transform(
           this.trail.comments,
           this.trail.comments.forEach((com) => com.createdAt)
         );
+        }
       },
       (err) => {
         console.error(err, `No trail recieved singleComponent`);
@@ -281,11 +325,13 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   createBoolArray() {
+    if(this.trail.comments != undefined){
     for (let i = 0; i < this.trail.comments.length; i++) {
       this.replyCollapse.push(false);
       this.editComments[this.trail.comments[i].id] = false;
       // create edit comments
       this.userEditComment[this.trail.comments[i].id] = new Comment();
+    }
     }
   }
 

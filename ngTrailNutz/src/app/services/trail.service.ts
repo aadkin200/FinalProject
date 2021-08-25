@@ -50,6 +50,10 @@ export class TrailService {
   }
 
   public update(trail: Trail) {
+    delete(trail.user.favoriteTrails);
+    delete(trail.trailImages);
+    delete(trail.comments);
+    console.log(trail);
     return this.http.put<Trail>(`${this.url}`, trail, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
