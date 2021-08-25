@@ -1,9 +1,42 @@
 
 form{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border: 5px solid deepskyblue;
   padding: 30px;
   margin: 20px;
+  border-radius: 70px;
 }
-.profileTop {
-  margin-top: 10vh;
+.profileBox {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 10px;
+  margin-top: 12vh;
+  border-radius: 18px;
+  border: 6px solid darkolivegreen;
+  background-color: sienna;
+  opacity: 90%;
+}
+.profileTrails{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 70px;
+  margin: 15px;
+  background-color: olivedrab;
+  opacity: 90%;
+}
+#cancelButton{
+  margin: 10px;
+  border-radius: 12px;
+}
+img{
+  border: 8px solid sienna;
+}
+.card{
+  background-color: #AE6C4C;
+}
+.list-group li{
+  background-color: #AE6C4C !important;
+}
+h4{
+  text-align: center;
+  text-shadow: black;
+  text-transform: uppercase;
 }

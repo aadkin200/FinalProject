@@ -46,15 +46,15 @@
   </div> -->
 
 <div class="container-fluid">
-<div class="mx-auto d-flex flex-column justify-content-center profileTop" style="width: 90vw;">
+<div class="mx-auto d-flex flex-column justify-content-center profileBox" style="width: 90vw;">
 
-  <div class="container-fluid card p-3">
+  <div class="card p-3">
     <div class="row">
       <div class="col-md-6 text-center">
         <img [src]="user.imageUrl" class="w-50 mx-auto rounded-circle" alt="user profile image">
       </div>
       <div class="col-md-6">
-        <h5 class="card-title">{{user.username}}</h5>
+        <h4 class="card-title">{{user.username}}</h4>
         <p class="card-text"></p>
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between">
@@ -97,23 +97,22 @@
         First Name: <input type="text" class="form-control" name="firstName" [(ngModel)]="editUser.firstName"><br>
      </div>
      <div class="col-sm-6">
-    Last Name: <input type="text" class="form-control" name="lastName" [(ngModel)]="editUser.lastName"><br>
+        Last Name: <input type="text" class="form-control" name="lastName" [(ngModel)]="editUser.lastName"><br>
      </div>
   </div>
     Profile Image: <input type="text" class="form-control" name="imageUrl" [(ngModel)]="editUser.imageUrl"><br>
     Favorite Trail Food: <input type="text" class="form-control" name="favoriteTrailFood" [(ngModel)]="editUser.favoriteTrailFood"><br>
 
-        <div class="btn-group">
-          <button type="button" class="btn btn-outline-info" (click)="updateUser(editUser)">Submit</button>
-          <button type="button" class="btn btn-outline-danger" (click)="closeSelected()">Cancel</button>
-        </div>
+        <button type="button" (click)="updateUser(editUser)">Submit</button>
+        <button type="button" id="cancelButton" (click)="closeSelected()">Cancel</button>
+
       </div>
   </form>
 </div>
 
-<div class="container-fluid card p-3">
+<div class="profileTrails">
 
-  <h5 class="card-title text-center">Favorite Trails</h5>
+  <h4 class="card-title text-center">Favorite Trails</h4>
 
   <ul class="list-group list-group-flush" *ngFor="let trails of user.favoriteTrails">
     <li>
