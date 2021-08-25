@@ -1,8 +1,37 @@
-ul{
-  margin: 10vh;
-}
 body{
-  margin: 10vh;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin: 12vh;
+  margin-left: 7vw;
+  margin-right: 7vw;
+  background-color: lavender;
+  opacity: 77%;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  outline-width: 15px;
+  outline-style: solid;
+  outline-color: lavender;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0px 12px;
+  background-color: lavender;
+  color: #202020;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+h3{
+  text-align: left;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+input{
+  width: 60%;
+}
+button{
+  color: #202020;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+  background-color: thistle;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 2px 4px 0 rgba(0,0,0,0.19);
+}
+button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  background-color: rosybrown;
+  color: white;
 }

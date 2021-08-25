@@ -63,6 +63,11 @@ caption{
 
 h3, h5, a{
   text-align: center;
+  color:rgb(5, 92, 59);
+}
+
+img{
+  margin-left: 200px;
 }
 
 
