@@ -1,12 +1,12 @@
-# FinalProject - Skill Distillery Full Stack Web Programming Bootcamp -
+# FinalProject - Skill Distillery Full Stack Web Development Bootcamp
 
 # Overview
  After a multi-round interview and test, extensive pre-work, and sixteen weeks of ten hour days, weekend projects, pair programming, OCA mock exams, individual, pair, and group projects a Midterm and well over ten languages and front end framework programs covered extensively, it is debatable if the sheer amount of material, or lessons learned are greater. It is with great pride we present to you our final full stack group project, created and implemented by Alex Adkins, Brandon Stine, Kim Nettleton, and Rachel Richardson.
 
 ## TrailNutz
- share your adventures with friends or learn about a trail near you with this dynamic user-friendly application. Designed with outdoor enthusiasts in mind, TrailNutz is unique in that it is user driven. Rather than picking and choosing which information is truly useful from a database of outdated topographical maps, you can learn about a hike from people like you who have recently traveled the same, yet still less beaten path. Aesthetic and functional, educational and useful; enjoy interacting with your friends on TrailNutz as you plan your next getaway!
+ This application has been created with all types of outdoor enthusiasts in mind. You can share your adventures with friends or learn about a trail near you with this dynamic user-friendly application. Designed with outdoor enthusiasts in mind, TrailNutz is unique in that it is user driven. Rather than picking and choosing which information is useful from a database of outdated topographical maps, you can learn about a hike from people like you who have recently traveled the same, yet less beaten path. Aesthetic and functional, educational and useful; enjoy interacting with your friends on TrailNutz as you plan your next getaway!
 
-# Endpoints - needs to be updated :)
+# Endpoints
 
 | Method | URI                | Request Body | Response Body |
 |--------|--------------------|--------------|---------------|
