@@ -7,5 +7,6 @@ import com.skilldistillery.trailnutz.entities.Amenity;
 public interface AmenityService {
 	
 	List<Amenity> amenities();
+	Amenity addAmenity(String username, Amenity amenity, int trailId);
 
 }
