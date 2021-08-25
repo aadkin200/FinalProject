@@ -1,49 +1,73 @@
-<p>new-trail-form works!</p>
 <div class="d-flex justify-content-center outterDiv">
-  <div class="">
-    <div class="">
-      <div class="">
-            <div>
-              <form>
-                <div class="form-group">
+  <div>
+    <form #trailForm="ngForm" >
+      <div class="form-group container-fluid">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Name: <input class="form-control" type="text" name="name" [(ngModel)]="newTrail.name">
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Address: <input class="form-control" id="autoComplete" type="text" placeholder="Enter Hike Location">
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Latitude: <input class="form-control" id="lat" type="number" name="trailheadLatitude" [(ngModel)]="newTrail.trailheadLatitude">
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Longitude: <input class="form-control" id="lng" type="number" name="trailheadLongitude" [(ngModel)]="newTrail.trailheadLongitude">
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            City:<input class="form-control" type="text" name="city" [(ngModel)]="newTrail.city">
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            State: <input class="form-control" type="text" name="state" [(ngModel)]="newTrail.state">
 
-                  Name: <input class="form-control" type="text" name="name" [(ngModel)]="newTrail.name"><br>
-                  <!-- <div class="d-flex w-100">
-                    <div id="my-google-map" class="my-google-map">
-                      <google-map id="newMap" height="250" width="42vw" [center]="latlng" [options]="mapOptions">
-                        <map-marker id="mapMarker" [position]="marker.position"></map-marker>
-                      </google-map>
-                    </div>
-                  </div> -->
-                  Address: <input class="form-control" id="autoComplete" type="text" placeholder="Enter Hike Location"><br>
-                  Latitude: <input class="form-control" id="lat" type="number" name="trailheadLatitude" [(ngModel)]="newTrail.trailheadLatitude"><br>
-                  Longitude: <input class="form-control" id="lng" type="number" name="trailheadLongitude" [(ngModel)]="newTrail.trailheadLongitude"><br>
-                  City:<input class="form-control" type="text" name="city" [(ngModel)]="newTrail.city"><br>
-                  State: <input class="form-control" type="text" name="state" [(ngModel)]="newTrail.state"><br>
-                  Hazards: <input class="form-control" type="text" name="hazards" [(ngModel)]="newTrail.hazards"><br>
-                  Wildlife: <input class="form-control" type="text" name="wildlife" [(ngModel)]="newTrail.wildlife"><br>
-                  Details: <input class="form-control" type="text" name="details" [(ngModel)]="newTrail.details"><br>
-                  Distance: <input class="form-control" type="number" name="distanceMiles" [(ngModel)]="newTrail.distanceMiles"><br>
-                  Difficulty:
-                  <select class="form-select" name="difficulty" [(ngModel)]="newDifficulty">
-                    <option *ngFor="let difficulty of newDifficulties" [ngValue]="difficulty">{{difficulty.name}}</option>
-                  </select><br>
-                  Route Type:
-                  <select class="form-select" name="routeType" [(ngModel)]="newRouteType">
-                    <option *ngFor="let routeType of newRouteTypes" [ngValue]="routeType">{{routeType.name}}</option>
-                  </select><br>
-                  Amenities:
-                  <div *ngFor="let amenity of newAmenities">
-                    {{amenity.name}} &nbsp;<input class="form-check form-check-inline" type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
-                  </div>
-                  <div class="button-div">
-                    <button class="acorn-button btn" (click)="addTrail()">Create Trail</button>
-                  </div>
-                </div>
-              </form>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Hazards: <input class="form-control" type="text" name="hazards" [(ngModel)]="newTrail.hazards">
+
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Wildlife: <input class="form-control" type="text" name="wildlife" [(ngModel)]="newTrail.wildlife">
+
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Details: <input class="form-control" type="text" name="details" [(ngModel)]="newTrail.details">
+
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Distance: <input class="form-control" type="number" name="distanceMiles" [(ngModel)]="newTrail.distanceMiles">
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Difficulty:
+            <select class="form-select" name="difficulty" [(ngModel)]="newDifficulty">
+              <option *ngFor="let difficulty of newDifficulties" [ngValue]="difficulty">{{difficulty.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Route Type:
+            <select class="form-select" name="routeType" [(ngModel)]="newRouteType">
+              <option *ngFor="let routeType of newRouteTypes" [ngValue]="routeType">{{routeType.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            Amenities:
+            <div *ngFor="let amenity of newAmenities">
+              {{amenity.name}} &nbsp;<input class="form-check form-check-inline" type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
             </div>
           </div>
-    </div>
+          <div class="button-div">
+            <button class="acorn-button btn" (click)="addTrail()">Create Trail</button>
+            <button class="acorn-button btn ms-1" (click)="trailForm.resetForm()">Clear</button>
+          </div>
+        </div>
+        <!-- <div class="d-flex w-100">
+          <div id="my-google-map" class="my-google-map">
+            <google-map id="newMap" height="250" width="42vw" [center]="latlng" [options]="mapOptions">
+              <map-marker id="mapMarker" [position]="marker.position"></map-marker>
+            </google-map>
+          </div>
+        </div> -->
+      </div>
+    </form>
   </div>
-  <br>
 </div>

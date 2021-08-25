@@ -17,6 +17,8 @@
   margin-top: 30px;
 }
 
+.pac-container { z-index: 400 !important; }
+
 .button-div {
   display: flex;
   justify-content: center;
