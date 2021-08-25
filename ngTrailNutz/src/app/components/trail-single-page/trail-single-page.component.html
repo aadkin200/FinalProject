@@ -21,7 +21,9 @@
       >
         Delete
       </button>
-      <span class="h4 text-light">Posted By: {{mainTrailImage.user.username}}</span>
+      <span class="h4 text-light"
+        >Posted By: {{ mainTrailImage.user.username }}</span
+      >
     </div>
     <!-- Delete trail image modal -->
     <ng-template #Data let-modal>
@@ -129,18 +131,12 @@
             <!-- TODO favorite -->
             <span class="btn w-25 d-flex align-items-center">
               <p class="align-self-center m-0">Favorite?</p>
-              <i-bs name="star"
-                 width="2vh"
-                 height="2vh">
-                </i-bs>
-              </span>
-              <span class="btn w-25 d-flex align-items-center">
-                <p class="align-self-center m-0" >Unfavorite?</p>
-                <i-bs name="star-fill"
-                   width="2vh"
-                   height="2vh">
-                  </i-bs>
-                </span>
+              <i-bs name="star" width="2vh" height="2vh"> </i-bs>
+            </span>
+            <span class="btn w-25 d-flex align-items-center">
+              <p class="align-self-center m-0">Unfavorite?</p>
+              <i-bs name="star-fill" width="2vh" height="2vh"> </i-bs>
+            </span>
 
             <button
               [ngClass]="
@@ -435,12 +431,20 @@
                 <div
                   class="card col-12 col-md-6 col-lg-4 bg-white p-1"
                   *ngFor="let resource of trail.trailResource; let i = index"
-                 >
-
+                >
                   <div
-                   class="d-flex justify-content-end text-end text-danger deleteTR"
-                   (click)="triggerModal(trailR)"
-                   >
+                    *ngIf="
+                      loggedInUser.username === trail.user.username ||
+                      loggedInUser.role === 'ADMIN'
+                    "
+                    class="
+                      d-flex
+                      justify-content-end
+                      text-end text-danger
+                      deleteTR
+                    "
+                    (click)="triggerModal(trailR)"
+                  >
                     X
                   </div>
 
@@ -452,37 +456,41 @@
                     >Resource {{ i }}</a
                   >
                   <!-- trail resource modal -->
-                <ng-template #trailR let-modal>
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">Delete Resouce?</h4>
-                    <button
-                      type="button"
-                      class="close"
-                      aria-label="Close"
-                      (click)="modal.dismiss('Cross click')"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <p>
-                      <strong>Are you sure you want to delete trail resource?</strong>
-                    </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      (click)="deleteTrailResource(resource.id)"
-                      type="button"
-                      class="btn btn-danger"
-                      (click)="modal.close('Save click')"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </ng-template>
-                <!-- trail resource modal end -->
+                  <ng-template #trailR let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">
+                        Delete Resouce?
+                      </h4>
+                      <button
+                        type="button"
+                        class="close"
+                        aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"
+                      >
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        <strong
+                          >Are you sure you want to delete trail
+                          resource?</strong
+                        >
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        (click)="deleteTrailResource(resource.id)"
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="modal.close('Save click')"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </ng-template>
+                  <!-- trail resource modal end -->
                 </div>
-
               </div>
             </div>
           </div>
