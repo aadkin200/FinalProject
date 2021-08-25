@@ -5,7 +5,7 @@ export class TrailImage {
   id: number;
   imageUrl: string;
   createAt: string;
-  trail: Trail;
+  trail: Trail | null | undefined;
   user: User;
 
 

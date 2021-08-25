@@ -19,6 +19,10 @@ export class TrailImageService {
     ) { }
 
   addImage(trailImage: TrailImage, trailId: any) {
+    console.log(trailImage);
+    delete(trailImage.trail);
+    console.log(trailImage);
+
     return this.http.post<TrailImage>(`${this.baseUrl}api/trail/${trailId}/trailimg`, trailImage, this.getHttpOptions())
     .pipe(
       catchError((err: any) => {

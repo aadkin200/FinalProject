@@ -153,7 +153,7 @@ export class NewTrailFormComponent implements OnInit {
     newTrailImage.imageUrl = 'https://static.wixstatic.com/media/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png/v1/fill/w_320,h_256,q_90/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png';
     this.trailService.create(this.newTrail).subscribe(
       data => {
-        // this.amenityService.addAmenity(this.newTrail.amenities, data.id).subscribe(
+        // this.amenityService.addAmenity(data.amenities, data.id).subscribe(
         //   dataAmen => {
         //     console.log('successful amen add');
 
