@@ -1,6 +1,7 @@
 package com.skilldistillery.trailnutz.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,13 +84,13 @@ public class TrailController {
 									  HttpServletRequest req,
 									  HttpServletResponse res,
 									  Principal principal) {
-		Trail managed = trailSvc.show(principal.getName(), trailId);
+		List<Amenity> newAmenities = new ArrayList<>();
 		for (Amenity amenity : amenities) {
-			amenity.getTrails().add(managed);
-			amenRepo.saveAndFlush(amenity);
+			if (amenity != null) {
+				Amenity newAmenity = amenRepo.saveAndFlush(amenity);
+				newAmenities.add(newAmenity);
+			}
 		}
-		
-		managed.setAmenities(amenities);
-		return amenities;
+		return newAmenities;
 	}
 }
