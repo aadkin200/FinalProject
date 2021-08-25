@@ -69,6 +69,17 @@ export class TrailSinglePageComponent implements OnInit {
     private router: Router
   ) {}
 
+  deleteTrailResource(trailRId:number){
+    this.trailResSvc.disable(trailRId, this.trail.id).subscribe(
+      success=>{
+        this.getSingleTrail(this.trail.id);
+      },
+      err=>{
+        console.error("Error deleting trail Resource");
+      }
+    )
+  }
+
   triggerModal(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((res) => {
       this.closeModal = `Closed with: ${res}`;
