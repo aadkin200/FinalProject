@@ -66,8 +66,15 @@ h3, h5, a{
   color:rgb(5, 92, 59);
 }
 
-img{
+/* img{
   margin-left: 200px;
+} */
+
+.image-container{
+
+  display: flex;
+  justify-content: center;
+
 }
 
 

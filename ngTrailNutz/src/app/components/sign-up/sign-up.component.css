@@ -32,8 +32,13 @@ h5{
   color:darkslategrey;
 }
 
-a{
+.linkedIn{
   color:rgb(4, 82, 39);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
 }
 
 
@@ -70,9 +75,7 @@ img{
   margin-left: 200px;
 }
 
-.github-development, .linkedIn{
-margin-left: 200px;
-}
+
 
 
 
