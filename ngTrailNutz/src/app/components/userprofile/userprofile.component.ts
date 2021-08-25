@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Trail } from 'src/app/models/trail';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +16,7 @@ export class UserprofileComponent implements OnInit {
   editUser: User = new User();
   selected: User | null = null;
 
-  constructor(private auth: AuthService, private userSvc: UserService) { }
+  constructor(private auth: AuthService, private userSvc: UserService, private router: Router) { }
 
   ngOnInit(): void {
    this.reload();
@@ -35,12 +37,10 @@ export class UserprofileComponent implements OnInit {
     }
   }
 
-
   setSelected(user: any) : void {
     this.selected = user;
     this.displayEdit(user);
   }
-
 
   displayEdit(user: any): void {
     this.editUser = user;
@@ -66,15 +66,6 @@ export class UserprofileComponent implements OnInit {
     this.selected = null;
   }
 
-  // disableUser(userId: number) {
-
-  //   this.userSvc.disable(userId).subscribe(
-  //     error => {
-  //       console.log(error);
-  //       console.log("error disabling user through service")
-  //     }
-  //   );
-  // }
 
   removeEmpty(){
     delete this.editUser.role;
@@ -100,4 +91,11 @@ export class UserprofileComponent implements OnInit {
       }
     );
   }
+
+  displayTrail(trail: Trail){
+
+    this.router.navigateByUrl(`trail/${trail.id}`);
+  }
+
+
 }
