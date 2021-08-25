@@ -52,7 +52,7 @@
           <div class="col-sm-12 col-md-6 col-lg-4">
             Amenities:
             <div *ngFor="let amenity of newAmenities">
-              {{amenity.name}} &nbsp;<input class="form-check form-check-inline" type="checkbox" name="amenities" [(ngModel)]="newTrail.amenities" value="{{amenity}}">
+              {{amenity.name}} &nbsp;<input class="form-check form-check-inline" type="checkbox" name="amenities" [value]="amenity" (change)="pushOrPop(amenity, $event)">
             </div>
           </div>
           <div class="button-div">

@@ -74,7 +74,6 @@ public class TrailController {
 						Principal principal) {
 		return trailSvc.update(principal.getName(), trailId);
 	}
-<<<<<<< HEAD
 	
 	@PostMapping("trail/{trailId}/amenity")
 	public List<Amenity> addAmenities(@PathVariable int trailId,
@@ -91,9 +90,4 @@ public class TrailController {
 		managed.setAmenities(amenities);
 		return amenities;
 	}
-	
-	
-
-=======
->>>>>>> 2f1d90616b11dd2689dddf8fc53f61d356c81692
 }
