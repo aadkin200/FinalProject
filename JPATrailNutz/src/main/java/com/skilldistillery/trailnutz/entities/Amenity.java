@@ -1,5 +1,6 @@
 package com.skilldistillery.trailnutz.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -35,6 +36,22 @@ public class Amenity {
 			   joinColumns=@JoinColumn(name="amenity_id"), 
 			   inverseJoinColumns=@JoinColumn(name="trail_id"))
 	private List<Trail> trails;
+	
+	
+	
+	public Amenity(int id, String name, String description, String imageUrl, List<Trail> trails) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.imageUrl = imageUrl;
+		this.trails = trails;
+	}
+
+	public void addTrail(Trail trail) {
+		System.out.println(this.trails);
+		this.trails.add(trail);
+	}
 
 	public Amenity() {
 		super();
