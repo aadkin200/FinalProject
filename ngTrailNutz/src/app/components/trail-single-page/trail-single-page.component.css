@@ -16,6 +16,10 @@
   position: relative;
 }
 
+.deleteTR {
+  cursor: pointer;
+}
+
 .pictureContainer:before{
   content:"";
   position:absolute;
@@ -36,6 +40,16 @@
 }
 .pictureContainer:hover button {
   opacity: 1;
+}
+
+.pictureContainer span {
+  position: absolute;
+  width: 15%;
+  top: 5%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  opacity:1;
 }
 
 .thumbnail {

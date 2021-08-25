@@ -20,7 +20,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { NgbCarousel, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
-import { imageFill, images, brush, circleSquare } from 'ngx-bootstrap-icons';
+import { imageFill, images, brush, circleSquare, star, starFill } from 'ngx-bootstrap-icons';
 import { OrderModule } from 'ngx-order-pipe';
 import { AdminViewComponent } from './components/admin-view/admin-view.component';
 
@@ -31,7 +31,9 @@ const icons = {
   imageFill,
   images,
   brush,
-  circleSquare
+  circleSquare,
+  star,
+  starFill
 };
 
 

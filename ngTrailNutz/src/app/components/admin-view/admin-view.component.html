@@ -1,18 +1,37 @@
 <app-navbar></app-navbar>
 <!-- <p>admin-view works!</p> -->
-<div class="containere-fluid">
-<div class="md-form">
-  <input type="search" placeholder="Username">
-</div>
-  <ul *ngFor="let user of users">
 
-    <li>{{user.username}}</li>
-    <li>{{user.role}}</li>
-    <li>{{user.enabled}}</li>
+<body>
+  <div class="userTable">
+    <!-- <div class="m-1"> -->
+     <h3 for="search"> Search All Users:</h3>
+     <input (keyup)="searchByUsername($event)" [value]="search"
+     class="form-control shadow-sm" type="text" name="search"/>
+    <!-- </div> -->
 
-    <button (click)="disableUser(user.id)">Disable Account</button>
-    <button (click)="enableUser(user.id)">Enable Account</button>
-
-  </ul>
-
-</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Username</th>
+          <th scope="col">Role</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Enabled</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th scope="row">{{user.username}}</th>
+          <td>{{user.role}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.enabled}}</td>
+          <td><button (click)="disableUser(user.id)">Disable User</button></td>
+          <td><button (click)="enableUser(user.id)">Enable User</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>

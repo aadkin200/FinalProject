@@ -1,17 +1,58 @@
 <app-navbar></app-navbar>
+
 <div class="container-fluid card top-of-card rounded">
   <div class="singleCardView mx-auto pt-3">
-    <h1 class="text-center mb-2">{{trail.name}}</h1>
+    <h1 class="text-center mb-2">{{ trail.name }}</h1>
     <div class="row pe-1 pictureContainer">
       <img
         class="shadow-lg singleImage rounded"
         [src]="mainTrailImage.imageUrl"
         alt="trail images"
       />
-      <button [ngClass]="mainTrailImage.user.username === loggedInUser.username || loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-danger' : 'd-none'" (click)="deleteTrailImage()">
+      <button
+        [ngClass]="
+          mainTrailImage.user.username === loggedInUser.username ||
+          loggedInUser.username === trail.user.username ||
+          loggedInUser.role === 'ADMIN'
+            ? 'btn btn-danger'
+            : 'd-none'
+        "
+        (click)="triggerModal(Data)"
+      >
         Delete
       </button>
+      <span class="h4 text-light">Posted By: {{mainTrailImage.user.username}}</span>
     </div>
+    <!-- Delete trail image modal -->
+    <ng-template #Data let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Comment?</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>Are you sure you want to delete this image?</strong>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="deleteTrailImage()"
+          type="button"
+          class="btn btn-danger"
+          (click)="modal.close('Save click')"
+        >
+          Delete
+        </button>
+      </div>
+    </ng-template>
+    <!-- End of trail image modal -->
     <div class="row">
       <!-- left side -->
       <div class="col-md-6 ps-0">
@@ -49,14 +90,13 @@
             />
           </ng-template>
           <button
-
             class="btn thumbnail"
             placement="right"
             #add="ngbPopover"
             [ngbPopover]="addImage"
             [autoClose]="false"
             [popoverTitle]="addImageTitle"
-            [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
+            [ngClass]="isLoggedIn() ? 'btn thumbnail' : 'btn thumbnail d-none'"
           >
             <i-bs width="5vw" height="5vh" name="images"></i-bs>
           </button>
@@ -84,103 +124,232 @@
             </div>
           </div>
           <!-- trail controls -->
-          <!-- TODO trail Disable -->
-          <div class="row justify-content-center">
-            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-dark m-1 trailBtn' : 'd-none'" (click)="isEditing = !isEditing">Edit</button>
-            <button [ngClass]="loggedInUser.username === trail.user.username || loggedInUser.role === 'ADMIN' ? 'btn btn-outline-danger m-1 trailBtn' : 'd-none'" >Delete</button>
+          <!-- TODO favorite trail-->
+          <div *ngIf="isLoggedIn()" class="row justify-content-center">
+            <!-- TODO favorite -->
+            <span class="btn w-25 d-flex align-items-center">
+              <p class="align-self-center m-0">Favorite?</p>
+              <i-bs name="star"
+                 width="2vh"
+                 height="2vh">
+                </i-bs>
+              </span>
+              <span class="btn w-25 d-flex align-items-center">
+                <p class="align-self-center m-0" >Unfavorite?</p>
+                <i-bs name="star-fill"
+                   width="2vh"
+                   height="2vh">
+                  </i-bs>
+                </span>
+
+            <button
+              [ngClass]="
+                loggedInUser.username === trail.user.username ||
+                loggedInUser.role === 'ADMIN'
+                  ? 'btn btn-outline-dark m-1 trailBtn'
+                  : 'd-none'
+              "
+              (click)="isEditing = !isEditing"
+            >
+              Edit
+            </button>
+            <button
+              (click)="triggerModal(modalData)"
+              [ngClass]="
+                loggedInUser.username === trail.user.username ||
+                loggedInUser.role === 'ADMIN'
+                  ? 'btn btn-outline-danger m-1 trailBtn'
+                  : 'd-none'
+              "
+            >
+              Delete
+            </button>
           </div>
+          <!-- Trail delete modal -->
+          <ng-template #modalData let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Delete Trail?</h4>
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>
+                <strong
+                  >Are you sure you want to delete {{ trail.name }}?
+                </strong>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button
+                (click)="deleteTrail()"
+                type="button"
+                class="btn btn-danger"
+                (click)="modal.close('Save click')"
+              >
+                Delete
+              </button>
+            </div>
+          </ng-template>
           <!-- trail details -->
           <section class="shadow-lg p-1 rounded">
             <div class="row mt-2">
               <div class="col-4">Added:</div>
-              <div class="col">{{trail.createdAt | date: "MMM-dd-YYYY"}}</div>
+              <div class="col">{{ trail.createdAt | date: "MMM-dd-YYYY" }}</div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Created By:</div>
-              <div class="col">{{trail.user.username}}</div>
+              <div class="col">{{ trail.user.username }}</div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Trail Name:</div>
-              <div *ngIf="!isEditing" class="col">{{trail.name}}</div>
+              <div *ngIf="!isEditing" class="col">{{ trail.name }}</div>
               <div *ngIf="isEditing" class="col">
-                <input class="form-control" type="text" name="trailName" [(ngModel)]="editingTrail.name">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="trailName"
+                  [(ngModel)]="editingTrail.name"
+                />
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Distance Mile:</div>
-              <div class="col" *ngIf="!isEditing">{{trail.distanceMiles}} miles</div>
+              <div class="col" *ngIf="!isEditing">
+                {{ trail.distanceMiles }} miles
+              </div>
               <div *ngIf="isEditing" class="col">
-                <input class="form-control" type="number" name="distance" [(ngModel)]="editingTrail.distanceMiles">
+                <input
+                  class="form-control"
+                  type="number"
+                  name="distance"
+                  [(ngModel)]="editingTrail.distanceMiles"
+                />
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Elevation Change:</div>
-              <div *ngIf="!isEditing" class="col">{{trail.elevationChangeFeet}} feet</div>
+              <div *ngIf="!isEditing" class="col">
+                {{ trail.elevationChangeFeet }} feet
+              </div>
               <div *ngIf="isEditing" class="col">
-                <input class="form-control" type="number" name="elevation" [(ngModel)]="editingTrail.elevationChangeFeet">
+                <input
+                  class="form-control"
+                  type="number"
+                  name="elevation"
+                  [(ngModel)]="editingTrail.elevationChangeFeet"
+                />
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Known hazards:</div>
-              <div *ngIf="!isEditing" class="col">{{trail.hazards}}</div>
+              <div *ngIf="!isEditing" class="col">{{ trail.hazards }}</div>
               <div *ngIf="isEditing" class="col">
-                <input class="form-control" type="text" name="hazards" [(ngModel)]="editingTrail.hazards">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="hazards"
+                  [(ngModel)]="editingTrail.hazards"
+                />
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Route type:</div>
               <div *ngIf="!isEditing" class="col">
-                <p>{{trail.routeType.name}}</p>
-                <p>{{trail.routeType.description}}</p>
+                <p>{{ trail.routeType.name }}</p>
+                <p>{{ trail.routeType.description }}</p>
               </div>
               <div *ngIf="isEditing" class="col">
-                <select class="form-control" name="difficulty" [(ngModel)]="newRoute.name">
-                  <option *ngFor="let route of newRoutes" selected [ngValue]="route.name">{{route.name}}</option>
+                <select
+                  class="form-control"
+                  name="difficulty"
+                  [(ngModel)]="newRoute.name"
+                >
+                  <option
+                    *ngFor="let route of newRoutes"
+                    selected
+                    [ngValue]="route.name"
+                  >
+                    {{ route.name }}
+                  </option>
                 </select>
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Difficulty:</div>
               <div class="col">
                 <div *ngIf="isEditing">
-                  <select class="form-control" name="difficulty" [(ngModel)]="newDifficulty.name">
-                    <option *ngFor="let difficulty of newDifficulties" selected [ngValue]="difficulty.name">{{difficulty.name}}</option>
+                  <select
+                    class="form-control"
+                    name="difficulty"
+                    [(ngModel)]="newDifficulty.name"
+                  >
+                    <option
+                      *ngFor="let difficulty of newDifficulties"
+                      selected
+                      [ngValue]="difficulty.name"
+                    >
+                      {{ difficulty.name }}
+                    </option>
                   </select>
                 </div>
                 <div *ngIf="!isEditing">
-                  <p>{{trail.difficulty.name}}</p>
-                  <p>{{trail.difficulty.description}}</p>
+                  <p>{{ trail.difficulty.name }}</p>
+                  <p>{{ trail.difficulty.description }}</p>
                 </div>
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Details:</div>
-              <div *ngIf="!isEditing" class="col">{{trail.details}}</div>
+              <div *ngIf="!isEditing" class="col">{{ trail.details }}</div>
               <div *ngIf="isEditing" class="col">
-                <textarea class="form-control textarea" rows="4" type="text" name="details" [(ngModel)]="editingTrail.details"></textarea>
+                <textarea
+                  class="form-control textarea"
+                  rows="4"
+                  type="text"
+                  name="details"
+                  [(ngModel)]="editingTrail.details"
+                ></textarea>
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Wildlife:</div>
-              <div *ngIf="!isEditing" class="col">{{trail.wildlife}}</div>
+              <div *ngIf="!isEditing" class="col">{{ trail.wildlife }}</div>
               <div *ngIf="isEditing" class="col">
-                <textarea class="form-control textarea" rows="4" type="text" name="wildlife" [(ngModel)]="editingTrail.wildlife"></textarea>
+                <textarea
+                  class="form-control textarea"
+                  rows="4"
+                  type="text"
+                  name="wildlife"
+                  [(ngModel)]="editingTrail.wildlife"
+                ></textarea>
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-4">Amenities:</div>
               <div class="col p-0" *ngIf="!isEditing">
-                <div class="p-0" *ngFor="let amen of trail.amenities" class="col">{{amen.name}}</div>
+                <div
+                  class="p-0"
+                  *ngFor="let amen of trail.amenities"
+                  class="col"
+                >
+                  {{ amen.name }}
+                </div>
               </div>
               <div *ngIf="isEditing" class="col">
                 what do we want here? Checkboxes?
@@ -188,12 +357,14 @@
             </div>
           </section>
           <div class="text-center mb-2" *ngIf="isEditing">
-            <button class="btn w-50 mt-2 btn-success" (click)="editTrail()">Submit</button>
+            <button class="btn w-50 mt-2 btn-success" (click)="editTrail()">
+              Submit
+            </button>
           </div>
           <!--Trail Resouce Section -->
-          <section class=" p-1 text-center mt-2">
+          <section class="p-1 text-center mt-2">
             <h1>Trail Resources</h1>
-            <hr>
+            <hr />
           </section>
           <div class="row m-2 shadow-lg text-center p-2 rounded">
             <ng-template #addResouceTitle>Add new trail resource</ng-template>
@@ -224,17 +395,17 @@
                     aria-describedby="basic-addon2"
                     [(ngModel)]="tr.resourceUrl"
                   />
-              </div>
+                </div>
 
                 <div class="d-flex justify-content-between w-100 mt-2">
                   <input
-                  type="hidden"
-                  role="uploadcare-uploader"
-                  data-public-key="aa6ba1052436d3b43dca"
-                  name="my_file_input"
-                />
+                    type="hidden"
+                    role="uploadcare-uploader"
+                    data-public-key="aa6ba1052436d3b43dca"
+                    name="my_file_input"
+                  />
                   <button
-                  (click)="addTrailResource()"
+                    (click)="addTrailResource()"
                     class="btn btn-outline-secondary"
                     type="submit"
                     (click)="trs.close()"
@@ -243,42 +414,91 @@
                   </button>
                 </div>
               </div>
-
             </ng-template>
             <div class="container-fluid">
               <div class="row">
-                <div class="col-12 col-md-6 col-lg-4 bg-white ">
+                <div class="col-12 col-md-6 col-lg-4 bg-white">
                   <button
-                  class="btn  col-2"
-                  placement="right"
-                  #trs="ngbPopover"
-                  [ngbPopover]="addResouce"
-                  [autoClose]="false"
-                  [popoverTitle]="addResouceTitle"
-                  [ngClass]="isLoggedIn() ? 'btn thumbnail': 'btn thumbnail d-none'"
-                >
-                  <i-bs width="5vw" height="5vh" name="circleSquare"></i-bs>
-                </button>
+                    class="btn col-2"
+                    placement="right"
+                    #trs="ngbPopover"
+                    [ngbPopover]="addResouce"
+                    [autoClose]="false"
+                    [popoverTitle]="addResouceTitle"
+                    [ngClass]="
+                      isLoggedIn() ? 'btn thumbnail' : 'btn thumbnail d-none'
+                    "
+                  >
+                    <i-bs width="5vw" height="5vh" name="circleSquare"></i-bs>
+                  </button>
                 </div>
-              <div class="card col-12 col-md-6 col-lg-4 bg-white " *ngFor="let resource of trail.trailResource; let i = index">
-                <h6>{{resource.title}}</h6>
-                <a href="{{resource.resourceUrl}}" target="_blank" rel="noopener noreferrer">Resource {{i}}</a>
+                <div
+                  class="card col-12 col-md-6 col-lg-4 bg-white p-1"
+                  *ngFor="let resource of trail.trailResource; let i = index"
+                 >
+
+                  <div
+                   class="d-flex justify-content-end text-end text-danger deleteTR"
+                   (click)="triggerModal(trailR)"
+                   >
+                    X
+                  </div>
+
+                  <h6>{{ resource.title }}</h6>
+                  <a
+                    href="{{ resource.resourceUrl }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Resource {{ i }}</a
+                  >
+                  <!-- trail resource modal -->
+                <ng-template #trailR let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Delete Resouce?</h4>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="modal.dismiss('Cross click')"
+                    >
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      <strong>Are you sure you want to delete trail resource?</strong>
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      (click)="deleteTrailResource(resource.id)"
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="modal.close('Save click')"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </ng-template>
+                <!-- trail resource modal end -->
+                </div>
+
               </div>
-              </div>
-
-
-
             </div>
-
           </div>
         </div>
       </div>
-      <!-- TODO Set up some kind of delete for the trail resources -->
 
       <!-- right side -->
       <div class="col-md-6 pe-1">
         <!-- Input for new comments -->
-        <form [ngClass]="isLoggedIn() ? 'shadow-lg mt-1 border p-2 bg-info text-light': 'd-none'">
+        <form
+          [ngClass]="
+            isLoggedIn()
+              ? 'shadow-lg mt-1 border p-2 bg-info text-light'
+              : 'd-none'
+          "
+        >
           <label for="subject">Subject</label>
           <input
             [(ngModel)]="topComment.subject"
@@ -302,7 +522,11 @@
               aria-describedby="basic-addon2"
             ></textarea>
             <div class="input-group-append">
-              <button class="btn btn-outline-light" type="button" (click)="postComment()">
+              <button
+                class="btn btn-outline-light"
+                type="button"
+                (click)="postComment()"
+              >
                 Submit
               </button>
             </div>
@@ -346,19 +570,45 @@
                           </div>
                         </div>
                         <div class="mt-2">
-                          <h6 *ngIf="!editComments[com.id]" >{{com.subject}}</h6>
-                          <p *ngIf="!editComments[com.id]" class="comment-text">{{ com.message }}</p>
-                          <input *ngIf="editComments[com.id]" type="text" name="subject" class="form-control" [(ngModel)]="userEditComment[com.id].subject">
-                          <textarea class="textarea w-100" *ngIf="editComments[com.id]" name="commentUpdate" id="" rows="5" [(ngModel)]="userEditComment[com.id].message">
+                          <h6 *ngIf="!editComments[com.id]">
+                            {{ com.subject }}
+                          </h6>
+                          <p *ngIf="!editComments[com.id]" class="comment-text">
+                            {{ com.message }}
+                          </p>
+                          <input
+                            *ngIf="editComments[com.id]"
+                            type="text"
+                            name="subject"
+                            class="form-control"
+                            [(ngModel)]="userEditComment[com.id].subject"
+                          />
+                          <textarea
+                            class="textarea w-100"
+                            *ngIf="editComments[com.id]"
+                            name="commentUpdate"
+                            id=""
+                            rows="5"
+                            [(ngModel)]="userEditComment[com.id].message"
+                          >
                           </textarea>
-                          <!-- TODO submit edit comment -->
-                          <button *ngIf="editComments[com.id]" class="btn btn-outline-success" (click)="submitEditComment(com.id)">Submit</button>
+                          <button
+                            *ngIf="editComments[com.id]"
+                            class="btn btn-outline-success"
+                            (click)="submitEditComment(com.id)"
+                          >
+                            Submit
+                          </button>
                         </div>
                       </div>
                       <div class="bg-white p-2 container">
                         <div class="row fs-12">
                           <div
-                            [ngClass]="isLoggedIn() ? 'like p-2 cursor action-collapse col-3': 'd-none'"
+                            [ngClass]="
+                              isLoggedIn()
+                                ? 'like p-2 cursor action-collapse col-3'
+                                : 'd-none'
+                            "
                             class="like p-2 cursor action-collapse"
                             data-bs-toggle="collapse"
                             attr.data-bs-target="#com{{ com.id }}"
@@ -366,47 +616,106 @@
                             aria-controls="collapseExample"
                           >
                             <i-bs name="brush" width="10" height="10"> </i-bs
-                            ><span class="ml-1" >Comment</span>
+                            ><span class="ml-1">Comment</span>
                           </div>
                           <div
-                          type="button" class="like p-2 cursor col-2" (click)="replyCollapse[i] = !replyCollapse[i]" [attr.aria-expanded]="replyCollapse[i]"
-                          aria-controls="collapseExample"
-                          *ngIf="com.replies.length > 0"
+                            type="button"
+                            class="like p-2 cursor col-2"
+                            (click)="replyCollapse[i] = !replyCollapse[i]"
+                            [attr.aria-expanded]="replyCollapse[i]"
+                            aria-controls="collapseExample"
+                            *ngIf="com.replies.length > 0"
                           >
-                            <i class="fa fa-share"></i
-                            ><span>Replies</span>
+                            <i class="fa fa-share"></i><span>Replies</span>
                           </div>
-                          <!-- TODO: Disable -->
-                          <!-- TODO: In place edit -->
-                          <div [ngClass]="com.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-3' : 'd-none'" (click)="editComment(com, i)">Edit</div>
-                          <div [ngClass]="com.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'" (click)="deleteComment(com.id)" >Delete</div>
+                          <div
+                            [ngClass]="
+                              com.user.username === loggedInUser.username
+                                ? 'like p-2 cursor text-primary col-3'
+                                : 'd-none'
+                            "
+                            (click)="editComment(com, i)"
+                          >
+                            Edit
+                          </div>
+                          <div
+                            [ngClass]="
+                              com.user.username === loggedInUser.username ||
+                              loggedInUser.role === 'ADMIN'
+                                ? 'col like p-2 cursor text-danger text-end'
+                                : 'd-none'
+                            "
+                            (click)="triggerModal(commentData)"
+                          >
+                            Delete
+                          </div>
                         </div>
                       </div>
+                      <!-- delete comment modal -->
+                      <ng-template #commentData let-modal>
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="modal-basic-title">
+                            Delete Comment?
+                          </h4>
+                          <button
+                            type="button"
+                            class="close"
+                            aria-label="Close"
+                            (click)="modal.dismiss('Cross click')"
+                          >
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>
+                            <strong
+                              >Are you sure you want to delete this
+                              comment?</strong
+                            >
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            (click)="deleteComment(com.id)"
+                            type="button"
+                            class="btn btn-danger"
+                            (click)="modal.close('Save click')"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </ng-template>
+                      <!-- end of comment delete modal -->
                       <div id="com{{ com.id }}" class="bg-light p-2 collapse">
                         <div
-                        [ngClass]="isLoggedIn() ? 'd-flex flex-row align-items-start': 'd-none'"
-                         >
+                          [ngClass]="
+                            isLoggedIn()
+                              ? 'd-flex flex-row align-items-start'
+                              : 'd-none'
+                          "
+                        >
                           <img
                             class="rounded-circle"
                             [src]="loggedInUser.imageUrl"
                             width="40"
-                          /><textarea [(ngModel)]="currentComment.message"
+                          /><textarea
+                            [(ngModel)]="currentComment.message"
                             class="form-control ml-1 shadow-none textarea"
                           ></textarea>
                         </div>
                         <div class="mt-2 text-right">
                           <button
-                          data-bs-toggle="collapse"
-                          attr.data-bs-target="#com{{ com.id }}"
+                            data-bs-toggle="collapse"
+                            attr.data-bs-target="#com{{ com.id }}"
                             class="btn btn-primary btn-sm shadow-none"
                             type="button"
                             (click)="postReply(com)"
                           >
                             Post comment</button
                           ><button
-                          data-bs-toggle="collapse"
-                          attr.data-bs-target="#com{{ com.id }}"
-                           class="btn btn-primary btn-sm shadow-none"
+                            data-bs-toggle="collapse"
+                            attr.data-bs-target="#com{{ com.id }}"
+                            class="btn btn-primary btn-sm shadow-none"
                             class="
                               btn btn-outline-primary btn-sm
                               ml-1
@@ -424,98 +733,183 @@
                 </div>
               </div>
               <div
-              *ngFor="let reply of com.replies | orderBy:com.replies.createdAt"
-              #collapse="ngbCollapse" [(ngbCollapse)]="!replyCollapse[i]"
+                *ngFor="
+                  let reply of com.replies | orderBy: com.replies.createdAt
+                "
+                #collapse="ngbCollapse"
+                [(ngbCollapse)]="!replyCollapse[i]"
               >
-              <div *ngIf="reply.enabled">
+                <div *ngIf="reply.enabled">
+                  <div class="ms-2">
+                    <div class="container card card-bg-gray">
+                      <div class="d-flex justify-content-center row">
+                        <div class="col">
+                          <div
+                            class="d-flex flex-column comment-section"
+                            id="myGroup"
+                          >
+                            <div class="bg-gray p-2">
+                              <div class="d-flex flex-row user-info">
+                                <img
+                                  class="rounded-circle"
+                                  [src]="reply.user.imageUrl"
+                                  width="40"
+                                />
+                                <div
+                                  class="
+                                    d-flex
+                                    flex-column
+                                    justify-content-start
+                                    ml-2
+                                  "
+                                >
+                                  <span class="d-block font-weight-bold name">{{
+                                    reply.user.username
+                                  }}</span
+                                  ><span class="date text-black-50">{{
+                                    reply.createdAt | date: "M/d/yy | h:mm a"
+                                  }}</span>
+                                </div>
+                              </div>
+                              <div class="mt-2">
+                                <p
+                                  *ngIf="!editComments[reply.id]"
+                                  class="comment-text"
+                                >
+                                  {{ reply.message }}
+                                </p>
+                                <textarea
+                                  *ngIf="editComments[reply.id]"
+                                  name="replyMessage"
+                                  class="
+                                    form-control
+                                    mb-1
+                                    shadow-none
+                                    textarea
+                                    h-50
+                                  "
+                                  rows="10"
+                                  [(ngModel)]="
+                                    userEditComment[reply.id].message
+                                  "
+                                  rows="5"
+                                ></textarea>
+                                <button
+                                  *ngIf="editComments[reply.id]"
+                                  class="btn btn-outline-success"
+                                  (click)="submitEditComment(reply.id)"
+                                >
+                                  Submit
+                                </button>
+                              </div>
+                            </div>
 
-              <div class="ms-2">
-                <div class="container card card-bg-gray">
-                  <div class="d-flex justify-content-center row">
-                    <div class="col">
-                      <div
-                        class="d-flex flex-column comment-section"
-                        id="myGroup"
-                      >
-                        <div class="bg-gray p-2">
-                          <div class="d-flex flex-row user-info">
-                            <img
-                              class="rounded-circle"
-                              [src]="reply.user.imageUrl"
-                              width="40"
-                            />
+                            <div class="p-2">
+                              <div class="d-flex flex-row fs-12">
+                                <div
+                                  class="like p-2 cursor action-collapse"
+                                  data-bs-toggle="collapse"
+                                  attr.data-bs-target="#com{{ reply.id }}"
+                                  aria-expanded="false"
+                                  aria-controls="collapseExample"
+                                >
+                                  <i-bs name="brush" width="10" height="10">
+                                  </i-bs
+                                  ><span class="ml-1">Comment</span>
+                                </div>
+                                <div
+                                  [ngClass]="
+                                    reply.user.username ===
+                                    loggedInUser.username
+                                      ? 'like p-2 cursor text-primary col-2 text-center'
+                                      : 'd-none'
+                                  "
+                                  (click)="editComment(reply, i)"
+                                >
+                                  Edit
+                                </div>
+                                <div
+                                  [ngClass]="
+                                    reply.user.username ===
+                                      loggedInUser.username ||
+                                    loggedInUser.role === 'ADMIN'
+                                      ? 'col like p-2 cursor text-danger text-end'
+                                      : 'd-none'
+                                  "
+                                  (click)="triggerModal(replyData)"
+                                >
+                                  Delete
+                                </div>
+                              </div>
+                            </div>
+                            <!-- replies modal -->
+                            <ng-template #replyData let-modal>
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">
+                                  Delete Comment?
+                                </h4>
+                                <button
+                                  type="button"
+                                  class="close"
+                                  aria-label="Close"
+                                  (click)="modal.dismiss('Cross click')"
+                                >
+                                  <span aria-hidden="true">×</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                  <strong
+                                    >Are you sure you want to delete this
+                                    comment?</strong
+                                  >
+                                </p>
+                              </div>
+                              <div class="modal-footer">
+                                <button
+                                  (click)="deleteComment(reply.id)"
+                                  type="button"
+                                  class="btn btn-danger"
+                                  (click)="modal.close('Save click')"
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </ng-template>
+                            <!-- End of modal reply -->
                             <div
-                              class="
-                                d-flex
-                                flex-column
-                                justify-content-start
-                                ml-2
-                              "
+                              id="com{{ reply.id }}"
+                              class="bg-light p-2 collapse"
                             >
-                              <span class="d-block font-weight-bold name">{{
-                                reply.user.username
-                              }}</span
-                              ><span class="date text-black-50">{{
-                                reply.createdAt | date: "M/d/yy | h:mm a"
-                              }}</span>
+                              <div class="d-flex flex-row align-items-start">
+                                <img
+                                  class="rounded-circle"
+                                  [src]="loggedInUser.imageUrl"
+                                  width="40"
+                                /><textarea
+                                  class="form-control ml-1 shadow-none textarea"
+                                ></textarea>
+                              </div>
+                              <div class="mt-2 text-right">
+                                <button
+                                  class="btn btn-primary btn-sm shadow-none"
+                                  type="button"
+                                  (click)="postReply(com)"
+                                >
+                                  Post comment</button
+                                ><button
+                                  class="
+                                    btn btn-outline-primary btn-sm
+                                    ml-1
+                                    shadow-none
+                                  "
+                                  type="button"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
                             </div>
                           </div>
-                          <!-- TODO: reply update comments -->
-                          <div class="mt-2">
-                            <p *ngIf="!editComments[reply.id]" class="comment-text">{{ reply.message }}</p>
-                            <textarea *ngIf="editComments[reply.id]" name="replyMessage" class="form-control mb-1 shadow-none textarea h-50" rows="10" [(ngModel)]="userEditComment[reply.id].message" rows="5"></textarea>
-                            <button *ngIf="editComments[reply.id]" class="btn btn-outline-success" (click)="submitEditComment(reply.id)">Submit</button>
-                          </div>
-                        </div>
-
-                        <div class="p-2">
-                          <div class="d-flex flex-row fs-12">
-                            <div
-                              class="like p-2 cursor action-collapse"
-                              data-bs-toggle="collapse"
-                              attr.data-bs-target="#com{{ reply.id }}"
-                              aria-expanded="false"
-                              aria-controls="collapseExample"
-                            >
-                              <i-bs name="brush" width="10" height="10"> </i-bs
-                              ><span class="ml-1">Comment</span>
-                            </div>
-                            <div [ngClass]="reply.user.username === loggedInUser.username ? 'like p-2 cursor text-primary col-2 text-center' : 'd-none'" (click)="editComment(reply, i)">Edit</div>
-                            <div [ngClass]="reply.user.username === loggedInUser.username || loggedInUser.role === 'ADMIN' ? 'col like p-2 cursor text-danger text-end' : 'd-none'" (click)="deleteComment(reply.id)">Delete</div>
-
-                          </div>
-
-
-                        </div>
-                        <div id="com{{ reply.id }}" class="bg-light p-2 collapse">
-                          <div class="d-flex flex-row align-items-start">
-                            <img
-                              class="rounded-circle"
-                              [src]="loggedInUser.imageUrl"
-                              width="40"
-                            /><textarea
-                              class="form-control ml-1 shadow-none textarea"
-                            ></textarea>
-                          </div>
-                          <div class="mt-2 text-right">
-                            <button
-                              class="btn btn-primary btn-sm shadow-none"
-                              type="button"
-                              (click)="postReply(com)"
-                            >
-                              Post comment</button
-                            ><button
-                              class="
-                                btn btn-outline-primary btn-sm
-                                ml-1
-                                shadow-none
-                              "
-                              type="button"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
                         </div>
                       </div>
                     </div>

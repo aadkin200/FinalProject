@@ -29,7 +29,7 @@ public class TrailImage {
 	@Column(name="created_at")
 	private LocalDateTime createAt;
 	
-	@JsonIgnoreProperties("trailImages")
+	@JsonIgnoreProperties("user")
 	@ManyToOne
 	@JoinColumn(name="trail_id")
 	private Trail trail;

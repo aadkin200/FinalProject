@@ -1,11 +1,17 @@
 <div *ngIf="!loggedIn()" class="outter-div">
   <div class="flex-container">
-    <div class="flex-child">
+    <div class="flex-child d-flex flex-column justify-content-center me-2">
       <div class="login-flex">
         <form>
-          <div class="input-text-div me-3">
-            Username: <input class="input-text" type="text" placeholder="Username" name="username" [(ngModel)]="loginUser.username"><br>
-            Password: <input class="input-text" type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password"><br>
+          <div class="input-text-div m-0">
+            <div>
+              <span for="username align-text-bottom m-0 me-1">Username</span>
+              <input class="form-control rounded input-text" type="text" placeholder="Username" name="username" [(ngModel)]="loginUser.username">
+            </div>
+            <div>
+              <span for="username align-text-bottom m-0 me-1">Password</span>
+              <input class="form-control rounded input-text" type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password">
+            </div>
             <button class="btn acorn-button" (click)="login(loginUser)">Login</button>
             <a [routerLink]="['/signup']"><button class="btn acorn-button">Sign Up</button></a><br>
             <a class="github-development" href="https://github.com/aadkin200/FinalProject">follow on GitHub<img class="github-image" src="../../../assets/images/githubLogo.png" alt=""></a>

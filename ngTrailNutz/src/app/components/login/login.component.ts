@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
         console.log('LoginComponent.login(): user logged in');
         this.router.navigateByUrl('/feed');
       },
-      fial => {
+      fail => {
+        this.router.navigateByUrl('/disabled');
         console.error("error in login.component.ts login()");
       }
     )

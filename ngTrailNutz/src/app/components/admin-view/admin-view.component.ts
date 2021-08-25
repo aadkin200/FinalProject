@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlSegment } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,7 +11,9 @@ import { UserService } from 'src/app/services/user.service';
 export class AdminViewComponent implements OnInit {
 
   users:User[] = [];
+  filteredUsers: User[] = [];
   user: User = new User();
+  search: string = '';
 
   constructor(private userSvc: UserService) { }
 
@@ -22,6 +25,7 @@ export class AdminViewComponent implements OnInit {
     this.userSvc.getAllUsers().subscribe(
       data => {
         this.users = data;
+        this.filteredUsers = this.users;
       },
       noUsers => {
         console.error('AdminViewComponent.loadUsers(): error retrieving users');
@@ -37,13 +41,13 @@ export class AdminViewComponent implements OnInit {
         this.loadUsers();
       },
       error => {
-        console.log(error);
         console.log("error disabling user through service")
       }
     );
   }
 
   enableUser(userId: number) {
+    // console.log(userId);
     this.userSvc.enable(userId).subscribe(
       data => {
         this.loadUsers();
@@ -55,20 +59,17 @@ export class AdminViewComponent implements OnInit {
     );
   }
 
-  searchByUsername(username: string){
-    this.userSvc.getAllUsers().subscribe(
-      data => {
-        data.forEach(element => {
-          if(element.username === username){
-            this.users.push(element);
-          }
-        });
-      },
-      noUsers => {
-        console.error('AdminViewComponent.loadUsers(): error searching users');
-        console.error(noUsers);
+  searchByUsername(event: any){
+    this.search = event.target.value;
+    this.filteredUsers = this.users.filter(user =>
+      user.username.toUpperCase().includes(this.search.toUpperCase())
+      );
+      this.users = this.filteredUsers;
+      this.filteredUsers = this.users.map(x => x);
+      this.search ='';
+      if(!event.target.value){
+        this.loadUsers();
       }
-    );
   }
 
 }

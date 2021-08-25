@@ -41,6 +41,10 @@
   padding: 0px;
 }
 
+.flex-child img {
+  min-height: 100%;
+}
+
 /* .flex-child:first-child {
 
 } */
@@ -62,6 +66,7 @@ input[type=password] {
 
 .login-flex {
   margin-left: 20px;
+  min-width: 200px;
 }
 
 .input-text-div {
