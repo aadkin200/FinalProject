@@ -8,5 +8,6 @@ public interface AmenityService {
 	
 	List<Amenity> amenities();
 	Amenity addAmenity(String username, Amenity amenity, int trailId);
+	List<Amenity> updateAmenities(String username, List<Amenity> amenities, int trailId);
 
 }

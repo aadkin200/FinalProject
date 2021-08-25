@@ -70,6 +70,8 @@ public class TrailController {
 		return trailSvc.update(principal.getName(), trail, trail.getId());
 	}
 	
+
+	
 	@PutMapping("trail/{trailId}")
 	public boolean destroy(@PathVariable int trailId,
 						HttpServletRequest req,
@@ -94,4 +96,10 @@ public class TrailController {
 		
 		return newAmenities;
 	}
+	
+	@PutMapping("trail/{trailId}/amenity")
+	public List<Amenity> updateAmenities(@PathVariable int trailId, Principal principal, @RequestBody List<Amenity> amenities){
+		return amenSvc.updateAmenities(principal.getName(), amenities, trailId);
+	}
+
 }
