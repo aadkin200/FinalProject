@@ -53,7 +53,7 @@ class AmenityTest {
 	void test2() {
 		
 		assertNotNull(amenity.getTrails());
-		assertEquals(1, amenity.getTrails().size());
+		assertTrue(amenity.getTrails().size() > 0);
 	
 		
 	}

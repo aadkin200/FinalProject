@@ -2,6 +2,7 @@ package com.skilldistillery.trailnutz.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -45,21 +46,21 @@ class TrailTest {
 	@DisplayName("Testing Trail entity")
 	void test() {
 		assertNotNull(trail);
-		assertEquals("Grover", trail.getCity());
+		assertEquals("Grandfather", trail.getCity());
 	}
 	
 	@Test
 	@DisplayName("Testing connection between Trail and User")
 	void test1() {
 		assertNotNull(trail);
-		assertEquals(1, trail.getUsers().size());
+		assertTrue(trail.getUsers().size() > 0);
 	}
 	
 	@Test
 	@DisplayName("Testing connection between Trail and Comment")
 	void test2() {
 		assertNotNull(trail);
-		assertEquals("welcome", trail.getComments().get(0).getMessage());
+		assertEquals("I have to agree!", trail.getComments().get(0).getMessage());
 	}
 	
 	@Test
@@ -80,14 +81,14 @@ class TrailTest {
 	@DisplayName("Testing connection between trail and trail_image")
 	void test5() {
 		assertNotNull(trail);
-		assertEquals("http://www.google.com", trail.getTrailImages().get(0).getImageUrl());
+		assertEquals("https://i.wnc.io/s1024/2011-05-15_grandfather-mountain-state-park_calloway-peak-view-attic-window-peak-hazy.jpg", trail.getTrailImages().get(0).getImageUrl());
 	}
 	
 	@Test
 	@DisplayName("Testing connection between trail and difficulty")
 	void test6() {
 		assertNotNull(trail);
-		assertEquals("A hike that is generally suitable for anyone who enjoys walking. Mostly level or with a slight incline. Generally less than 3 miles.", trail.getDifficulty().getDescription());
+		assertEquals("Moderately Strenuous hikes will generally be challenging for an unconditioned person. The terrain will involve a steady and often steep incline. Generally 5 to 8 miles.", trail.getDifficulty().getDescription());
 	}
 	
 	@Test

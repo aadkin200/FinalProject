@@ -44,14 +44,14 @@ class TrailImageTest {
 	@DisplayName("trailImage entity test")
 	void test() {
 		assertNotNull(trailImage);
-		assertEquals("http://www.google.com", trailImage.getImageUrl());
+		assertEquals("https://i.wnc.io/s1024/2011-05-15_grandfather-mountain-state-park_calloway-peak-view-attic-window-peak-hazy.jpg", trailImage.getImageUrl());
 	}
 	
 	@Test
 	@DisplayName("Testing trailImage to trail mapping")
 	void test1() {
 		assertNotNull(trailImage);
-		assertEquals("Grover", trailImage.getTrail().getCity());
+		assertEquals("Grandfather", trailImage.getTrail().getCity());
 	}
 	
 	@Test
