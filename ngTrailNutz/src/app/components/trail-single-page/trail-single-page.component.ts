@@ -160,21 +160,31 @@ export class TrailSinglePageComponent implements OnInit {
     this.trailSvc.show(trailId).subscribe(
       (data) => {
         this.trail = data;
-        if (this.trail.trailImages.length > 0) {
-          this.mainTrailImage = this.trail.trailImages[0];
-        } else {
-          this.mainTrailImage.imageUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png`;
-        }
         this.newDifficulty = this.trail.difficulty;
         this.newRoute = this.trail.routeType;
+        if(this.trail.comments != undefined){
         this.trail.comments = this.trail.comments.filter(comment => comment.enabled);
+        }
         this.changeMapCord();
         this.editingTrail = Object.assign({}, this.trail);
         this.createBoolArray();
+        console.log(this.trail.trailImages);
+        if(this.trail.trailImages != undefined){
+          if(this.trail.trailImages.length == 0){
+            let trailImage = new TrailImage();
+            trailImage.imageUrl = 'http://blog.archive.org/wp-content/uploads/2016/08/nomor4041.png';
+            this.mainTrailImage = trailImage;
+          }else {
+            this.changeMainImg(this.trail.trailImages[0]);
+          }
+        }
+
+        if(this.trail.comments != undefined){
         this.trail.comments = this.orderPipe.transform(
           this.trail.comments,
           this.trail.comments.forEach((com) => com.createdAt)
         );
+        }
       },
       (err) => {
         console.error(err, `No trail recieved singleComponent`);
@@ -281,11 +291,13 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   createBoolArray() {
+    if(this.trail.comments != undefined){
     for (let i = 0; i < this.trail.comments.length; i++) {
       this.replyCollapse.push(false);
       this.editComments[this.trail.comments[i].id] = false;
       // create edit comments
       this.userEditComment[this.trail.comments[i].id] = new Comment();
+    }
     }
   }
 

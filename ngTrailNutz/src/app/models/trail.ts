@@ -26,9 +26,9 @@ export class Trail {
   user: User;
   difficulty: Difficulty;
   routeType: Routetype;
-  trailImages: TrailImage[];
+  trailImages?: TrailImage[];
   trailResource: TrailResource[];
-  comments: Comment[];
+  comments?: Comment[];
   amenities: Amenity[];
 
 

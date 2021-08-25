@@ -64,6 +64,8 @@ public class TrailController {
 						HttpServletRequest req, 
 						HttpServletResponse res, 
 						Principal principal) {
+		System.out.println(trail);
+		System.out.println(trail.getComments());
 		return trailSvc.update(principal.getName(), trail, trail.getId());
 	}
 	

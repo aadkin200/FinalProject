@@ -45,6 +45,7 @@ public class TrailServiceImpl implements TrailService{
 	public Trail update(String username, Trail trail, int trailId) {
 		//Sysouts used to prevent lazy loading issues on update
 		System.out.println(trail.getTrailImages());
+		System.out.println(trail.getComments());
 		Trail managed = trailRepo.findByUser_UsernameAndId(username, trailId);
 		System.out.println(managed.getTrailImages());
 		if(managed != null) {
