@@ -14,6 +14,7 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
 export class TrailFeedComponent implements OnInit {
 
   trails: Trail[] = [];
+  trailsPreFilter: Trail[] = [];
 
   newTrailFormBool: boolean = false;
 
@@ -33,6 +34,7 @@ export class TrailFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFeed();
+    // this.checkEnabledFeed();
   }
 
   newTrailFormFillOut() {

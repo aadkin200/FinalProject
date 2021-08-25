@@ -42,10 +42,13 @@ public class AmenityServiceImpl implements AmenityService {
 		amenity = null;
 	}
 	System.out.println(amenity);
-	Amenity newAmenity = repo.saveAndFlush(amenity);
-	Trail managed = tRepo.findById(trailId).get();
-	managed.addAmenity(newAmenity);
-	return newAmenity;
+	if(amenity != null) {
+		Amenity newAmenity = repo.saveAndFlush(amenity);
+		Trail managed = tRepo.findById(trailId).get();
+		managed.addAmenity(newAmenity);
+		return newAmenity;
+	}
+	return null;
 	}
 	
 	

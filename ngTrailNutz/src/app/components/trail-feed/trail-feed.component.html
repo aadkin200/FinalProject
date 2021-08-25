@@ -12,22 +12,24 @@
 <!-- <p>trail-feed works!</p> -->
 
 <div>
-  <div class="justify-content-center tableD" *ngFor="let trail of trails">
-    <div class="carousel-inner m-0" role="listbox" style="max-width: 1280px; max-height: 350px;">
-      <ngb-carousel class="" #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
-        <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
-          <a (click)="displayTrail(trail)" target="_blank" rel="nofollow noopener noreferrer">
-            <div class="d-flex justify-content-center">
-              <img id="trailPic" [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
-            </div>
-          </a>
-        </ng-template>
-      </ngb-carousel>
+  <div *ngFor="let trail of trails">
+    <div *ngIf="trail.enabled" class="justify-content-center tableD">
+      <div class="carousel-inner m-0" role="listbox" style="max-width: 1280px; max-height: 350px;">
+        <ngb-carousel class="" #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+          <ng-template ngbSlide *ngFor="let trailImage of trail.trailImages; index as i">
+            <a (click)="displayTrail(trail)" target="_blank" rel="nofollow noopener noreferrer">
+              <div class="d-flex justify-content-center">
+                <img id="trailPic" [src]="trailImage.imageUrl" alt="My image {{i + 1}} description">
+              </div>
+            </a>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <h2 class="clickable-thing" (click)="displayTrail(trail)">{{trail.name}}</h2><br><br>
+      <p>{{trail.city}}, {{trail.state}}<img class="locationPNG" src="../../../assets/images/locationPNG.png" alt=""><br></p>
+      <h5>About this trail: </h5>
+        <div class="centeredEM">{{trail.details}}</div>
     </div>
-    <h2 class="clickable-thing" (click)="displayTrail(trail)">{{trail.name}}</h2><br><br>
-    <p>{{trail.city}}, {{trail.state}}<img class="locationPNG" src="../../../assets/images/locationPNG.png" alt=""><br></p>
-    <h5>About this trail: </h5>
-      <div class="centeredEM">{{trail.details}}</div>
   </div>
   <br>
 </div>
