@@ -109,6 +109,11 @@ public class Trail {
 		this.enabled = enabled;
 		this.approved = approved;
 	}
+	
+	public void addAmenity(Amenity amenity) {
+		this.amenities.add(amenity);
+	}
+	
 	public int getId() {
 		return id;
 	}
