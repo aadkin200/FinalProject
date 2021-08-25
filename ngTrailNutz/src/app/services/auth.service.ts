@@ -10,7 +10,6 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  // private baseUrl = 'http://localhost:8084/';
   baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
