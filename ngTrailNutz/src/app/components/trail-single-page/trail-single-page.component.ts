@@ -108,37 +108,36 @@ export class TrailSinglePageComponent implements OnInit {
       }
     )
   }
-
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
-    this.userSvc.getUser().subscribe(
-      (user) => {
-        this.loggedInUser = user;
-      },
-      (err) => {
-        console.error('SinglePageView: ngOnInit(): error getting user', err);
-      }
-    );
+    if(this.authSvc.checkLogin()){
+      this.userSvc.getUser().subscribe(
+        (user) => {
+          this.loggedInUser = user;
+        },
+        (err) => {
+          console.error('SinglePageView: ngOnInit(): error getting user', err);
+        }
+      );
+      this.difficultyService.show().subscribe(
+        (data) => {
+          this.newDifficulties = data;
+        },
+        (error) => {
+          console.log('error singleTrail ngOnInit() difficulty', error);
+        }
+      );
 
-    this.difficultyService.show().subscribe(
-      (data) => {
-        this.newDifficulties = data;
-      },
-      (error) => {
-        console.log('error singleTrail ngOnInit() difficulty', error);
-      }
-    );
-
-    this.routeService.show().subscribe(
-      (data) => {
-        this.newRoutes = data;
-      },
-      (error) => {
-        console.log('error singleTrail ngOnInit() routeType', error);
-      }
-    );
-
+      this.routeService.show().subscribe(
+        (data) => {
+          this.newRoutes = data;
+        },
+        (error) => {
+          console.log('error singleTrail ngOnInit() routeType', error);
+        }
+      );
+    }
   }
 
   addTrailResource(){

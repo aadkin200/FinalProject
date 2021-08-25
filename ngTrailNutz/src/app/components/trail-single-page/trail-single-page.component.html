@@ -125,8 +125,23 @@
           </div>
           <!-- trail controls -->
           <!-- TODO favorite trail-->
-          <div class="row justify-content-center">
-            <button class="btn">asssdfdsfsd</button>
+          <div *ngIf="isLoggedIn()" class="row justify-content-center">
+            <!-- TODO favorite -->
+            <span class="btn w-25 d-flex align-items-center">
+              <p class="align-self-center m-0">Favorite?</p>
+              <i-bs name="star"
+                 width="2vh"
+                 height="2vh">
+                </i-bs>
+              </span>
+              <span class="btn w-25 d-flex align-items-center">
+                <p class="align-self-center m-0" >Unfavorite?</p>
+                <i-bs name="star-fill"
+                   width="2vh"
+                   height="2vh">
+                  </i-bs>
+                </span>
+
             <button
               [ngClass]="
                 loggedInUser.username === trail.user.username ||

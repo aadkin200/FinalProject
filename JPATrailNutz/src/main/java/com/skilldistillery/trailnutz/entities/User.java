@@ -40,7 +40,7 @@ public class User {
 	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
-	@JsonIgnore
+	@JsonIgnoreProperties({"user", "trailImages", "comments"})
 	@ManyToMany
     @JoinTable(
             name = "user_has_trail", 

@@ -10,5 +10,7 @@ public interface UserService {
 	boolean disableUser(int userId, String username);
 	boolean userEnable(int userId, String username);
 	List<User> getAllUsers();
+	long hasFavoriteTrail(String username, int trailId);
+	User updateFavoriteTrails(int trailId, String username);
 	
 	}
