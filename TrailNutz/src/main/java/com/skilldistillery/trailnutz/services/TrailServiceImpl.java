@@ -85,6 +85,7 @@ public class TrailServiceImpl implements TrailService{
 		Trail trail = trailOp.get();
 		trail.getComments().removeIf(comment -> comment.getEnabled() == false);
 		trail.getComments().forEach(comment -> comment.getReplies().removeIf(reply -> reply.getEnabled() == false));
+		trail.getTrailResource().removeIf(resource -> resource.getEnabled() == false);
 		return trail;
 	}
 
