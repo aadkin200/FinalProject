@@ -51,7 +51,7 @@ class DifficultyTest {
 	@Test
 	void test_difficulty_name_for_trail_mapping() {
 		assertNotNull(difficulty);
-		assertTrue(difficulty.getTrails().size() > 0);
+		assertEquals("Easy",difficulty.getName());
 	}
 	
 	

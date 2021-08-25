@@ -49,7 +49,7 @@ class RouteTypeTest {
 	@Test
 	void test_route_type_for_trail_mapping() {
 		assertNotNull(routeType);
-		assertEquals("Grover", routeType.getTrails().get(0).getCity());
+		assertEquals("Grandfather", routeType.getTrails().get(0).getCity());
 	}
 	
 	

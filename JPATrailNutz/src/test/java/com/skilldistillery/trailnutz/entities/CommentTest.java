@@ -48,12 +48,12 @@ class CommentTest {
 	@DisplayName("comment entity test")
 	void test() {
 		assertNotNull(comment);
-		assertEquals("Hello", comment.getMessage());
+		assertEquals("Beautiful and not a bad hike either", comment.getMessage());
 		
-		LocalDateTime createDate =  LocalDateTime.of(2020, 01, 01, 10, 10, 00);
-		assertEquals(createDate, comment.getCreatedAt());
 		
-		assertEquals(1, comment.getReplies().size());
+		assertEquals(2021, comment.getCreatedAt().getYear());
+		
+		assertTrue( comment.getReplies().size() > 0);
 	}
 	
 	@Test
@@ -72,7 +72,7 @@ class CommentTest {
 		
 		assertNotNull(comment.getTrail());
 		assertEquals(1, comment.getTrail().getId());
-		assertEquals("Racoons", comment.getTrail().getWildlife());
+		assertEquals("Racoons, Bears", comment.getTrail().getWildlife());
 		
 	}
 

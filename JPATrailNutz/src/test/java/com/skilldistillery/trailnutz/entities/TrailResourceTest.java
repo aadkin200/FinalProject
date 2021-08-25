@@ -71,7 +71,7 @@ class TrailResourceTest {
 		
 		assertNotNull(trailResrc.getTrail());
 		assertEquals(1, trailResrc.getTrail().getId());
-		assertEquals("Racoons", trailResrc.getTrail().getWildlife());
+		assertEquals("Racoons, Bears", trailResrc.getTrail().getWildlife());
 		
 	}
 	
