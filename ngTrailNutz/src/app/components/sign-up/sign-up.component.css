@@ -1,16 +1,18 @@
 .flex-container {
   display:flexbox;
   padding: 10px;
+  text-align: center;
 }
 
-.flex-child {
+/* .flex-child {
   flex: 1;
   margin-left: 100px;
   padding: 0px;
-}
+} */
 
 .outter-div {
-  margin-top: 200px;
+  margin-top: 150px;
+  margin-bottom: 90px;
   border-style: solid;
   border-color: blue;
   border-width: 4px;
@@ -20,11 +22,12 @@
   background-color: rgba(181,206,131,255);
   border-color: rgba(181,206,131,255);
   border-radius: 20px;
-  box-shadow: -10px 5px 30px 8px grey;
+  box-shadow: -10px 5px 30px 8px black;
   padding: 30px;
   height: auto;
   padding: 0px;
   overflow: hidden;
+  opacity: 90%;
 }
 
 h5{
@@ -37,45 +40,73 @@ h5{
   display: flex;
   justify-content: center;
   align-items: center;
-
-
 }
 
-
 input{
-  margin-left: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* margin-left: 15px; */
   border-radius: 25px;
   border: 3px solid rgb(5, 104, 69);
-  padding: 20px;
-  width: 200px;
+  width: 160px;
   height: 15px;
-  text-align: center;
-
+  margin-left: 10px;
+  box-sizing: border-box;
+  padding: 16px;
 }
 
 label{
-  margin-left: 150px;
-
+  /* margin-left: 150px; */
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button{
-  margin-left: 150px;
-
-  border-radius: 15px;
-  border-bottom: 20px;
+  margin-top: 3px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* margin-left: 150px; */
+  border-radius: 25px;
+  /* border-bottom: 20px; */
   border: 3px solid rgb(5, 104, 69);
-  padding: 25px;
+  background-color: rgb(5, 104, 69);
+  /* padding: 10px; */
   width: 110px;
-  height: 30px;
   text-align:center;
+  color: aliceblue;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2), 0 1px 2px 0 rgba(0,0,0,0.19);
+}
+
+button:hover{
+  color: rgb(207, 231, 252);
+  border: 3px solid rgb(119, 134, 133);
+  background-color: rgb(119, 134, 133);
+  box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2), 0 3px 8px 0 rgba(0,0,0,0.19);
 }
 
 img{
-  margin-left: 200px;
+  /* margin-left: 200px; */
+  margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 18px;
+  border-radius: 27px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 2px 4px 0 rgba(0,0,0,0.19);
 }
 
+.form-popup{
+  margin: 10px;
+  margin-bottom: 5px;
+}
 
+.top-text{
+  margin: 12px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
+.row{
+  text-align: left;
+}
 
-
+#email{
+  width: 300px;
+}
