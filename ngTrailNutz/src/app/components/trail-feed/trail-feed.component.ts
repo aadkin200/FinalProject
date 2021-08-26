@@ -14,6 +14,7 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
 export class TrailFeedComponent implements OnInit {
 
   trails: Trail[] = [];
+  viewTrails: Trail[] = [];
   trailsPreFilter: Trail[] = [];
 
   newTrailFormBool: boolean = false;
@@ -23,6 +24,8 @@ export class TrailFeedComponent implements OnInit {
   pauseOnIndicator = false;
   pauseOnHover = true;
   pauseOnFocus = true;
+  search: string = "";
+  searchBy: String = "Name";
 
   // @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
@@ -37,6 +40,22 @@ export class TrailFeedComponent implements OnInit {
     // this.checkEnabledFeed();
   }
 
+  setSearch(event:any){
+    console.log(event.target.value)
+    this.search = event.target.value;
+    console.log(this.search);
+    this.filterViewTrails()
+  }
+
+  filterViewTrails(){
+    if(this.searchBy === "Name"){
+      this.viewTrails = this.trails.filter(trail => trail.name.toUpperCase().includes(this.search.toUpperCase()));
+    }
+    if(this.searchBy === "Location"){
+      this.viewTrails = this.trails.filter(trail=> trail.city.toUpperCase().includes(this.search.toUpperCase()) || trail.state.toUpperCase().includes(this.search.toUpperCase()))
+    }
+  }
+
   newTrailFormFillOut() {
     this.newTrailFormBool = true;
   }
@@ -49,6 +68,7 @@ export class TrailFeedComponent implements OnInit {
     this.trailSrv.index().subscribe(
       trails => {
         this.trails = trails;
+        this.viewTrails = this.trails.map(x => x);
       },
       noTrails => {
         console.log("Error retreiving trails from service");

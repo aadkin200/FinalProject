@@ -70,7 +70,7 @@ export class TrailSinglePageComponent implements OnInit {
     private router: Router
   ) {}
 
-
+//TODO: Get amenity
 
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;

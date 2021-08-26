@@ -1,10 +1,19 @@
 <app-navbar></app-navbar>
+<div class="row mt-5">
+  <div class="w-50 mx-auto d-flex mt-5">
+    <select [(ngModel)]="searchBy" class="form-control w-50" name="searchBy">
+      <option value="Name">Name</option>
+      <option value="Location">Location</option>
+    </select>
+    <input class="form-control" (keyup)="setSearch($event)" placeholder="search for trail" type="text">
+  </div>
+</div>
 <div *ngIf="newTrailFormBool">
   <app-new-trail-form></app-new-trail-form>
 </div>
 <div class="d-flex justify-content-center" *ngIf="!newTrailFormBool">
   <br>
-  <button class="btn acorn-button" (click)="newTrailFormFillOut()">Create Trail</button>
+  <button class="btn m-5" (click)="newTrailFormFillOut()">Create Trail</button>
 </div>
 <div class="d-flex justify-content-center" *ngIf="newTrailFormBool">
   <button class="button" (click)="closeTrailFormFillOut()">Cancel</button>
@@ -12,7 +21,7 @@
 <!-- <p>trail-feed works!</p> -->
 
 <div>
-  <div *ngFor="let trail of trails">
+  <div *ngFor="let trail of viewTrails">
     <div *ngIf="trail.enabled" class="justify-content-center tableD">
       <div class="carousel-inner m-0" role="listbox" style="max-width: 1280px; max-height: 350px;">
         <ngb-carousel class="" #carousel [interval]="4000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
@@ -26,7 +35,7 @@
         </ngb-carousel>
       </div>
       <h2 class="clickable-thing" (click)="displayTrail(trail)">{{trail.name}}</h2><br><br>
-      <p>{{trail.city}}, {{trail.state}}<img class="locationPNG" src="../../../assets/images/locationPNG.png" alt=""><br></p>
+      <p>{{trail.city}}, {{trail.state}}<img class="locationPNG" src="assets/images/locationPNG.png" alt=""><br></p>
       <h5>About this trail: </h5>
         <div class="centeredEM">{{trail.details}}</div>
     <!-- </div>
