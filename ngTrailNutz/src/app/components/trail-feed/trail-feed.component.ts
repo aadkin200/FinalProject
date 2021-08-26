@@ -5,6 +5,7 @@ import { TrailImage } from 'src/app/models/trail-image';
 import { TrailImageService } from 'src/app/services/trail-image.service';
 import { TrailService } from 'src/app/services/trail.service';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-trail-feed',
@@ -30,6 +31,7 @@ export class TrailFeedComponent implements OnInit {
   // @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
   constructor(
+    private auth: AuthService,
     private trailSrv: TrailService,
     private carousel: NgbCarousel,
     private router: Router
@@ -100,6 +102,10 @@ export class TrailFeedComponent implements OnInit {
     if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
       this.togglePaused();
     }
+  }
+
+  loggedIn(): boolean {
+    return this.auth.checkLogin();
   }
 
 }
