@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class="container-fluid card top-of-card rounded">
+<div class="container-fluid card top-of-card rounded card-two">
   <div class="singleCardView mx-auto pt-3">
     <h1 class="text-center mb-2">{{ trail.name }}</h1>
     <div class="row pe-1 pictureContainer">
@@ -193,7 +193,7 @@
             </div>
           </ng-template>
           <!-- trail details -->
-          <section class="shadow-lg p-1 rounded">
+          <section class="shadow-lg p-1 rounded trail-details">
             <div class="row mt-2">
               <div class="col-4">Added:</div>
               <div class="col">{{ trail.createdAt | date: "MMM-dd-YYYY" }}</div>
@@ -547,14 +547,14 @@
           <!-- Check to see if parent comment -->
           <div *ngIf="!com.parentComment && com.enabled">
             <div class="mt-1">
-              <div class="container card shadow-lg">
+              <div class="container card shadow-lg trail-details">
                 <div class="d-flex justify-content-center row">
                   <div class="col">
                     <div
                       class="d-flex flex-column comment-section"
                       id="myGroup"
                     >
-                      <div class="bg-white p-2">
+                      <div class="p-2">
                         <div class="d-flex flex-row user-info">
                           <img
                             class="rounded-circle"
@@ -609,7 +609,7 @@
                           </button>
                         </div>
                       </div>
-                      <div class="bg-white p-2 container">
+                      <div class="p-2 container">
                         <div class="row fs-12">
                           <div
                             [ngClass]="

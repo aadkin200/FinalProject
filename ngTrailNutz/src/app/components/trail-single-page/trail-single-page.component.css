@@ -4,8 +4,20 @@
 
 }
 
+.container-fluid card top-of-card rounded {
+  background: aquamarine !important;
+}
+
 .bg-info {
   background-color: rgba(180,204,131,.8) !important;
+}
+
+.card-two {
+  background:rgba(175,175,200,.7) !important;
+}
+
+.trail-details {
+  background:rgba(225,225,225,1) !important;
 }
 
 .top-of-card {
@@ -45,7 +57,7 @@
 .pictureContainer span {
   position: absolute;
   width: 15%;
-  top: 5%;
+  top: 8%;
   left: 15%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
