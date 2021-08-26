@@ -1,5 +1,4 @@
-import { localizedString } from '@angular/compiler/src/output/output_ast';
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Amenity } from 'src/app/models/amenity';
 import { Difficulty } from 'src/app/models/difficulty';
@@ -10,7 +9,6 @@ import { AmenityService } from 'src/app/services/amenity.service';
 import { DifficultyService } from 'src/app/services/difficulty.service';
 import { RouteTypeService } from 'src/app/services/route-type.service';
 import { TrailService } from 'src/app/services/trail.service';
-import { FormsModule } from '@angular/forms';
 import { TrailImageService } from 'src/app/services/trail-image.service';
 
 @Component({

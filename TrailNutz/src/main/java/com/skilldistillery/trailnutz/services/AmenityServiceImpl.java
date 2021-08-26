@@ -48,17 +48,24 @@ public class AmenityServiceImpl implements AmenityService {
 	public List<Amenity> updateAmenities(String username, List<Amenity> amenities, int trailId) {
 		Trail trail = tRepo.findByUser_UsernameAndId(username, trailId);
 		List<Amenity> managedAmenities= repo.findAll();
-		if(amenities.size() != trail.getAmenities().size()) {
+			
+			
 			for(Amenity am: managedAmenities) {
-				am.getTrails().removeIf(t -> am.getTrails().contains(trail));
+			   am.getTrails().remove(trail);
+			   repo.saveAndFlush(am);
 			}
 			
-			for (Amenity amenity : amenities) {
-				Amenity managedAmenity = repo.findById(amenity.getId()).get();
-				managedAmenity.getTrails().add(trail);
-				repo.saveAndFlush(managedAmenity);
+			if(amenities.size() > 0) {
+				for (Amenity amenity : amenities) {
+					Amenity managedAmenity = repo.findById(amenity.getId()).get();
+					if(!managedAmenity.getTrails().contains(trail)) {
+						managedAmenity.getTrails().add(trail);	
+					}
+					
+					repo.saveAndFlush(managedAmenity);
+				}
 			}
-		}
+
 		return amenities;
 	}
 

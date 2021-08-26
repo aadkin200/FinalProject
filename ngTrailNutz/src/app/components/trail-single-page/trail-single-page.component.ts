@@ -17,6 +17,8 @@ import { RouteTypeService } from 'src/app/services/route-type.service';
 import { TrailResource } from 'src/app/models/trail-resource';
 import { TrailResourceService } from 'src/app/services/trail-resource.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { AmenityService } from 'src/app/services/amenity.service';
+import { Amenity } from 'src/app/models/amenity';
 
 @Component({
   selector: 'app-trail-single-page',
@@ -25,6 +27,8 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class TrailSinglePageComponent implements OnInit {
   loggedInUser: User = new User();
+  newAmenities: Amenity[] = [];
+  addToTrailAmenities: Amenity[] = [];
   trail: Trail = new Trail();
   currentComment = new Comment();
   topComment = new Comment();
@@ -67,7 +71,8 @@ export class TrailSinglePageComponent implements OnInit {
     private routeService: RouteTypeService,
     private trailResSvc: TrailResourceService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private amenityService: AmenityService
   ) {}
 
 //TODO: Get amenity
@@ -75,6 +80,14 @@ export class TrailSinglePageComponent implements OnInit {
   ngOnInit(): void {
     let trailId = this.activatedRoute.snapshot.params.trailId;
     this.getSingleTrail(trailId);
+    this.amenityService.show().subscribe(
+      data => {
+        this.newAmenities = data;
+      },
+      error => {
+        console.log("error in new-trail-form.component.ts ngOnInit()", error);
+      }
+    );
     if(this.authSvc.checkLogin()){
       this.checkForUser();
       this.difficultyService.show().subscribe(
@@ -94,6 +107,15 @@ export class TrailSinglePageComponent implements OnInit {
           console.log('error singleTrail ngOnInit() routeType', error);
         }
       );
+    }
+  }
+
+  pushOrPop(amenity:Amenity, event:any){
+    if(event.target.checked){
+      this.addToTrailAmenities.push(amenity);
+    }else {
+      let index:number = this.addToTrailAmenities.indexOf(amenity);
+      this.addToTrailAmenities.splice(index,1);
     }
   }
 
@@ -241,7 +263,17 @@ export class TrailSinglePageComponent implements OnInit {
     }
     this.trailSvc.update(this.editingTrail).subscribe(
       (update) => {
-        this.getSingleTrail(this.trail.id);
+        //TODO amenity service update
+        this.amenityService.updateAmenity(this.addToTrailAmenities, this.trail.id).subscribe(
+          trail=>{
+            this.getSingleTrail(this.trail.id);
+            this.addToTrailAmenities = [];
+          },
+          err=>{
+            console.error("error updating amenity:trail edit")
+          }
+        )
+
       },
       (err) => {
         console.error('error updating trail', err);

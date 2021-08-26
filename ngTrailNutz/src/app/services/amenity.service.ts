@@ -42,6 +42,18 @@ export class AmenityService {
     )
   }
 
+  updateAmenity(amenities: Amenity[], trailId: any) {
+    return this.http.put<Amenity[]>(`${this.url}api/trail/${trailId}/amenity`, amenities, this.getHttpOptions())
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError("error in amenity add");
+      })
+    )
+  }
+
+
+
   getHttpOptions() {
     const credentials = this.auth.getCredentials();
     const httpOptions = {
