@@ -330,6 +330,13 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   submitEditComment(id:number){
+    delete this.userEditComment[id].user;
+    if(this.userEditComment[id].parentComment === null){
+      delete this.userEditComment[id].parentComment
+    }else{
+      delete this.userEditComment[id].parentComment.user
+    }
+    delete this.userEditComment[id].replies
     this.commentSvc.update(this.userEditComment[id], this.trail.id).subscribe(
       data=> {
         this.getSingleTrail(this.trail.id);
@@ -387,8 +394,12 @@ export class TrailSinglePageComponent implements OnInit {
   }
 
   postReply(parentComment: Comment) {
+    delete parentComment.user
     this.currentComment.parentComment = parentComment;
     this.removeProperties();
+    delete this.currentComment.user;
+    delete this.currentComment.trail;
+
     this.commentSvc.create(this.currentComment, this.trail.id).subscribe(
       (success) => {
         this.getSingleTrail(this.trail.id);

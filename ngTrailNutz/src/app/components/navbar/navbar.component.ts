@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
         data => {
           this.user = data;
           this.admin = this.isAdmin();
-          console.log(this.admin);
+          // console.log(this.admin);
 
         },
         err => {

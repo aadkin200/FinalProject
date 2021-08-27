@@ -51,8 +51,6 @@ export class UserprofileComponent implements OnInit {
   }
 
   updateUser(user: User) {
-    console.log(this.editUser);
-
     this.removeEmpty();
     this.userSvc.update(this.editUser).subscribe(
       data=>{

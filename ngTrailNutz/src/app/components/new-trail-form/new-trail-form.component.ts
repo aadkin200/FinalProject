@@ -146,9 +146,9 @@ export class NewTrailFormComponent implements OnInit {
     this.newTrail.difficulty = this.newDifficulty;
     this.newTrail.routeType = this.newRouteType;
     this.newTrail.amenities = this.addToTrailAmenities;
-    console.log(this.newTrail);
+    // console.log(this.newTrail);
     let newTrailImage: TrailImage = new TrailImage();
-    console.log(this.newTrail.amenities);
+    // console.log(this.newTrail.amenities);
     newTrailImage.imageUrl = 'https://static.wixstatic.com/media/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png/v1/fill/w_320,h_256,q_90/2cd43b_457a179ee0c64a7ba7ed0e41bb344359~mv2_d_1969_1582_s_2.png';
     this.trailService.create(this.newTrail).subscribe(
       data => {
@@ -180,7 +180,7 @@ export class NewTrailFormComponent implements OnInit {
   }
 
   viewTestCoordinates(test: any) {
-    console.log(test);
+    // console.log(test);
 
   }
 

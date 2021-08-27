@@ -4,7 +4,7 @@ import { User } from "./user";
 export class Comment {
 
   id: number;
-  user: User;
+  user?: User;
   message: string;
   createdAt?: number;
   updatedAt?: number;
@@ -12,7 +12,7 @@ export class Comment {
   replies: Comment[] | any;
   enabled: boolean;
   subject: string;
-  trail: Trail;
+  trail?: Trail;
 
 constructor(
   id: number = 0,

@@ -43,9 +43,7 @@ export class TrailFeedComponent implements OnInit {
   }
 
   setSearch(event:any){
-    console.log(event.target.value)
     this.search = event.target.value;
-    console.log(this.search);
     this.filterViewTrails()
   }
 

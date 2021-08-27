@@ -10,6 +10,7 @@
         alt="trail images"
       />
       <button
+        *ngIf="mainTrailImage.user"
         [ngClass]="
           mainTrailImage.user.username === loggedInUser.username ||
           loggedInUser.username === trail.user.username ||
@@ -21,7 +22,7 @@
       >
         Delete
       </button>
-      <span class="h4 text-light"
+      <span *ngIf="mainTrailImage.user" class="h4 text-light"
         >Posted By: {{ mainTrailImage.user.username }}</span
       >
     </div>
@@ -562,6 +563,7 @@
                         <div class="d-flex flex-row user-info">
                           <img
                             class="rounded-circle"
+                            *ngIf="com.user != null"
                             [src]="com.user.imageUrl"
                             width="40"
                           />
@@ -573,7 +575,7 @@
                               ml-2
                             "
                           >
-                            <span class="d-block font-weight-bold name">{{
+                            <span *ngIf="com.user != null" class="d-block font-weight-bold name">{{
                               com.user.username
                             }}</span
                             ><span class="date text-black-50">{{
@@ -641,6 +643,7 @@
                             <i class="fa fa-share"></i><span>Replies</span>
                           </div>
                           <div
+                          *ngIf="com.user != null"
                             [ngClass]="
                               com.user.username === loggedInUser.username
                                 ? 'like p-2 cursor text-primary col-3'
@@ -651,6 +654,7 @@
                             Edit
                           </div>
                           <div
+                          *ngIf="com.user != null"
                             [ngClass]="
                               com.user.username === loggedInUser.username ||
                               loggedInUser.role === 'ADMIN'
@@ -711,9 +715,10 @@
                             [src]="loggedInUser.imageUrl"
                             width="40"
                           /><textarea
+                          name="currentComment"
                             [(ngModel)]="currentComment.message"
                             class="form-control ml-1 shadow-none textarea"
-                          ></textarea>
+                          >aaaaa</textarea>
                         </div>
                         <div class="mt-2 text-right">
                           <button
@@ -899,7 +904,8 @@
                                   class="rounded-circle"
                                   [src]="loggedInUser.imageUrl"
                                   width="40"
-                                /><textarea
+                                  /><textarea
+                                  [(ngModel)]="currentComment.message"
                                   class="form-control ml-1 shadow-none textarea"
                                 ></textarea>
                               </div>

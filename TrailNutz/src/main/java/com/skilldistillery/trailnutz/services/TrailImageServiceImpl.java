@@ -30,9 +30,10 @@ public class TrailImageServiceImpl implements TrailImageService {
 	@Override
 	public TrailImage addTrailImage(String username, TrailImage trailImage, int trailId ) {
 		User user = uRepo.findByUsername(username);
-		
+		System.out.println(trailImage);
 		try {
 			Trail trail = tRepo.findById(trailId).get();
+			System.out.println(trail.getUser());
 			System.out.println(trail.getTrailImages());
 			trailImage.setTrail(trail);
 			trailImage.setUser(user);

@@ -6,7 +6,7 @@ export class TrailImage {
   imageUrl: string;
   createAt: string;
   trail: Trail | null | undefined;
-  user: User;
+  user?: User;
 
 
   constructor(
